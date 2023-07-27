@@ -1,0 +1,21 @@
+.custom-range {
+    position: relative;
+}
+
+input[type='range']+label {
+    visibility: hidden;
+    color: $white;
+    font-size: 12px;
+    background-color: $primary;
+    position: absolute;
+    z-index: 99;
+    // width: 35px;
+    border-radius: 100%;
+    bottom: -20px;
+    left: 0px;
+    padding: 5px 10px;
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    transition: visibility 0.3s ease-in-out 0.3s;
+}

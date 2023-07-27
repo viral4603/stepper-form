@@ -1,0 +1,64 @@
+<div class="main-form d-flex flex-column justify-content-between h-100">
+    <h2 class="fs-5 text-primary py-4"><span>3.</span>Skill Rating</h2>
+    <!-- start-basic-details-form -->
+    <form class="flex-grow-1 d-flex flex-column" name="userSkill">
+        <div class="form-details flex-grow-1">
+            <div class="row">
+                <div class="col-6">
+                    <label for="country" class="mb-1 cursor-pointer fw-semibold">Frameworks<span
+                            class="text-danger">*</span></label>
+                    <div class="input-group mb-4">
+                        <!--Using ng-option and for loop-->
+                        <ng-select placeholder="Country" id="country" class="w-100">
+                            <ng-option *ngFor="let car of cars" [value]="car.id">{{car.name}}</ng-option>
+                        </ng-select>
+                    </div>
+                    <div class="input-group mb-4 d-flex">
+                        <div class="col-4">
+                            <label for="customRange1" class="form-label">Angular</label>
+                        </div>
+                        <div class="col-8">
+                            <app-custom-range-slider></app-custom-range-slider>
+                        </div>
+                        <div class="col-4">
+                            <label for="customRange1" class="form-label">C++</label>
+                        </div>
+                        <div class="col-8">
+                            <app-custom-range-slider></app-custom-range-slider>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label for="country" class="mb-1 cursor-pointer fw-semibold">Programming Languages<span
+                            class="text-danger">*</span></label>
+                    <div class="input-group mb-4">
+                        <!--Using ng-option and for loop-->
+                        <ng-select placeholder="Country" id="country" class="w-100">
+                            <ng-option *ngFor="let car of cars" [value]="car.id">{{car.name}}</ng-option>
+                        </ng-select>
+                    </div>
+                    <div class="input-group mb-4 d-flex">
+                        <div class="col-4">
+                            <label for="customRange1" class="form-label">C#</label>
+                        </div>
+                        <div class="col-8">
+                            <app-custom-range-slider></app-custom-range-slider>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label for="country" class="mb-1 cursor-pointer fw-semibold">leadership skill<span
+                            class="text-danger">*</span></label>
+                    <app-custom-range-slider></app-custom-range-slider>
+                </div>
+            </div>
+        </div>
+        <!-- start:next-button -->
+        <div class="form-footer d-flex justify-content-between py-3 flex-shrink-0">
+            <button class="btn btn-primary text">Previous</button><button
+                class="btn btn-secondary text-white">Next</button>
+        </div>
+        <!-- end:next-button -->
+    </form>
+    <!-- end-basic-details-form -->
+</div>

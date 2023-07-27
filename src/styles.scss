@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./assets/scss/base/index";
+@import "./assets/scss/utilites/index";
+@import "./assets/scss/vendors/bootsrap";
+@import "./assets/scss/components/index";
+@import "~@ng-select/ng-select/themes/default.theme.css";

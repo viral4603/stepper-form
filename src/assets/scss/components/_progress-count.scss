@@ -1,0 +1,36 @@
+.counts {
+    position: relative;
+    z-index: 11;
+}
+.progress {
+    position: absolute;
+    z-index: -1;
+    top: 40%;
+    width: 100%;
+}
+
+.active .count-button {
+    background-color: $secondary;
+    color: $white;
+}
+
+.count-button {
+    height: 40px;
+    width: 40px;
+    background-color: $primary;
+    font-size: 16px;
+    font-weight: bold;
+    color: $white;
+    border: none;
+    &:active {
+        background-color: $secondary;
+        border: none;
+    }
+}
+
+.step-progress {
+    .progress-bar {
+        height: 40%;
+        box-shadow: 0px 0px 3px 1px rgba(219, 168, 219, 1)
+    }
+}

@@ -1,0 +1,112 @@
+<div class="main-form d-flex flex-column justify-content-between h-100">
+    <h2 class="fs-5 text-primary py-4 "><span>4.</span>Project Details & Equipment Preference</h2>
+    <!-- start-basic-details-form -->
+    <form class="flex-grow-1 d-flex flex-column">
+        <div class="form-details flex-grow-1">
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <label for="country" class="mb-1 cursor-pointer fw-semibold">Project<span
+                            class="text-danger">*</span></label>
+                    <div class="input-group mb-4">
+                        <!--Using ng-option and for loop-->
+                        <ng-select placeholder="Country" id="country" class="w-100">
+                            <ng-option *ngFor="let car of cars" [value]="car.id">{{car.name}}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <label for="state" class="mb-1 cursor-pointer fw-semibold">Position in Project<span
+                            class="text-danger">*</span></label>
+                    <div class="input-group mb-4">
+                        <ng-select placeholder="State" class="w-100" id="state">
+                            <ng-option *ngFor="let car of cars" [value]="car.id">{{car.name}}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <label for="city" class="mb-1 cursor-pointer fw-semibold">Project Start From<span
+                            class="text-danger">*</span></label>
+                    <div class="input-group mb-4">
+                        <input type="date" id="pinCode" class="form-control" placeholder="Pin Code"
+                            aria-label="First Name">
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <label for="city" class="mb-1 cursor-pointer fw-semibold">Project End<span
+                            class="text-danger">*</span></label>
+                    <div class="input-group mb-4">
+                        <input type="date" id="pinCode" class="form-control" placeholder="Pin Code"
+                            aria-label="First Name">
+                    </div>
+                </div>
+                <!-- start-system-preference -->
+                <div class="col-12 col-lg-6 d-flex">
+                    <div class="col-6">
+                        <label for="city" class="mb-1 cursor-pointer fw-semibold">System Preference<span
+                                class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-6 mb-4 d-flex">
+                        <!-- computer-radio-input -->
+                        <div>
+                            <input class="form-check-input me-3" type="radio" name="systemPreference" id="computer">
+                            <label for="computer" class="mb-1 cursor-pointer">Computer</label>
+                        </div>
+                        <!-- laptop-radio-input -->
+                        <div class="ps-4">
+                            <input class="form-check-input me-3" type="radio" name="systemPreference" id="laptop">
+                            <label for="laptop" class="mb-1 cursor-pointer">Laptop</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- start-system-preference -->
+                <!-- start-mouse-preference -->
+                <div class="col-12 col-lg-6 d-flex">
+                    <div class="col-6">
+                        <label for="city" class="mb-1 cursor-pointer fw-semibold">Mouse Preference<span
+                                class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-6 mb-4 d-flex">
+                        <!-- wireless-radio-input -->
+                        <div>
+                            <input class="form-check-input me-3" type="radio" name="mousePreference" id="wirelessMouse">
+                            <label for="wirelessMouse" class="mb-1 cursor-pointer">Wireless</label>
+                        </div>
+                        <!-- wired-radio-input -->
+                        <div class="ps-4">
+                            <input class="form-check-input me-3" type="radio" name="mousePreference" id="wiredMouse">
+                            <label for="wiredMouse" class="mb-1 cursor-pointer">Wired</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- end-mouse-preference -->
+
+                <!-- start-keyboard-preference -->
+                <div class="col-12 col-lg-6 d-flex">
+                    <div class="col-6">
+                        <label for="city" class="mb-1 cursor-pointer fw-semibold">Keyboard Preference<span
+                                class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-6 mb-4 d-flex">
+                        <!-- wireless-radio-input -->
+                        <div>
+                            <input class="form-check-input me-3" type="radio" name="keyboardPreference" id="wirelessKeyboard">
+                            <label for="wirelessKeyboard" class="mb-1 cursor-pointer">Wireless</label>
+                        </div>
+                        <!-- wired-radio-input -->
+                        <div class="ps-4">
+                            <input class="form-check-input me-3" type="radio" name="keyboardPreference" id="wiredKeyboard">
+                            <label for="wiredKeyboard" class="mb-1 cursor-pointer">Wired</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- end-keyboard-preference -->
+            </div>
+        </div>
+        <!-- start:next-button -->
+        <div class="form-footer d-flex justify-content-between py-3 flex-shrink-0">
+            <button class="btn btn-primary text-white">Previous</button><button class="btn btn-secondary text-white">Next</button>
+        </div>
+        <!-- end:next-button -->
+    </form>
+    <!-- end-basic-details-form -->
+</div>
