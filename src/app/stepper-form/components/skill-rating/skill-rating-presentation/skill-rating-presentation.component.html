@@ -4,7 +4,8 @@
     <form class="flex-grow-1 d-flex flex-column" name="userSkill">
         <div class="form-details flex-grow-1">
             <div class="row">
-                <div class="col-6">
+                <!-- start-framworks-select -->
+                <div class="col-12 col-lg-6">
                     <label for="country" class="mb-1 cursor-pointer fw-semibold">Frameworks<span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-4">
@@ -28,7 +29,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <!-- end-framworks-select -->
+
+                <!-- start-programming-language-select -->
+                <div class="col-12 col-lg-6">
                     <label for="country" class="mb-1 cursor-pointer fw-semibold">Programming Languages<span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-4">
@@ -46,19 +50,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <!-- end-programming-language-select -->
+
+                <!-- start-leadership -->
+                <div class="col-12 col-lg-6">
                     <label for="country" class="mb-1 cursor-pointer fw-semibold">leadership skill<span
                             class="text-danger">*</span></label>
                     <app-custom-range-slider></app-custom-range-slider>
                 </div>
+                <!-- end-leadership -->
             </div>
         </div>
-        <!-- start:next-button -->
+        <!-- start:submit-buttons -->
         <div class="form-footer d-flex justify-content-between py-3 flex-shrink-0">
-            <button class="btn btn-primary text">Previous</button><button
+            <button class="btn btn-primary text-white">Previous</button><button
                 class="btn btn-secondary text-white">Next</button>
         </div>
-        <!-- end:next-button -->
+        <!-- end:submit-buttons -->
     </form>
     <!-- end-basic-details-form -->
 </div>
