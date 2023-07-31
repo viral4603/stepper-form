@@ -10,7 +10,8 @@ import { AddressDetailsPresentationComponent } from './components/address-detail
 import { ProjectDetailsPresentationComponent } from './components/project-details/project-details-presentation/project-details-presentation.component';
 import { PolicyDetailsPresentationComponent } from './components/policy-details/policy-details-presentation/policy-details-presentation.component';
 import { CustomRangeSliderComponent } from '../shared/custom-range-slider/custom-range-slider.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StepperCountService } from './services/stepper-count.service';
 
 
 
@@ -29,10 +30,14 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     NgSelectModule,
     CustomRangeSliderComponent,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
-  exports:[
+  exports: [
     FormContainerComponent
+  ],
+  providers: [
+    StepperCountService
   ]
 })
 export class StepperFormModule { }

@@ -41,7 +41,6 @@ export class CustomRangeSliderComponent implements ControlValueAccessor, OnInit 
     // throw new Error('Method not implemented.');
   }
   onSliderChange(e: any) {
-    // console.log(e)
     const value = +e.target.value
     this.onChange(this.convertToSkillName(value))
     const label = e.target.nextElementSibling

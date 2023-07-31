@@ -1,52 +1,66 @@
 <div class="main-form d-flex flex-column justify-content-between h-100">
     <h2 class="fs-5 text-primary py-4"><span>3.</span>Skill Rating</h2>
     <!-- start-basic-details-form -->
-    <form class="flex-grow-1 d-flex flex-column" name="userSkill">
+    <form class="flex-grow-1 d-flex flex-column" [formGroup]="skillForm" (ngSubmit)="submitForm()">
         <div class="form-details flex-grow-1">
             <div class="row">
                 <!-- start-framworks-select -->
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-6" formGroupName="framework">
                     <label for="country" class="mb-1 cursor-pointer fw-semibold">Frameworks<span
                             class="text-danger">*</span></label>
-                    <div class="input-group mb-4">
-                        <!--Using ng-option and for loop-->
-                        <ng-select placeholder="Country" id="country" class="w-100">
-                            <ng-option *ngFor="let car of cars" [value]="car.id">{{car.name}}</ng-option>
+                    <div class="input-group mb-3    ">
+                        <ng-select [clearable]="false" [multiple]="true" placeholder="Country" id="country"
+                            class="w-100" (add)="onSelectChange($event,'framework')"
+                            (remove)="onDeselectChange($event,'framework')">
+                            <ng-option *ngFor="let car of cars" [value]="car.name">{{car.name}}</ng-option>
                         </ng-select>
+                        <!-- start-state-error -->
+                        <ng-container
+                            *ngIf="(formContorls['framework'].errors || (!isFormValid && formContorls['framework'].errors))">
+                            <h6 *ngIf="formContorls['framework']['errors']['required']" class="text-danger mt-2">
+                                *Framework is required
+                            </h6>
+                        </ng-container>
+                        <!-- end-state-error -->
                     </div>
-                    <div class="input-group mb-4 d-flex">
+                    <div *ngFor="let control of nestedGroupArray; let i = index" class="input-group mb-2">
                         <div class="col-4">
-                            <label for="customRange1" class="form-label">Angular</label>
+                            <label for="customRange1" class="form-label">{{control}}</label>
                         </div>
                         <div class="col-8">
-                            <app-custom-range-slider></app-custom-range-slider>
-                        </div>
-                        <div class="col-4">
-                            <label for="customRange1" class="form-label">C++</label>
-                        </div>
-                        <div class="col-8">
-                            <app-custom-range-slider></app-custom-range-slider>
+                            <app-custom-range-slider [formControlName]="$any(control)"
+                                class="w-100"></app-custom-range-slider>
                         </div>
                     </div>
                 </div>
                 <!-- end-framworks-select -->
 
                 <!-- start-programming-language-select -->
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-6" formGroupName="framework">
                     <label for="country" class="mb-1 cursor-pointer fw-semibold">Programming Languages<span
                             class="text-danger">*</span></label>
-                    <div class="input-group mb-4">
-                        <!--Using ng-option and for loop-->
-                        <ng-select placeholder="Country" id="country" class="w-100">
-                            <ng-option *ngFor="let car of cars" [value]="car.id">{{car.name}}</ng-option>
+                    <div class="input-group mb-2">
+                        <ng-select [clearable]="false" [multiple]="true" placeholder="Country" id="country"
+                            class="w-100" (add)="onSelectChange($event,'framework')"
+                            (remove)="onDeselectChange($event,'framework')">
+                            <ng-option *ngFor="let car of cars" [value]="car.name">{{car.name}}</ng-option>
                         </ng-select>
+                        <!-- start-state-error -->
+                        <ng-container
+                            *ngIf="(formContorls['framework'].errors || (!isFormValid && formContorls['framework'].errors))">
+                            <h6 *ngIf="formContorls['framework']['errors']['required']" class="text-danger mt-2">
+                                *Framework is required
+                            </h6>
+                        </ng-container>
+                        <!-- end-state-error -->
                     </div>
-                    <div class="input-group mb-4 d-flex">
+                    <div *ngFor="let control of nestedGroupArray; let i = index" class="input-group">
                         <div class="col-4">
-                            <label for="customRange1" class="form-label">C#</label>
+                            <label for="customRange1" class="form-label">{{control}}</label>
                         </div>
                         <div class="col-8">
-                            <app-custom-range-slider></app-custom-range-slider>
+                            <app-custom-range-slider [formControlName]="$any(control)"
+                                class="w-100"></app-custom-range-slider>
                         </div>
                     </div>
                 </div>
@@ -54,17 +68,17 @@
 
                 <!-- start-leadership -->
                 <div class="col-12 col-lg-6">
-                    <label for="country" class="mb-1 cursor-pointer fw-semibold">leadership skill<span
+                    <label for="country" class="mb-1 cursor-pointer fw-semibold">Leadership skill<span
                             class="text-danger">*</span></label>
-                    <app-custom-range-slider></app-custom-range-slider>
+                    <app-custom-range-slider formControlName="leaderShipSkill"></app-custom-range-slider>
                 </div>
                 <!-- end-leadership -->
             </div>
         </div>
         <!-- start:submit-buttons -->
         <div class="form-footer d-flex justify-content-between py-3 flex-shrink-0">
-            <button class="btn btn-primary text-white">Previous</button><button
-                class="btn btn-secondary text-white">Next</button>
+            <button class="btn btn-primary text-white">Previous</button>
+            <button type="submit" class="btn btn-secondary text-white">Next</button>
         </div>
         <!-- end:submit-buttons -->
     </form>

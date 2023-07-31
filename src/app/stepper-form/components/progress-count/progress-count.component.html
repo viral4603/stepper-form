@@ -2,23 +2,23 @@
     <!-- start-number-of-count-widget -->
     <div class="progress step-progress align-items-center" role="progressbar" aria-label="Animated striped example" aria-valuenow="75"
         aria-valuemin="0" aria-valuemax="100">
-        <div class="progress-bar" style="width: 50%"></div>
+        <div class="progress-bar" [style]="styleExpression"></div>
     </div>
     <ul class="count-list nav d-flex justify-content-between">
-        <li class="nav-items active">
-            <button class="count-button d-flex align-items-center justify-content-center rounded-circle">1</button>
+        <li class="nav-items" [class]="steps >= 1 ? 'active' : ''">
+            <button class="count-button d-flex align-items-center justify-content-center rounded-circle" (click)="setActiveTab(1)">1</button>
         </li>
-        <li class="nav-items active">
-            <button class="count-button d-flex align-items-center justify-content-center rounded-circle">2</button>
+        <li class="nav-items" [class]="steps >= 2 ? 'active' : ''">
+            <button class="count-button d-flex align-items-center justify-content-center rounded-circle" (click)="setActiveTab(2)">2</button>
         </li>
-        <li class="nav-items active">
-            <button class="count-button d-flex align-items-center justify-content-center rounded-circle">3</button>
+        <li class="nav-items" [class]="steps >= 3 ? 'active' : ''">
+            <button class="count-button d-flex align-items-center justify-content-center rounded-circle" (click)="setActiveTab(3)">3</button>
         </li>
-        <li class="nav-items">
-            <button class="count-button d-flex align-items-center justify-content-center rounded-circle">4</button>
+        <li class="nav-items" [class]="steps >= 4 ? 'active' : ''">
+            <button class="count-button d-flex align-items-center justify-content-center rounded-circle" (click)="setActiveTab(4)">4</button>
         </li>
-        <li class="nav-items">
-            <button class="count-button d-flex align-items-center justify-content-center rounded-circle">5</button>
+        <li class="nav-items" [class]="steps >= 5 ? 'active' : ''">
+            <button class="count-button d-flex align-items-center justify-content-center rounded-circle" (click)="setActiveTab(5)">5</button>
         </li>
     </ul>
     <!-- end-number-of-count-widget -->

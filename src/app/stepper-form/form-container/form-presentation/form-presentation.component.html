@@ -2,14 +2,14 @@
     <!-- start-form-wraper -->
     <div class="form-wrapper border rounded d-flex flex-column px-2 px-md-3 py-3 mt-4 m-auto">
         <div class="progress-bar py-4 px-2 px-md--3">
-            <app-progress-count></app-progress-count>
+            <app-progress-count [steps]="count"></app-progress-count>
         </div>
         <div class="active-form flex-grow-1 d-flex px-2 px-md-3 w-100">
-            <!-- <app-basic-details-presentation></app-basic-details-presentation> -->
-            <!-- <app-address-details-presentation></app-address-details-presentation> -->
-            <!-- <app-skill-rating-presentation></app-skill-rating-presentation> -->
-            <app-project-details-presentation></app-project-details-presentation>
-            <!-- <app-policy-details-presentation></app-policy-details-presentation> -->
+            <app-basic-details-presentation (submitFormData)="submitFormData($event)" *ngIf="count === 1"></app-basic-details-presentation>
+            <app-address-details-presentation (submitFormData)="submitFormData($event)" (previousClicked)="navigateOnPreviousTab($event)" *ngIf="count === 2"></app-address-details-presentation>
+            <app-skill-rating-presentation (submitFormData)="submitFormData($event)" (previousClicked)="navigateOnPreviousTab($event)"  *ngIf="count === 3"></app-skill-rating-presentation>
+            <app-project-details-presentation (previousClicked)="navigateOnPreviousTab($event)" *ngIf="count === 4"></app-project-details-presentation>
+            <app-policy-details-presentation (previousClicked)="navigateOnPreviousTab($event)" *ngIf="count === 5"></app-policy-details-presentation>
         </div>
     </div>
     <!-- end-form-wraper -->
