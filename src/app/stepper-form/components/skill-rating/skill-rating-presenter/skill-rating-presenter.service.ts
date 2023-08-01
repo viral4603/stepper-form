@@ -9,8 +9,12 @@ export class SkillRatingPresenterService {
   }
   skillFormGroup() {
     return this._fb.group({
-      framework: this._fb.group({}),
-      programmingLanguges: this._fb.group({}),
+      framework: this._fb.group({}, {
+        validator: this.customValidators() // Adding the custom validator here
+      }),
+      programmingLanguges: this._fb.group({}, {
+        validator: this.customValidators() // Adding the custom validator here
+      }),
       leaderShipSkill: [, Validators.required]
     })
   }
@@ -19,10 +23,8 @@ export class SkillRatingPresenterService {
    * @description This method add controls in fromGroup while user select fields
    */
   addControlToNestedGroup(myForm: any, name: string, nestedGroupName: string) {
-
     const nestedGroup = myForm.get(`${nestedGroupName}`) as FormGroup;
-    nestedGroup.addControl(`${name}`, new FormControl());
-    nestedGroup.setValidators(this.customValidators())
+    nestedGroup.addControl(`${name}`, new FormControl(null, Validators.required));
   }
 
   /**
@@ -34,7 +36,6 @@ export class SkillRatingPresenterService {
   }
   /**
    * @description Add custom error to nested formGroup
-   * @returns 
    */
   customValidators(): ValidatorFn {
     let validateFun = (fg: FormGroup): ValidationErrors => {
@@ -45,4 +46,5 @@ export class SkillRatingPresenterService {
     };
     return validateFun as ValidatorFn;
   }
+  
 }

@@ -22,11 +22,10 @@ export class CustomRangeSliderComponent implements ControlValueAccessor, OnInit 
   ngOnInit(): void {
   }
   public sliderValue!: string | number;
-  private onChange: (value: any) => void = (value) => {
+  public onChange: (value: any) => void = (value) => {
     this.sliderValue = this.convertToSkillName(value)
   };
-  private onTouched: () => void = () => {
-
+  public onTouched: (value: any) => void = (value) => {
   };
   writeValue(value: number): void {
     this.sliderValue = value;
@@ -42,14 +41,15 @@ export class CustomRangeSliderComponent implements ControlValueAccessor, OnInit 
   }
   onSliderChange(e: any) {
     const value = +e.target.value
-    this.onChange(this.convertToSkillName(value))
+    this.onChange(value)
+    this.onTouched(value)
     const label = e.target.nextElementSibling
     const max = +e.target.max
     const min = +e.target.min
     const getOffcetWidth = e.target.offsetWidth;
     const stepDiffrence = max - min;
-    const leftStepValue = getOffcetWidth/stepDiffrence;
-    const left = value*leftStepValue - leftStepValue;
+    const leftStepValue = getOffcetWidth / stepDiffrence;
+    const left = value * leftStepValue - leftStepValue;
     label.style.left = `${left}px`
     label.style.visibility = 'visible'
     label.innerHTML = this.convertToSkillName(value)

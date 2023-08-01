@@ -8,15 +8,16 @@
                 <div class="col-12 col-lg-6" formGroupName="framework">
                     <label for="country" class="mb-1 cursor-pointer fw-semibold">Frameworks<span
                             class="text-danger">*</span></label>
-                    <div class="input-group mb-3    ">
+                    <div class="input-group mb-3 ">
                         <ng-select [clearable]="false" [multiple]="true" placeholder="Country" id="country"
                             class="w-100" (add)="onSelectChange($event,'framework')"
-                            (remove)="onDeselectChange($event,'framework')">
+                            (remove)="onDeselectChange($event,'framework')"
+                            (blur) ="markFormGroupAsTouched('framework')">
                             <ng-option *ngFor="let car of cars" [value]="car.name">{{car.name}}</ng-option>
                         </ng-select>
                         <!-- start-state-error -->
                         <ng-container
-                            *ngIf="(formContorls['framework'].errors || (!isFormValid && formContorls['framework'].errors))">
+                            *ngIf="(formContorls['framework'].errors && formContorls['framework'].touched || (!isFormValid && formContorls['framework'].errors))">
                             <h6 *ngIf="formContorls['framework']['errors']['required']" class="text-danger mt-2">
                                 *Framework is required
                             </h6>
@@ -36,25 +37,25 @@
                 <!-- end-framworks-select -->
 
                 <!-- start-programming-language-select -->
-                <div class="col-12 col-lg-6" formGroupName="framework">
+                <div class="col-12 col-lg-6" formGroupName="programmingLanguges">
                     <label for="country" class="mb-1 cursor-pointer fw-semibold">Programming Languages<span
                             class="text-danger">*</span></label>
-                    <div class="input-group mb-2">
+                    <div class="input-group mb-3">
                         <ng-select [clearable]="false" [multiple]="true" placeholder="Country" id="country"
-                            class="w-100" (add)="onSelectChange($event,'framework')"
-                            (remove)="onDeselectChange($event,'framework')">
+                            class="w-100" (add)="onSelectChange($event,'programmingLanguges')"
+                            (remove)="onDeselectChange($event,'programmingLanguges')" (blur) ="markFormGroupAsTouched('programmingLanguges')">
                             <ng-option *ngFor="let car of cars" [value]="car.name">{{car.name}}</ng-option>
                         </ng-select>
                         <!-- start-state-error -->
                         <ng-container
-                            *ngIf="(formContorls['framework'].errors || (!isFormValid && formContorls['framework'].errors))">
-                            <h6 *ngIf="formContorls['framework']['errors']['required']" class="text-danger mt-2">
-                                *Framework is required
+                            *ngIf="(formContorls['programmingLanguges'].errors && formContorls['programmingLanguges']['touched'] || (!isFormValid && formContorls['programmingLanguges'].errors))">
+                            <h6 *ngIf="formContorls['programmingLanguges']['errors']['required']" class="text-danger mt-2">
+                                *Programming Language is required
                             </h6>
                         </ng-container>
                         <!-- end-state-error -->
                     </div>
-                    <div *ngFor="let control of nestedGroupArray; let i = index" class="input-group">
+                    <div *ngFor="let control of nestedGroupOfProgramming; let i = index" class="input-group mb-2">
                         <div class="col-4">
                             <label for="customRange1" class="form-label">{{control}}</label>
                         </div>
@@ -71,6 +72,14 @@
                     <label for="country" class="mb-1 cursor-pointer fw-semibold">Leadership skill<span
                             class="text-danger">*</span></label>
                     <app-custom-range-slider formControlName="leaderShipSkill"></app-custom-range-slider>
+                    <!-- start-leaderShipSkill-error -->
+                    <ng-container
+                        *ngIf="(formContorls['leaderShipSkill'].touched && formContorls['leaderShipSkill'].errors) || (!isFormValid && formContorls['leaderShipSkill'].errors)">
+                        <h6 *ngIf="formContorls['leaderShipSkill']['errors']['required']" class="text-danger mt-2">
+                            *Leadership skill is required field
+                        </h6>
+                    </ng-container>
+                    <!-- end-leaderShipSkill-error -->
                 </div>
                 <!-- end-leadership -->
             </div>

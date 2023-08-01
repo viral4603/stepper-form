@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { SkillRatingPresenterService } from '../skill-rating-presenter/skill-rating-presenter.service';
 
@@ -53,18 +53,32 @@ export class SkillRatingPresentationComponent {
     }
     return resultArray
   }
+  get nestedGroupOfProgramming() {
+    const resultArray = []
+    const nestedGroup = this.skillForm.get('programmingLanguges') as FormGroup
+    for (let key in nestedGroup.controls) {
+      resultArray.push(key)
+    }
+    return resultArray
+  }
 
   /**
  * @description this method submit from data to container
  */
   submitForm(): void {
-    console.log(this.skillForm)
     if (this.skillForm.status !== "INVALID") {
       this.submitFormData.emit({ data: this.skillForm.value, activeTab: 4 })
     }
     else {
       this.isFormValid = false;
     }
+  }
+  /**
+   * @description change state of nested form group to touched
+   * @param name nested form group name
+   */
+  markFormGroupAsTouched(name:string) {
+     this.skillForm.controls[`${name}`].markAsTouched()
   }
 
 }
