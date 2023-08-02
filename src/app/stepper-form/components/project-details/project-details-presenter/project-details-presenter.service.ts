@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { StepperCountService } from 'src/app/stepper-form/services/stepper-count.service';
 
 @Injectable()
 export class ProjectDetailsPresenterService {
 
-  constructor(private _fb: FormBuilder, private _stepperCount: StepperCountService) {
+  constructor(private _fb: FormBuilder) {
 
   }
   /**
@@ -26,15 +25,10 @@ export class ProjectDetailsPresenterService {
   /**
    * @description submit form data
    */
-  submitForm() {
-    this._stepperCount.setActiveTab(5)
+  submitForm(value:any) {
+    localStorage.setItem('projectDetails',JSON.stringify(value))
   }
 
-  /**
-   * @description navigate previous button
-   */
-  navigatePrevious() {
-    this._stepperCount.setActiveTab(3)
-  }
+
 
 }

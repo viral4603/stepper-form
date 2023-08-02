@@ -1,7 +1,7 @@
 <div class="main-form d-flex flex-column justify-content-between h-100">
     <h2 class="fs-5 pt-4 pb-2 text-primary"><span>1.</span>Basic Details</h2>
     <!-- start-basic-details-form -->
-    <form class="flex-grow-1 d-flex flex-column" [formGroup]="basicDetails" (ngSubmit)="submitForm()">
+    <form class="flex-grow-1 d-flex flex-column" [formGroup]="basicDetails" (ngSubmit)="submitForm(2)">
         <div class="form-details flex-grow-1">
             <div class="row">
                 <div class="col-12 col-md-6">
@@ -81,7 +81,7 @@
                         <ng-container
                             *ngIf="(formContorls['department'].touched && formContorls['department'].errors) || (!isFormValid && formContorls['department'].errors)">
                             <h6 *ngIf="formContorls['department']['errors']['required']" class="text-danger mt-2">
-                                *Position is required field
+                                *Department is required field
                             </h6>
                         </ng-container>
                         <!-- end-phone-number-error -->
@@ -96,7 +96,7 @@
                         <ng-container
                             *ngIf="(formContorls['position'].touched && formContorls['position'].errors) || (!isFormValid && formContorls['position'].errors)">
                             <h6 *ngIf="formContorls['position']['errors']['required']" class="text-danger mt-2">
-                                *Department is required field
+                                *Position is required field
                             </h6>
                         </ng-container>
                         <!-- end-position-error -->

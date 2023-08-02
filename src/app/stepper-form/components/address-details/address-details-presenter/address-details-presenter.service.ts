@@ -26,6 +26,6 @@ export class AddressDetailsPresenterService {
    * @param formValues 
    */
   submitForm(formValues: AddressDetails) {
-    console.log(formValues)
+    localStorage.setItem('addressDetails', JSON.stringify(formValues))
   }
 }

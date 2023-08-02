@@ -1,7 +1,7 @@
 <div class="main-form d-flex flex-column justify-content-between h-100">
     <h2 class="fs-5 text-primary py-4"><span>3.</span>Skill Rating</h2>
     <!-- start-basic-details-form -->
-    <form class="flex-grow-1 d-flex flex-column" [formGroup]="skillForm" (ngSubmit)="submitForm()">
+    <form class="flex-grow-1 d-flex flex-column" [formGroup]="skillForm" (ngSubmit)="submitForm(4)">
         <div class="form-details flex-grow-1">
             <div class="row">
                 <!-- start-framworks-select -->
@@ -24,7 +24,7 @@
                         </ng-container>
                         <!-- end-state-error -->
                     </div>
-                    <div *ngFor="let control of nestedGroupArray; let i = index" class="input-group mb-2">
+                    <div *ngFor="let control of frameWorkGroupControls; let i = index" class="input-group mb-2">
                         <div class="col-4">
                             <label for="customRange1" class="form-label">{{control}}</label>
                         </div>
@@ -55,7 +55,7 @@
                         </ng-container>
                         <!-- end-state-error -->
                     </div>
-                    <div *ngFor="let control of nestedGroupOfProgramming; let i = index" class="input-group mb-2">
+                    <div *ngFor="let control of programmingGroupControls; let i = index" class="input-group mb-2">
                         <div class="col-4">
                             <label for="customRange1" class="form-label">{{control}}</label>
                         </div>
@@ -86,7 +86,7 @@
         </div>
         <!-- start:submit-buttons -->
         <div class="form-footer d-flex justify-content-between py-3 flex-shrink-0">
-            <button class="btn btn-primary text-white">Previous</button>
+            <button class="btn btn-primary text-white" (click)="navigateTab(2)">Previous</button>
             <button type="submit" class="btn btn-secondary text-white">Next</button>
         </div>
         <!-- end:submit-buttons -->

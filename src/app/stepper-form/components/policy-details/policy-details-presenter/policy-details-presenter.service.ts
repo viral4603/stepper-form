@@ -24,7 +24,7 @@ export class PolicyDetailsPresenterService {
   /**
    * @description navigate previous button
    */
-  navigatePrevious() {
-    this._stepperCount.setActiveTab(4)
+  navigatePrevious(tab: number) {
+    this._stepperCount.setActiveTab(tab)
   }
 }

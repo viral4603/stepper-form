@@ -1,6 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { SkillRatingPresenterService } from '../skill-rating-presenter/skill-rating-presenter.service';
+import { Subject } from 'rxjs/internal/Subject';
+import { StepperCountService } from 'src/app/stepper-form/services/stepper-count.service';
+import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 
 @Component({
   selector: 'app-skill-rating-presentation',
@@ -9,22 +12,24 @@ import { SkillRatingPresenterService } from '../skill-rating-presenter/skill-rat
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SkillRatingPresenterService]
 })
-export class SkillRatingPresentationComponent {
-  @Output() public submitFormData: EventEmitter<any>;
+export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
+
   public skillForm: FormGroup;
   public isFormValid: boolean;
-  constructor(private _skillPresenterService: SkillRatingPresenterService, private _cdr: ChangeDetectorRef) {
-    this.skillForm = this._skillPresenterService.skillFormGroup()
-    this.submitFormData = new EventEmitter<any>();
-    this.isFormValid = true;
-  }
-  
+  public unSubscribe: Subject<any>;
   public cars: any = [
-    { id: 1, name: 'Volvo' },
+    { id: 1, name: 'Volvo', selected: true },
     { id: 2, name: 'Saab' },
     { id: 3, name: 'Opel' },
     { id: 4, name: 'Audi' },
   ];
+
+  constructor(private _skillPresenterService: SkillRatingPresenterService, private _cdr: ChangeDetectorRef,
+    private _stepperCountService: StepperCountService) {
+    this.skillForm = this._skillPresenterService.skillFormGroup()
+    this.isFormValid = true;
+    this.unSubscribe = new Subject<any>();
+  }
 
   public get formContorls() {
     return this.skillForm.controls;
@@ -35,17 +40,47 @@ export class SkillRatingPresentationComponent {
     return skillGroup['controls']
   }
 
-  onSelectChange(value: string, parentGroup: string) {
-    if (value) {
-      this._skillPresenterService.addControlToNestedGroup(this.skillForm, value, parentGroup)
+  ngOnInit(): void {
+    this._stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
+      if (res === 4) {
+        this.submitForm(res)
+      }
+    })
+    //patch form value
+    const localStorageValue = JSON.parse(localStorage.getItem('skillDetails')!)
+    if (localStorageValue) {
+      for (let item in localStorageValue) {
+        if (typeof localStorageValue[`${item}`] === 'object') {
+          const nestedGroup = this.skillForm.controls[`${item}`] as FormGroup
+          this._skillPresenterService.addControls(nestedGroup, localStorageValue[`${item}`])
+        }
+      }
+      this.skillForm.patchValue(localStorageValue)
     }
   }
 
+  /**
+   * @description Add range control in the form group
+   * @param controlName Name of the control
+   * @param parentGroup Name of fromgroup where control should add.
+   */
+  onSelectChange(controlName: string, parentGroup: string) {
+    if (controlName) {
+      this._skillPresenterService.addControlToNestedGroup(this.skillForm, controlName, parentGroup)
+    }
+  }
+  /**
+   * @description Remove range control from the Group 
+   * @param object Object of event
+   * @param parentGroup Name of fromgroup from where control will remove.
+   */
   onDeselectChange(object: any, parentGroup: string) {
     this._skillPresenterService.removeControlFromNestedGroup(this.skillForm, object.value, parentGroup)
   }
-
-  get nestedGroupArray() {
+  /**
+   * get all conrols of Framework from group
+   */
+  get frameWorkGroupControls() {
     const resultArray = []
     const nestedGroup = this.skillForm.get('framework') as FormGroup
     for (let key in nestedGroup.controls) {
@@ -53,7 +88,10 @@ export class SkillRatingPresentationComponent {
     }
     return resultArray
   }
-  get nestedGroupOfProgramming() {
+  /**
+  * get all conrols of Programming from group
+  */
+  get programmingGroupControls() {
     const resultArray = []
     const nestedGroup = this.skillForm.get('programmingLanguges') as FormGroup
     for (let key in nestedGroup.controls) {
@@ -65,20 +103,35 @@ export class SkillRatingPresentationComponent {
   /**
  * @description this method submit from data to container
  */
-  submitForm(): void {
+  submitForm(tab: number): void {
     if (this.skillForm.status !== "INVALID") {
-      this.submitFormData.emit({ data: this.skillForm.value, activeTab: 4 })
+      this._skillPresenterService.submitForm(this.skillForm.value)
+      this.navigateTab(tab)
     }
     else {
       this.isFormValid = false;
+      this._cdr.markForCheck()
     }
   }
+
   /**
    * @description change state of nested form group to touched
    * @param name nested form group name
    */
-  markFormGroupAsTouched(name:string) {
-     this.skillForm.controls[`${name}`].markAsTouched()
+  markFormGroupAsTouched(name: string) {
+    this.skillForm.controls[`${name}`].markAsTouched()
   }
 
+  /**
+   * @description navigation
+   */
+  public navigateTab(tab:number) {
+    this._stepperCountService.setActiveTab(tab)
+  }
+  
+  //unsubscribe all subscriber
+  public ngOnDestroy(): void {
+    this.unSubscribe.next(true)
+    this.unSubscribe.unsubscribe()
+  }
 }

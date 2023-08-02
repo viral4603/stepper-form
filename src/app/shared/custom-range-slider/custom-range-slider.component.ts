@@ -23,12 +23,16 @@ export class CustomRangeSliderComponent implements ControlValueAccessor, OnInit 
   }
   public sliderValue!: string | number;
   public onChange: (value: any) => void = (value) => {
-    this.sliderValue = this.convertToSkillName(value)
+    this.sliderValue = value
   };
   public onTouched: (value: any) => void = (value) => {
   };
   writeValue(value: number): void {
-    this.sliderValue = value;
+    if (value) {
+      this.sliderValue = value;
+    } else {
+      this.sliderValue = 0;
+    }
   }
   registerOnChange(fn: any): void {
     this.onChange = fn;

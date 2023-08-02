@@ -1,7 +1,7 @@
 <div class="main-form d-flex flex-column justify-content-between h-100">
     <h2 class="fs-5 pt-4 pb-2 text-primary"><span>2.</span>Address Details</h2>
     <!-- start-basic-details-form -->
-    <form class="flex-grow-1 d-flex flex-column" [formGroup]="addressForm" (ngSubmit)="submitForm()">
+    <form class="flex-grow-1 d-flex flex-column" [formGroup]="addressForm" (ngSubmit)="submitForm(3)">
         <div class="form-details flex-grow-1">
             <div class="row">
                 <div class="col-12 col-lg-6">
@@ -109,7 +109,7 @@
         </div>
         <!-- start:submit-button -->
         <div class="form-footer d-flex justify-content-between py-3 flex-shrink-0">
-            <button class="btn btn-primary text-white" (click)="navigatePrevious(1)">Previous</button>
+            <button class="btn btn-primary text-white" (click)="navigateToTab(1)">Previous</button>
             <button type="submit" class="btn btn-secondary text-white">Next</button>
         </div>
         <!-- end:submit-button -->

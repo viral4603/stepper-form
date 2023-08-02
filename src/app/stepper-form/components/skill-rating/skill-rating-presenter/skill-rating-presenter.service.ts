@@ -46,5 +46,18 @@ export class SkillRatingPresenterService {
     };
     return validateFun as ValidatorFn;
   }
-  
+  /**
+   * submit Form data
+   */
+  submitForm(value: any) {
+    localStorage.setItem('skillDetails', JSON.stringify(value))
+  }
+  /**
+   * add control in from group while initilize form
+   */
+  addControls(formGroup: FormGroup, controls: AnalyserNode) {
+    Object.keys(controls).forEach((item: any) => {
+      formGroup.addControl(`${item}`,this._fb.control(null,Validators.required))
+    })
+  }
 }

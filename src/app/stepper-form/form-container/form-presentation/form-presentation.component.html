@@ -5,11 +5,22 @@
             <app-progress-count [steps]="count"></app-progress-count>
         </div>
         <div class="active-form flex-grow-1 d-flex px-2 px-md-3 w-100">
-            <app-basic-details-presentation (submitFormData)="submitFormData($event)" *ngIf="count === 1"></app-basic-details-presentation>
-            <app-address-details-presentation (submitFormData)="submitFormData($event)" (previousClicked)="navigateOnPreviousTab($event)" *ngIf="count === 2"></app-address-details-presentation>
-            <app-skill-rating-presentation (submitFormData)="submitFormData($event)" (previousClicked)="navigateOnPreviousTab($event)"  *ngIf="count === 3"></app-skill-rating-presentation>
-            <app-project-details-presentation (previousClicked)="navigateOnPreviousTab($event)" *ngIf="count === 4"></app-project-details-presentation>
-            <app-policy-details-presentation (previousClicked)="navigateOnPreviousTab($event)" *ngIf="count === 5"></app-policy-details-presentation>
+            <!-- Basic-Details-form -->
+            <app-basic-details-presentation (submitFormData)="submitFormData($event)"
+                *ngIf="count === 1"></app-basic-details-presentation>
+            <!-- Address-Details-form -->
+            <app-address-details-presentation (submitFormData)="submitFormData($event)"
+                (previousClicked)="navigateOnPreviousTab($event)"
+                *ngIf="count === 2"></app-address-details-presentation>
+            <!-- Skill-Rating-form -->
+            <app-skill-rating-presentation (submitFormData)="submitFormData($event)"
+                (previousClicked)="navigateOnPreviousTab($event)" *ngIf="count === 3"></app-skill-rating-presentation>
+            <!-- Project-Details-form -->
+            <app-project-details-presentation (previousClicked)="navigateOnPreviousTab($event)"
+                *ngIf="count === 4"></app-project-details-presentation>
+            <!-- Policy-Details-form -->
+            <app-policy-details-presentation (previousClicked)="navigateOnPreviousTab($event)"
+                *ngIf="count === 5"></app-policy-details-presentation>
         </div>
     </div>
     <!-- end-form-wraper -->

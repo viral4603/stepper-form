@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { AddressDetailsPresenterService } from '../address-details-presenter/address-details-presenter.service';
 import { FormGroup } from '@angular/forms';
 import { StepperCountService } from 'src/app/stepper-form/services/stepper-count.service';
+import { Subject } from 'rxjs/internal/Subject';
+import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 
 @Component({
   selector: 'app-address-details-presentation',
@@ -12,11 +14,10 @@ import { StepperCountService } from 'src/app/stepper-form/services/stepper-count
     AddressDetailsPresenterService
   ]
 })
-export class AddressDetailsPresentationComponent {
+export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
   public addressForm: FormGroup;
   public isFormValid: boolean;
-  @Output() public submitFormData: EventEmitter<any>;
-  @Output() public previousClicked: EventEmitter<number>
+  public unSubscribe: Subject<any>
   public cars: {
     id: number,
     name: string
@@ -26,35 +27,58 @@ export class AddressDetailsPresentationComponent {
       { id: 3, name: 'Opel' },
       { id: 4, name: 'Audi' },
     ];
-  constructor(private _addressPresenterService: AddressDetailsPresenterService, private _stepperCountService: StepperCountService) {
+
+  constructor(
+    private _addressPresenterService: AddressDetailsPresenterService,
+    private _stepperCountService: StepperCountService,
+    private _cdr: ChangeDetectorRef) {
     this.addressForm = this._addressPresenterService.basicDeatilsFormGroup();
     this.isFormValid = true;
-    this.submitFormData = new EventEmitter<any>()
-    this.previousClicked = new EventEmitter<number>()
+    this.unSubscribe = new Subject<any>();
   }
+  ngOnInit(): void {
+    this._stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
+      if (res === 3) {
+        this.submitForm(res)
+      }
+    })
+    //patch form Value
+    const localStorageValue = localStorage.getItem('addressDetails')
+    if (localStorageValue) {
+      this.addressForm.patchValue(JSON.parse(localStorageValue))
+    }
+  }
+  //get all form control in a form group
   public get formContorls() {
     return this.addressForm.controls
   }
-  public submitForm() {
+  /**
+   * @description submit form data and neavigate to next tab
+   * @param tab next tab value
+   */
+  public submitForm(tab: number) {
     if (this.addressForm.status !== "INVALID") {
-      this.submitFormData.emit({ data: this.addressForm.value, activeTab: 3 })
+      this._addressPresenterService.submitForm(this.addressForm.value)
+      this.navigateToTab(tab)
     }
     else {
       this.isFormValid = false;
+      this._cdr.markForCheck()
+      this._stepperCountService.setErrorOnTab(tab-1)
     }
   }
   /**
-   * @description emit event with previous tab number
-   * @param tabNumber 
+   * @description navigate user to tab and store changed value 
+   * @param tab number of tab where user want to navigate
    */
-  public navigatePrevious(tabNumber: number) {
-    // this.previousClicked.emit(tabNumber)
-    this.setActiveTab(tabNumber)
+  navigateToTab(tab: number): void {
+    this._stepperCountService.setActiveTab(tab);
+    this._addressPresenterService.submitForm(this.addressForm.value)
   }
-  /**
-   * @description This will provide value to active tab through subjet
-   */
-  setActiveTab(tabValue: number): void {
-    this._stepperCountService.setActiveTab(tabValue)
+
+
+  ngOnDestroy(): void {
+    this.unSubscribe.next(true)
+    this.unSubscribe.unsubscribe()
   }
 }

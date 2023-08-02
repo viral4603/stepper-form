@@ -31,8 +31,8 @@ export class PolicyDetailsPresentationComponent {
   /**
    * navigate to previous tab
    */
-  public navigateToPrevious() {
-    this._policyPresenterService.navigatePrevious()
+  public navigateTab(tab:number) {
+    this._policyPresenterService.navigatePrevious(tab)
   }
 
 }

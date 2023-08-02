@@ -1,5 +1,5 @@
 <div class="custom-range w-100">
     <input type="range" class="form-range" id="customRange1" min="1" max="5" (change)="onSliderChange($event)" step="1"
-        value="0" (input)="onSliderChange($event)" (blur)="onTouched($event)">
+        (input)="onSliderChange($event)" (blur)="onTouched($event)" [value]="sliderValue">
     <label for="customRange1"></label>
 </div>

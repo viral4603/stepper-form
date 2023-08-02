@@ -25,7 +25,7 @@ export class BasicDetailsPresenterService {
      * 
      */
   submitForm(formValues:BasicDetails) {
-    console.log(formValues)
+    localStorage.setItem('basicDetails',JSON.stringify(formValues))  
   }
   
 

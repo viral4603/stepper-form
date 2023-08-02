@@ -2,6 +2,10 @@
     cursor: pointer;
 }
 
+.not-allowed {
+    cursor: not-allowed !important;
+}
+
 .text-truncate {
     white-space: nowrap;
     overflow: hidden;
