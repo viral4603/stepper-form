@@ -1,0 +1,159 @@
+<div class="form-details p-3">
+    <!-- heading-start -->
+    <div class="form-heading d-flex justify-content-between align-items-center py-2">
+        <h5>Preview Form Details</h5>
+        <button class="btn btn-primary" (click)="closeOverlay()">Close</button>
+    </div>
+    <!-- heading-end -->
+    <!-- main-details -->
+    <!-- <div class="p-2 border">
+        <ng-container *ngFor="let key of getKeyOfObject, let i = index">
+            <table class="table caption-top table-borderless">
+                <caption class="fw-bold p-2 fs-5">{{key}}</caption>
+                <tbody>
+                    <ng-container *ngFor="let nestedKey of getNestedKey(key), let j = index">
+                        <tr>
+                            <td width="30%">{{nestedKey}}</td>
+                            <td *ngIf="formData[key][nestedKey]">{{formData[key][nestedKey]}}</td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </ng-container>
+    </div> -->
+    <div class="p-2 border">
+        <!-- start-basic-details-table -->
+        <table class="table caption-top table-borderless">
+            <caption class="fw-bold p-2 fs-5">Basic Information</caption>
+            <tbody>
+                <tr>
+                    <td width="30%">First Name :</td>
+                    <td>{{formData.basicDetails.firstName}}</td>
+                <tr>
+                    <td width="30%">Last Name :</td>
+                    <td>{{formData.basicDetails.lastName}}</td>
+                </tr>
+                <tr>
+                    <td width="30%">Email :</td>
+                    <td>{{formData.basicDetails.email}}</td>
+                </tr>
+                <tr>
+                    <td width="30%">Phone Number :</td>
+                    <td>{{formData.basicDetails.phoneNumber}}</td>
+                </tr>
+                <tr>
+                    <td width="30%">Department :</td>
+                    <td>{{formData.basicDetails.department}}</td>
+                </tr>
+                <tr>
+                    <td width="30%">Position :</td>
+                    <td>{{formData.basicDetails.position}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- end-basic-details-end -->
+
+        <!-- start-address-details-table -->
+        <table class="table caption-top table-borderless">
+            <caption class="fw-bold p-2 fs-5">Address Information</caption>
+            <tbody>
+                <tr>
+                    <td width="30%">Address :</td>
+                    <td>{{formData.addressDetails.address}}</td>
+                <tr>
+                    <td width="30%">Street Address :</td>
+                    <td>{{formData.addressDetails.streetAddress}}</td>
+                </tr>
+                <tr>
+                    <td width="30%">Country :</td>
+                    <td>{{formData.addressDetails.country}}</td>
+                </tr>
+                <tr>
+                    <td width="30%">State :</td>
+                    <td>{{formData.addressDetails.state}}</td>
+                </tr>
+                <tr>
+                    <td width="30%">City :</td>
+                    <td>{{formData.addressDetails.city}}</td>
+                </tr>
+                <tr>
+                    <td width="30%">Pin Code :</td>
+                    <td>{{formData.addressDetails.pinCode}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- end-address-details-table -->
+
+        <!-- start-skill-details-table -->
+        <table class="table caption-top table-borderless">
+            <caption class="fw-bold p-2 fs-5">Skill Information</caption>
+            <tbody>
+                <tr>
+                    <td width="30%">Leadership :</td>
+                    <td>{{formData.skillDetails.leaderShipSkill}}</td>
+                </tr>
+                <!-- start-framewroks -->
+                <tr>
+                    <td>Frameworks</td>
+                </tr>
+                <ng-container *ngFor="let key of framworkSkills">
+                    <tr>
+                        <td>{{key}} :</td>
+                        <td>{{formData.skillDetails.framework[key]}}</td>
+                    </tr>
+                </ng-container>
+                <!-- end-framewroks -->
+                <!-- start-programming-lanaguges -->
+                <tr>
+                    <td>Programming Languages</td>
+                </tr>
+                <ng-container *ngFor="let key of programmingLangugesSkill">
+                    <tr>
+                        <td>{{key}} :</td>
+                        <td>{{formData.skillDetails.programmingLanguges[key]}}</td>
+                    </tr>
+                </ng-container>
+
+            </tbody>
+        </table>
+        <!-- end-skill-details-table -->
+        <!-- start-basic-details-table -->
+        <table class="table caption-top table-borderless">
+            <caption class="fw-bold p-2 fs-5">Project Information</caption>
+            <tbody>
+                <tr>
+                    <td width="30%">Project Name :</td>
+                    <td>{{formData.projectDetails.projectName}}</td>
+                <tr>
+                    <td width="30%">Roll :</td>
+                    <td>{{formData.projectDetails.roll}}</td>
+                </tr>
+                <tr>
+                    <td width="30%">Start Date :</td>
+                    <td>{{formData.projectDetails.startDate}}</td>
+                </tr>
+                <tr>
+                    <td width="30%">End Date :</td>
+                    <td>{{formData.projectDetails.endDate}}</td>
+                </tr>
+                <tr>
+                    <td width="30%">System :</td>
+                    <td>{{formData.projectDetails.system}}</td>
+                </tr>
+                <tr>
+                    <td width="30%">Keyboard :</td>
+                    <td>{{formData.projectDetails.mouse}}</td>
+                </tr>
+                <tr>
+                    <td width="30%">Mouse :</td>
+                    <td>{{formData.projectDetails.keyboard}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- end-basic-details-end -->
+        <div class="footer d-flex justify-content-center w-100 pb-3">
+            <button class="btn btn-success me-4">Print</button>
+            <button class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+</div>

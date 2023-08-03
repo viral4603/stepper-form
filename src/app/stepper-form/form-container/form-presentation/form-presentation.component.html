@@ -21,6 +21,8 @@
             <!-- Policy-Details-form -->
             <app-policy-details-presentation (previousClicked)="navigateOnPreviousTab($event)"
                 *ngIf="count === 5"></app-policy-details-presentation>
+            <!-- preview-form -->
+            <app-preview-form-presentation *ngIf="count === 6"></app-preview-form-presentation>
         </div>
     </div>
     <!-- end-form-wraper -->

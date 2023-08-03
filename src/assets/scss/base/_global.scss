@@ -17,6 +17,12 @@
     width: 80%;
 }
 
+//overlay
+.cdk-global-overlay-wrapper {
+    overflow-y: auto;
+    padding-bottom: 20px;
+}
+
 //responsive 
 @media screen and (max-width: 992px) {
     .form-wrapper {

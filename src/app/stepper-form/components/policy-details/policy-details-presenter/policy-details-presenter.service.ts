@@ -17,8 +17,8 @@ export class PolicyDetailsPresenterService {
   /**
  * @description submit form data
  */
-  submitForm() {
-    // this._stepperCount.setActiveTab(6)
+  submitForm(value:any) {
+    localStorage.setItem('policyForm',JSON.stringify(value)) 
   }
 
   /**

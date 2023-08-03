@@ -29,25 +29,29 @@ export class ProgressCountComponent implements OnInit, OnDestroy {
   public styleExpression: any;
   public errorOccurOnTab: number;
   public formValidtionSub!: Subscription;
+  public isLastStepReach: boolean;
   constructor(private _stepperCountService: StepperCountService) {
     this.errorOccurOnTab = 0;
+    this.isLastStepReach = false;
   }
 
   ngOnInit(): void {
-    this.formValidtionSub = this._stepperCountService.errorTab$.subscribe((res: number) => {
-      this.errorOccurOnTab = res;
+    this.formValidtionSub = this._stepperCountService.lastStepReached$.subscribe((res: boolean) => {
+      this.isLastStepReach = res;
     })
   }
+
   /**
  * @description This will provide value to active tab through subjet
  */
   setActiveTab(tabValue: number): void {
-    this._stepperCountService.submitFormByTab(tabValue)
-    if (tabValue > this.steps && tabValue === this.steps + 1) {
-      this._stepperCountService.submitFormByTab(tabValue)
+    const navigationOption = {
+      activeTab: this.steps,
+      navigateTo: tabValue
     }
-    if (tabValue < this._steps) {
-      this._stepperCountService.setActiveTab(tabValue)
+    if (tabValue > this.steps && tabValue === this.steps + 1 && !this.isLastStepReach ||
+      this.isLastStepReach || tabValue < this.steps) {
+      this._stepperCountService.submitFormByTab(navigationOption)
     }
   }
 

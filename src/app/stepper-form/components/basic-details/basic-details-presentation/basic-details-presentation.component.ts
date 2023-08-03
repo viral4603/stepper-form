@@ -35,8 +35,8 @@ export class BasicDetailsPresentationComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this._stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
-      if (res === 2) {
-        this.submitForm(res)
+      if (res.activeTab === 1) {
+        this.submitForm(res.navigateTo)
       }
     })
     //patch form Value

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormPresenterService } from '../form-presenter/form-presenter.service';
 import { StepperCountService } from '../../services/stepper-count.service';
 import { Subscription } from 'rxjs';
@@ -12,16 +12,18 @@ import { Subscription } from 'rxjs';
     FormPresenterService
   ]
 })
-export class FormPresentationComponent implements OnInit,OnDestroy {
+export class FormPresentationComponent implements OnInit, OnDestroy {
   public count: number;
-  public stepperCountSub:Subscription;
-  constructor(private _formPresenterService: FormPresenterService, private _stepperCountService: StepperCountService) {
+  public stepperCountSub: Subscription;
+  constructor(private _formPresenterService: FormPresenterService, private _stepperCountService: StepperCountService,
+    private _cdr: ChangeDetectorRef) {
     this.count = this._formPresenterService.activeTab;
     this.stepperCountSub = new Subscription();
   }
   ngOnInit(): void {
-    this.stepperCountSub =this._stepperCountService.activeCount$.subscribe((res:any) => {
+    this.stepperCountSub = this._stepperCountService.activeCount$.subscribe((res: any) => {
       this.count = res;
+      this._cdr.markForCheck()
     })
   }
   /**

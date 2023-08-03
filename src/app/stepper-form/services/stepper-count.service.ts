@@ -4,18 +4,18 @@ import { Observable, Subject } from 'rxjs';
 @Injectable()
 export class StepperCountService {
   private _activeCount: Subject<number>;
-  private _errorsOnTab: Subject<number>;
+  private _isLastStepReached: Subject<boolean>;
   private _emitSubmitClick: Subject<any>;
   public activeCount$: Observable<number>
-  public errorTab$: Observable<number>
+  public lastStepReached$: Observable<boolean>
   public submitClick$: Observable<any>
 
   constructor() {
     this._activeCount = new Subject<number>();
     this.activeCount$ = new Observable<number>();
     this.activeCount$ = this._activeCount.asObservable()
-    this._errorsOnTab = new Subject<number>()
-    this.errorTab$ = this._errorsOnTab.asObservable()
+    this._isLastStepReached = new Subject<boolean>()
+    this.lastStepReached$ = this._isLastStepReached.asObservable()
     this._emitSubmitClick = new Subject<any>()
     this.submitClick$ = this._emitSubmitClick.asObservable()
   }
@@ -25,10 +25,10 @@ export class StepperCountService {
   setActiveTab(tabNumber: number): void {
     this._activeCount.next(tabNumber)
   }
-  setErrorOnTab(tabNumber: number): void {
-    this._errorsOnTab.next(tabNumber)
+  setLastStepReached(value: boolean): void {
+    this._isLastStepReached.next(value)
   }
-  submitFormByTab(tab: number) {
-    this._emitSubmitClick.next(tab)
+  submitFormByTab(navigationOption: any) {
+    this._emitSubmitClick.next(navigationOption)
   }
 }

@@ -42,8 +42,8 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
-      if (res === 4) {
-        this.submitForm(res)
+      if (res.activeTab === 3) {
+        this.submitForm(res.navigateTo)
       }
     })
     //patch form value
@@ -125,10 +125,10 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
   /**
    * @description navigation
    */
-  public navigateTab(tab:number) {
+  public navigateTab(tab: number) {
     this._stepperCountService.setActiveTab(tab)
   }
-  
+
   //unsubscribe all subscriber
   public ngOnDestroy(): void {
     this.unSubscribe.next(true)

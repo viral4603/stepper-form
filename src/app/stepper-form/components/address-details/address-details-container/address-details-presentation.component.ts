@@ -38,8 +38,8 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this._stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
-      if (res === 3) {
-        this.submitForm(res)
+      if (res.activeTab === 2) {
+        this.submitForm(res.navigateTo)
       }
     })
     //patch form Value
@@ -64,7 +64,6 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
     else {
       this.isFormValid = false;
       this._cdr.markForCheck()
-      this._stepperCountService.setErrorOnTab(tab-1)
     }
   }
   /**
@@ -75,7 +74,6 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
     this._stepperCountService.setActiveTab(tab);
     this._addressPresenterService.submitForm(this.addressForm.value)
   }
-
 
   ngOnDestroy(): void {
     this.unSubscribe.next(true)
