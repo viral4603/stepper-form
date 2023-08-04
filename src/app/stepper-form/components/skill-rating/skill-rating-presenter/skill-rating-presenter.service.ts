@@ -9,13 +9,17 @@ export class SkillRatingPresenterService {
   }
   skillFormGroup() {
     return this._fb.group({
-      framework: this._fb.group({}, {
+      selectedFramewrok:[],
+      selectedLanguage:[],
+      framework: this._fb.group({
+
+      }, {
         validator: this.customValidators() // Adding the custom validator here
       }),
       programmingLanguges: this._fb.group({}, {
         validator: this.customValidators() // Adding the custom validator here
       }),
-      leaderShipSkill: [, Validators.required]
+      leaderShipSkill: [, Validators.required],
     })
   }
 

@@ -25,7 +25,6 @@ export class FormPreviewComponent {
     this.close = new EventEmitter<boolean>()
   }
   closeOverlay() {
-    console.log(this.formData)
     this.close.emit(true)
   }
 

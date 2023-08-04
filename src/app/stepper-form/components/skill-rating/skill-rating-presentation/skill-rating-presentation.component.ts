@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs/internal/Subject';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { StepperCountService } from 'src/app/stepper-form/services/stepper-count.service';
@@ -18,14 +18,8 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
   public skillForm: FormGroup;
   public isFormValid: boolean;
   public unSubscribe: Subject<any>;
-  public cars: any = [
-    { id: 1, name: 'Volvo', selected: true },
-    { id: 2, name: 'Saab' },
-    { id: 3, name: 'Opel' },
-    { id: 4, name: 'Audi' },
-  ];
-  public frameWorks:SelectOption[];
-  public programmingLanguages:SelectOption[];
+  public frameWorks: SelectOption[];
+  public programmingLanguages: SelectOption[];
 
 
   constructor(private _skillPresenterService: SkillRatingPresenterService, private _cdr: ChangeDetectorRef,
@@ -54,9 +48,10 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
     })
     //patch form value
     const localStorageValue = JSON.parse(localStorage.getItem('skillDetails')!)
+
     if (localStorageValue) {
       for (let item in localStorageValue) {
-        if (typeof localStorageValue[`${item}`] === 'object') {
+        if (typeof localStorageValue[`${item}`] === 'object' && !Array.isArray(localStorageValue[`${item}`])) {
           const nestedGroup = this.skillForm.controls[`${item}`] as FormGroup
           this._skillPresenterService.addControls(nestedGroup, localStorageValue[`${item}`])
         }
@@ -86,25 +81,26 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
   /**
    * get all conrols of Framework from group
    */
-  get frameWorkGroupControls() {
-    const resultArray = []
-    const nestedGroup = this.skillForm.get('framework') as FormGroup
-    for (let key in nestedGroup.controls) {
-      resultArray.push(key)
-    }
-    return resultArray
-  }
+  // get frameWorkGroupControls() {
+  //   const resultArray = []
+  //   const nestedGroup = this.skillForm.get('framework') as FormGroup
+  //   for (let key in nestedGroup.controls) {
+  //     resultArray.push(key)
+  //   }
+  //   return resultArray
+  // }
+
   /**
   * get all conrols of Programming from group
   */
-  get programmingGroupControls() {
-    const resultArray = []
-    const nestedGroup = this.skillForm.get('programmingLanguges') as FormGroup
-    for (let key in nestedGroup.controls) {
-      resultArray.push(key)
-    }
-    return resultArray
-  }
+  // get programmingGroupControls() {
+  //   const resultArray = []
+  //   const nestedGroup = this.skillForm.get('programmingLanguges') as FormGroup
+  //   for (let key in nestedGroup.controls) {
+  //     resultArray.push(key)
+  //   }
+  //   return resultArray
+  // }
 
   /**
  * @description this method submit from data to container

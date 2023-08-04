@@ -5,14 +5,15 @@
         <div class="form-details flex-grow-1">
             <div class="row">
                 <!-- start-framworks-select -->
-                <div class="col-12 col-lg-6" formGroupName="framework">
+                <div class="col-12 col-lg-6">
                     <label for="country" class="mb-1 cursor-pointer fw-semibold">Frameworks<span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3 ">
                         <ng-select [clearable]="false" [multiple]="true" placeholder="Select Framework" id="frameworkID"
                             class="w-100" (add)="onSelectChange($event,'framework')"
                             (remove)="onDeselectChange($event,'framework')"
-                            (blur)="markFormGroupAsTouched('framework')">
+                            (blur)="markFormGroupAsTouched('framework')"
+                            formControlName="selectedFramewrok" >
                             <ng-option *ngFor="let item of frameWorks" [value]="item.name">{{item.name}}</ng-option>
                         </ng-select>
                         <!-- start-state-error -->
@@ -24,27 +25,30 @@
                         </ng-container>
                         <!-- end-state-error -->
                     </div>
-                    <div *ngFor="let control of frameWorkGroupControls; let i = index" class="input-group mb-2">
-                        <div class="col-4">
-                            <label for="customRange1" class="form-label">{{control}}</label>
-                        </div>
-                        <div class="col-8">
-                            <app-custom-range-slider [formControlName]="$any(control)"
-                                class="w-100"></app-custom-range-slider>
-                        </div>
+                    <div class="input-group mb-2" formGroupName="framework">
+                        <ng-container *ngFor="let control of formContorls['selectedFramewrok'].value; let i = index">
+                            <div class="col-4">
+                                <label for="customRange1" class="form-label">{{control}}</label>
+                            </div>
+                            <div class="col-8">
+                                <app-custom-range-slider [formControlName]="$any(control)"
+                                    class="w-100"></app-custom-range-slider>
+                            </div>
+                        </ng-container>
                     </div>
                 </div>
                 <!-- end-framworks-select -->
 
                 <!-- start-programming-language-select -->
-                <div class="col-12 col-lg-6" formGroupName="programmingLanguges">
+                <div class="col-12 col-lg-6">
                     <label for="country" class="mb-1 cursor-pointer fw-semibold">Programming Languages<span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3">
                         <ng-select [clearable]="false" [multiple]="true" placeholder="Select Programming Language" id="programmingLangugesId"
                             class="w-100" (add)="onSelectChange($event,'programmingLanguges')"
                             (remove)="onDeselectChange($event,'programmingLanguges')"
-                            (blur)="markFormGroupAsTouched('programmingLanguges')">
+                            (blur)="markFormGroupAsTouched('programmingLanguges')"
+                            formControlName="selectedLanguage">
                             <ng-option *ngFor="let language of programmingLanguages" [value]="language.name">{{language.name}}</ng-option>
                         </ng-select>
                         <!-- start-state-error -->
@@ -57,14 +61,16 @@
                         </ng-container>
                         <!-- end-state-error -->
                     </div>
-                    <div *ngFor="let control of programmingGroupControls; let i = index" class="input-group mb-2">
-                        <div class="col-4">
-                            <label for="customRange1" class="form-label">{{control}}</label>
-                        </div>
-                        <div class="col-8">
-                            <app-custom-range-slider [formControlName]="$any(control)"
-                                class="w-100"></app-custom-range-slider>
-                        </div>
+                    <div  class="input-group mb-2" formGroupName="programmingLanguges">
+                        <ng-container *ngFor="let control of formContorls['selectedLanguage'].value; let i = index">
+                            <div class="col-4">
+                                <label for="customRange1" class="form-label">{{control}}</label>
+                            </div>
+                            <div class="col-8">
+                                <app-custom-range-slider [formControlName]="$any(control)"
+                                    class="w-100"></app-custom-range-slider>
+                            </div>
+                        </ng-container>
                     </div>
                 </div>
                 <!-- end-programming-language-select -->

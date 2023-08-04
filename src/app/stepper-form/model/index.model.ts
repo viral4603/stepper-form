@@ -36,7 +36,7 @@ export interface SelectOption {
 export const Framework = [
     {
         "name": "React.js",
-        "id": 1
+        "id": 1,
     },
     {
         "name": "Angular",
