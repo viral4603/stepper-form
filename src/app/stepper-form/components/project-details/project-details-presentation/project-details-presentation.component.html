@@ -10,8 +10,8 @@
                             class="text-danger">*</span></label>
                     <div class="input-group mb-4">
                         <!--Using ng-option and for loop-->
-                        <ng-select placeholder="Project Name" id="project" class="w-100" formControlName="projectName">
-                            <ng-option *ngFor="let car of cars" [value]="car.id">{{car.name}}</ng-option>
+                        <ng-select placeholder="Select Project" id="project" class="w-100" formControlName="projectName">
+                            <ng-option *ngFor="let project of projects" [value]="project.name">{{project.name}}</ng-option>
                         </ng-select>
                         <!-- start-project-name-error -->
                         <ng-container
@@ -31,7 +31,7 @@
                     <div class="input-group mb-4">
                         <!--Using ng-option and for loop-->
                         <ng-select placeholder="Roll" id="roll" class="w-100" formControlName="roll">
-                            <ng-option *ngFor="let car of cars" [value]="car.id">{{car.name}}</ng-option>
+                            <ng-option *ngFor="let role of postions" [value]="role.name">{{role.name}}</ng-option>
                         </ng-select>
                         <!-- start-roll-name-error -->
                         <ng-container

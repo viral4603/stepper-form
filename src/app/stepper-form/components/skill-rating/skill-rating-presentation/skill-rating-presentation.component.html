@@ -9,11 +9,11 @@
                     <label for="country" class="mb-1 cursor-pointer fw-semibold">Frameworks<span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3 ">
-                        <ng-select [clearable]="false" [multiple]="true" placeholder="Country" id="country"
+                        <ng-select [clearable]="false" [multiple]="true" placeholder="Select Framework" id="frameworkID"
                             class="w-100" (add)="onSelectChange($event,'framework')"
                             (remove)="onDeselectChange($event,'framework')"
-                            (blur) ="markFormGroupAsTouched('framework')">
-                            <ng-option *ngFor="let car of cars" [value]="car.name">{{car.name}}</ng-option>
+                            (blur)="markFormGroupAsTouched('framework')">
+                            <ng-option *ngFor="let item of frameWorks" [value]="item.name">{{item.name}}</ng-option>
                         </ng-select>
                         <!-- start-state-error -->
                         <ng-container
@@ -41,15 +41,17 @@
                     <label for="country" class="mb-1 cursor-pointer fw-semibold">Programming Languages<span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3">
-                        <ng-select [clearable]="false" [multiple]="true" placeholder="Country" id="country"
+                        <ng-select [clearable]="false" [multiple]="true" placeholder="Select Programming Language" id="programmingLangugesId"
                             class="w-100" (add)="onSelectChange($event,'programmingLanguges')"
-                            (remove)="onDeselectChange($event,'programmingLanguges')" (blur) ="markFormGroupAsTouched('programmingLanguges')">
-                            <ng-option *ngFor="let car of cars" [value]="car.name">{{car.name}}</ng-option>
+                            (remove)="onDeselectChange($event,'programmingLanguges')"
+                            (blur)="markFormGroupAsTouched('programmingLanguges')">
+                            <ng-option *ngFor="let language of programmingLanguages" [value]="language.name">{{language.name}}</ng-option>
                         </ng-select>
                         <!-- start-state-error -->
                         <ng-container
                             *ngIf="(formContorls['programmingLanguges'].errors && formContorls['programmingLanguges']['touched'] || (!isFormValid && formContorls['programmingLanguges'].errors))">
-                            <h6 *ngIf="formContorls['programmingLanguges']['errors']['required']" class="text-danger mt-2">
+                            <h6 *ngIf="formContorls['programmingLanguges']['errors']['required']"
+                                class="text-danger mt-2">
                                 *Programming Language is required
                             </h6>
                         </ng-container>

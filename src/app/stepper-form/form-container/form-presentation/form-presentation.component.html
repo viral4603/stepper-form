@@ -2,25 +2,19 @@
     <!-- start-form-wraper -->
     <div class="form-wrapper border rounded d-flex flex-column px-2 px-md-3 py-3 mt-4 m-auto">
         <div class="progress-bar py-4 px-2 px-md--3">
-            <app-progress-count [steps]="count"></app-progress-count>
+            <app-progress-count-presentation [steps]="count"></app-progress-count-presentation>
         </div>
         <div class="active-form flex-grow-1 d-flex px-2 px-md-3 w-100">
             <!-- Basic-Details-form -->
-            <app-basic-details-presentation (submitFormData)="submitFormData($event)"
-                *ngIf="count === 1"></app-basic-details-presentation>
+            <app-basic-details-presentation *ngIf="count === 1"></app-basic-details-presentation>
             <!-- Address-Details-form -->
-            <app-address-details-presentation (submitFormData)="submitFormData($event)"
-                (previousClicked)="navigateOnPreviousTab($event)"
-                *ngIf="count === 2"></app-address-details-presentation>
+            <app-address-details-presentation [countryAndState]="countryAndState" [countryAndCity]="contryAndCity" *ngIf="count === 2"></app-address-details-presentation>
             <!-- Skill-Rating-form -->
-            <app-skill-rating-presentation (submitFormData)="submitFormData($event)"
-                (previousClicked)="navigateOnPreviousTab($event)" *ngIf="count === 3"></app-skill-rating-presentation>
+            <app-skill-rating-presentation *ngIf="count === 3"></app-skill-rating-presentation>
             <!-- Project-Details-form -->
-            <app-project-details-presentation (previousClicked)="navigateOnPreviousTab($event)"
-                *ngIf="count === 4"></app-project-details-presentation>
+            <app-project-details-presentation *ngIf="count === 4"></app-project-details-presentation>
             <!-- Policy-Details-form -->
-            <app-policy-details-presentation (previousClicked)="navigateOnPreviousTab($event)"
-                *ngIf="count === 5"></app-policy-details-presentation>
+            <app-policy-details-presentation *ngIf="count === 5"></app-policy-details-presentation>
             <!-- preview-form -->
             <app-preview-form-presentation *ngIf="count === 6"></app-preview-form-presentation>
         </div>

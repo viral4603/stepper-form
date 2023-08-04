@@ -36,29 +36,15 @@
                         <!-- end-street-address -->
                     </div>
                 </div>
-                <div class="col-12 col-lg-6">
-                    <label for="pinCode" class="mb-1 cursor-pointer fw-semibold">Pin Code<span
-                            class="text-danger">*</span></label>
-                    <div class="input-group mb-3 flex-column">
-                        <input type="text" id="pinCode" class="form-control w-100" placeholder="Pin Code"
-                            aria-label="Pin Code" formControlName="pinCode">
-                        <!-- start-pincode-error -->
-                        <ng-container
-                            *ngIf="(formContorls['pinCode'].touched && formContorls['pinCode'].errors) || (!isFormValid && formContorls['pinCode'].errors)">
-                            <h6 *ngIf="formContorls['pinCode']['errors']['required']" class="text-danger mt-2">
-                                *Pin Code is required field
-                            </h6>
-                        </ng-container>
-                        <!-- end-pincode-error -->
-                    </div>
-                </div>
+
                 <div class="col-12 col-lg-6">
                     <label for="country" class="mb-1 cursor-pointer fw-semibold">Country<span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3 flex-column">
                         <!--Using ng-option and for loop-->
-                        <ng-select placeholder="Country" id="country" class="w-100" formControlName="country">
-                            <ng-option *ngFor="let car of cars" [value]="car.id">{{car.name}}</ng-option>
+                        <ng-select placeholder="Country" id="country" class="w-100" formControlName="country"
+                            (change)="onSelectCountry($event)" [clearable]="false">
+                            <ng-option *ngFor="let item of country" [value]="item.name">{{item.name}}</ng-option>
                         </ng-select>
                         <!-- start-country-error -->
                         <ng-container
@@ -74,8 +60,9 @@
                     <label for="state" class="mb-1 cursor-pointer fw-semibold">State<span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3 flex-column">
-                        <ng-select placeholder="State" class="w-100" id="state" formControlName="state">
-                            <ng-option *ngFor="let car of cars" [value]="car.id">{{car.name}}</ng-option>
+                        <ng-select placeholder="State" class="w-100" id="state" formControlName="state"
+                            [clearable]="false">
+                            <ng-option *ngFor="let item of state;let i = index" [value]="item.name">{{item.name}}</ng-option>
                         </ng-select>
                         <!-- start-state-error -->
                         <ng-container
@@ -92,8 +79,8 @@
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3 flex-column">
                         <!--Using ng-option and for loop-->
-                        <ng-select placeholder="City" class="w-100" id="city" formControlName="city">
-                            <ng-option *ngFor="let car of cars" [value]="car.id">{{car.name}}</ng-option>
+                        <ng-select placeholder="City" class="w-100" id="city" formControlName="city" [clearable]="false">
+                            <ng-option *ngFor="let city of cities" [value]="city.name">{{city.name}}</ng-option>
                         </ng-select>
                         <!-- start-state-error -->
                         <ng-container
@@ -103,6 +90,22 @@
                             </h6>
                         </ng-container>
                         <!-- end-state-error -->
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <label for="pinCode" class="mb-1 cursor-pointer fw-semibold">Pin Code<span
+                            class="text-danger">*</span></label>
+                    <div class="input-group mb-3 flex-column">
+                        <input type="text" id="pinCode" class="form-control w-100" placeholder="Pin Code"
+                            aria-label="Pin Code" formControlName="pinCode">
+                        <!-- start-pincode-error -->
+                        <ng-container
+                            *ngIf="(formContorls['pinCode'].touched && formContorls['pinCode'].errors) || (!isFormValid && formContorls['pinCode'].errors)">
+                            <h6 *ngIf="formContorls['pinCode']['errors']['required']" class="text-danger mt-2">
+                                *Pin Code is required field
+                            </h6>
+                        </ng-container>
+                        <!-- end-pincode-error -->
                     </div>
                 </div>
             </div>

@@ -1,14 +1,16 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { StepperCountService } from '../../services/stepper-count.service';
-import { Subscriber, Subscription } from 'rxjs';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { StepperCountService } from 'src/app/stepper-form/services/stepper-count.service';
+import { ProgressCountService } from '../progress-count-presenter/progress-count.service';
 
 @Component({
-  selector: 'app-progress-count',
-  templateUrl: './progress-count.component.html',
-  styleUrls: ['./progress-count.component.scss']
+  selector: 'app-progress-count-presentation',
+  templateUrl: './progress-count-presentation.component.html',
+  styleUrls: ['./progress-count-presentation.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [ProgressCountService]
 })
-export class ProgressCountComponent implements OnInit, OnDestroy {
-
+export class ProgressCountPresentationComponent {
   private _steps!: number;
   public get value(): number {
     return this._steps;
@@ -27,11 +29,10 @@ export class ProgressCountComponent implements OnInit, OnDestroy {
   }
 
   public styleExpression: any;
-  public errorOccurOnTab: number;
   public formValidtionSub!: Subscription;
   public isLastStepReach: boolean;
-  constructor(private _stepperCountService: StepperCountService) {
-    this.errorOccurOnTab = 0;
+  constructor(private _stepperCountService: StepperCountService,
+    private _progressCountPresenter: ProgressCountService) {
     this.isLastStepReach = false;
   }
 
@@ -47,15 +48,14 @@ export class ProgressCountComponent implements OnInit, OnDestroy {
   setActiveTab(tabValue: number): void {
     const navigationOption = {
       activeTab: this.steps,
-      navigateTo: tabValue
+      navigateTo: tabValue,
+      isLastStepReach: this.isLastStepReach
     }
-    if (tabValue > this.steps && tabValue === this.steps + 1 && !this.isLastStepReach ||
-      this.isLastStepReach || tabValue < this.steps) {
-      this._stepperCountService.submitFormByTab(navigationOption)
-    }
+    this._progressCountPresenter.setActiveTab(navigationOption)
   }
 
   ngOnDestroy(): void {
     this.formValidtionSub.unsubscribe()
   }
+
 }

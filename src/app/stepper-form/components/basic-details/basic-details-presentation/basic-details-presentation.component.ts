@@ -15,7 +15,6 @@ import { Subject, takeUntil } from 'rxjs';
   ],
 })
 export class BasicDetailsPresentationComponent implements OnInit, OnDestroy {
-  @Output() public submitFormData: EventEmitter<any>;
   public basicDetails: FormGroup;
   public isFormValid: boolean;
   public unSubscribe: Subject<any>
@@ -24,7 +23,6 @@ export class BasicDetailsPresentationComponent implements OnInit, OnDestroy {
     private _cdr: ChangeDetectorRef) {
     this.basicDetails = this._presenterService.basicDeatilsFormGroup();
     this.isFormValid = true;
-    this.submitFormData = new EventEmitter<any>()
     this.unSubscribe = new Subject<any>();
   }
 

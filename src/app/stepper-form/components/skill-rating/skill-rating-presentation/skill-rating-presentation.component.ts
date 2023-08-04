@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { SkillRatingPresenterService } from '../skill-rating-presenter/skill-rating-presenter.service';
 import { Subject } from 'rxjs/internal/Subject';
-import { StepperCountService } from 'src/app/stepper-form/services/stepper-count.service';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
+import { StepperCountService } from 'src/app/stepper-form/services/stepper-count.service';
+import { SkillRatingPresenterService } from '../skill-rating-presenter/skill-rating-presenter.service';
+import { Framework, ProgrammingLanguages, SelectOption } from 'src/app/stepper-form/model/index.model';
 
 @Component({
   selector: 'app-skill-rating-presentation',
@@ -23,12 +24,17 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
     { id: 3, name: 'Opel' },
     { id: 4, name: 'Audi' },
   ];
+  public frameWorks:SelectOption[];
+  public programmingLanguages:SelectOption[];
+
 
   constructor(private _skillPresenterService: SkillRatingPresenterService, private _cdr: ChangeDetectorRef,
     private _stepperCountService: StepperCountService) {
     this.skillForm = this._skillPresenterService.skillFormGroup()
     this.isFormValid = true;
     this.unSubscribe = new Subject<any>();
+    this.frameWorks = Framework;
+    this.programmingLanguages = ProgrammingLanguages;
   }
 
   public get formContorls() {
@@ -129,7 +135,6 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
     this._stepperCountService.setActiveTab(tab)
   }
 
-  //unsubscribe all subscriber
   public ngOnDestroy(): void {
     this.unSubscribe.next(true)
     this.unSubscribe.unsubscribe()

@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs/internal/Subject';
 import { StepperCountService } from 'src/app/stepper-form/services/stepper-count.service';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
+import { SelectOption } from 'src/app/stepper-form/model/index.model';
 
 @Component({
   selector: 'app-project-details-presentation',
@@ -13,12 +14,23 @@ import { takeUntil } from 'rxjs/internal/operators/takeUntil';
   providers: [ProjectDetailsPresenterService]
 })
 export class ProjectDetailsPresentationComponent implements OnInit, OnDestroy {
-  public cars: any = [
-    { id: 1, name: 'Volvo' },
-    { id: 2, name: 'Saab' },
-    { id: 3, name: 'Opel' },
-    { id: 4, name: 'Audi' },
+  public projects: SelectOption[] = [
+    { id: 1, name: 'NAC' },
+    { id: 2, name: '1TrackIt' },
+    { id: 3, name: '1Talent' },
+    { id: 4, name: 'Vehical Tracking' },
+    { id: 5, name: 'Food Services' },
+    { id: 6, name: 'Expense Tracker' }
   ];
+  public postions: SelectOption[] = [
+    { id: 1, name: 'Project Manger' },
+    { id: 2, name: 'Web Developer' },
+    { id: 3, name: 'Business analyst' },
+    { id: 4, name: 'Front End Developer' },
+    { id: 5, name: 'Data scientists' },
+    { id: 6, name: 'Quality Assurance' },
+    { id: 7, name: 'Database administrators' },
+  ]
   public today: string = new Date().toISOString().split('T')[0];
   public isFormValid: boolean;
   public unSubscribe: Subject<any>
