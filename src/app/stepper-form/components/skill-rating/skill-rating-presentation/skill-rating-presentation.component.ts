@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs/internal/Subject';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
+import { SelectOption } from 'src/app/stepper-form/model/index.model';
 import { StepperCountService } from 'src/app/stepper-form/services/stepper-count.service';
 import { SkillRatingPresenterService } from '../skill-rating-presenter/skill-rating-presenter.service';
-import { Framework, ProgrammingLanguages, SelectOption } from 'src/app/stepper-form/model/index.model';
 
 @Component({
   selector: 'app-skill-rating-presentation',
@@ -21,7 +21,6 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
   public get frameworks(): SelectOption[] {
     return this._frameworks;
   }
-  private _frameworks: SelectOption[];
 
   @Input() public set programmingLanguages(v: SelectOption[]) {
     this._programmingLanguages = v;
@@ -29,11 +28,22 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
   public get programmingLanguages(): SelectOption[] {
     return this._programmingLanguages;
   }
-  private _programmingLanguages: SelectOption[];
 
   public skillForm: FormGroup;
   public isFormValid: boolean;
   public unSubscribe: Subject<any>;
+
+  private _frameworks: SelectOption[];
+  private _programmingLanguages: SelectOption[];
+
+  public get formContorls() {
+    return this.skillForm.controls;
+  }
+
+  public get frameWorksContorls() {
+    const skillGroup = this.skillForm.controls['framework'] as FormGroup
+    return skillGroup['controls']
+  }
 
   constructor(private _skillPresenterService: SkillRatingPresenterService, private _cdr: ChangeDetectorRef,
     private _stepperCountService: StepperCountService) {
@@ -44,14 +54,6 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
     this._programmingLanguages = []
   }
 
-  public get formContorls() {
-    return this.skillForm.controls;
-  }
-
-  public get frameWorksContorls() {
-    const skillGroup = this.skillForm.controls['framework'] as FormGroup
-    return skillGroup['controls']
-  }
 
   ngOnInit(): void {
     this._stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {

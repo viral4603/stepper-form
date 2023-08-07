@@ -1,45 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { StpperService } from '../stpper.service';
 import { SelectOption } from '../model/index.model';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-form-container',
   templateUrl: './form-container.component.html',
   styleUrls: ['./form-container.component.scss']
 })
-export class FormContainerComponent implements OnInit {
+export class FormContainerComponent implements OnInit, OnDestroy {
+
   public countryAndState: any;
   public countryAndCity: any;
   public projectList: SelectOption[];
   public positionList: SelectOption[];
   public frameWorkList: SelectOption[];
   public programmingList: SelectOption[];
+  public unSubscribe: Subject<boolean>;
 
   constructor(private stepperService: StpperService) {
     this.projectList = [];
     this.positionList = [];
     this.frameWorkList = [];
     this.programmingList = [];
+    this.unSubscribe = new Subject<boolean>();
   }
-  
+
   ngOnInit(): void {
-    this.stepperService.getCountryAndState().subscribe((res: any) => {
+    this.stepperService.getCountryAndState().pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
       this.countryAndState = res.data;
     })
-    this.stepperService.getCountyAndciy().subscribe((res: any) => {
+    this.stepperService.getCountyAndciy().pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
       this.countryAndCity = res.data;
     })
-    this.stepperService.getProjects().subscribe((res: SelectOption[]) => {
+    this.stepperService.getProjects().pipe(takeUntil(this.unSubscribe)).subscribe((res: SelectOption[]) => {
       this.projectList = res;
     })
-    this.stepperService.getPositions().subscribe((res: SelectOption[]) => {
+    this.stepperService.getPositions().pipe(takeUntil(this.unSubscribe)).subscribe((res: SelectOption[]) => {
       this.positionList = res;
     })
-    this.stepperService.getFrameworks().subscribe((res: SelectOption[]) => {
+    this.stepperService.getFrameworks().pipe(takeUntil(this.unSubscribe)).subscribe((res: SelectOption[]) => {
       this.frameWorkList = res;
     })
-    this.stepperService.getProgrammingLangues().subscribe((res: SelectOption[]) => {
+    this.stepperService.getProgrammingLangues().pipe(takeUntil(this.unSubscribe)).subscribe((res: SelectOption[]) => {
       this.programmingList = res;
     })
+  }
+  
+  ngOnDestroy(): void {
+    this.unSubscribe.next(true)
+    this.unSubscribe.unsubscribe()
   }
 }

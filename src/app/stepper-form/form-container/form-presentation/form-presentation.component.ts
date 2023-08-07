@@ -15,6 +15,11 @@ import { SelectOption } from '../../model/index.model';
 })
 export class FormPresentationComponent implements OnInit, OnDestroy {
 
+  @Input() public projectList!: SelectOption[];
+  @Input() public positionList!: SelectOption[];
+  @Input() public frameWorkList!: SelectOption[];
+  @Input() public languageList!: SelectOption[];
+
   @Input() public set countryAndState(v: any) {
     this._countryAndState = v;
   }
@@ -25,21 +30,18 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
   @Input() public set contryAndCity(v: any) {
     this._contryAndCity = v;
   }
-  private _contryAndCity: any;
   public get contryAndCity(): any {
     return this._contryAndCity;
   }
 
-  @Input() public projectList!:SelectOption[];
-  @Input() public positionList!: SelectOption[];
-  @Input() public frameWorkList!: SelectOption[];
-  @Input() public languageList!: SelectOption[];
 
   public country: SelectOption[];
   public count: number;
   public stepperCountSub: Subscription;
 
   private _countryAndState: any;
+  private _contryAndCity: any;
+
   constructor(private _formPresenterService: FormPresenterService, private _stepperCountService: StepperCountService,
     private _cdr: ChangeDetectorRef) {
     this.count = this._formPresenterService.activeTab;

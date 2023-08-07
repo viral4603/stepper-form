@@ -32,7 +32,3 @@ export interface SelectOption {
     name: string
     id: number
 }
-
-export const Framework = []
-
-export const ProgrammingLanguages = []

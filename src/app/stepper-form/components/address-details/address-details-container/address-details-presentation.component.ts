@@ -16,7 +16,7 @@ import { SelectOption } from 'src/app/stepper-form/model/index.model';
   ]
 })
 export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
-  //set country list
+  //set country with state
   @Input() public set countryAndState(v: any[]) {
     this._countryAndState = v;
   }
@@ -24,16 +24,14 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
   public get countryAndState(): any[] {
     return this._countryAndState;
   }
-  //get stateList
-  private _countryAndCity: SelectOption[];
-  public get countryAndCity(): SelectOption[] {
-    return this._countryAndCity;
-  }
+  //set country with city
   @Input() public set countryAndCity(v: SelectOption[]) {
     this._countryAndCity = v;
   }
+  public get countryAndCity(): SelectOption[] {
+    return this._countryAndCity;
+  }
 
-  private _countryAndState: any[];
   public addressForm: FormGroup;
   public isFormValid: boolean;
   public unSubscribe: Subject<any>
@@ -41,15 +39,13 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
   public state: SelectOption[];
   public cities: SelectOption[]
 
-  public cars: {
-    id: number,
-    name: string
-  }[] = [
-      { id: 1, name: 'Volvo' },
-      { id: 2, name: 'Saab' },
-      { id: 3, name: 'Opel' },
-      { id: 4, name: 'Audi' },
-    ];
+  private _countryAndState: any[];
+  private _countryAndCity: SelectOption[];
+
+  //get all form control in a form group
+  public get formContorls() {
+    return this.addressForm.controls
+  }
 
   constructor(
     private _addressPresenterService: AddressDetailsPresenterService,
@@ -63,7 +59,6 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
     this.country = [];
     this.state = [];
     this.cities = [];
-
   }
   ngOnInit(): void {
     //set coutry list in select option 
@@ -82,10 +77,7 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
       this.addressForm.patchValue(formValue)
     }
   }
-  //get all form control in a form group
-  public get formContorls() {
-    return this.addressForm.controls
-  }
+
   /**
    * @description submit form data and neavigate to next tab
    * @param tab next tab value
@@ -105,7 +97,6 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
    * @param tab number of tab where user want to navigate
    */
   navigateToTab(tab: number): void {
-    this._stepperCountService.setActiveTab(tab);
     this._addressPresenterService.submitForm(this.addressForm.value)
   }
   /**

@@ -11,9 +11,8 @@
                     <div class="input-group mb-3 ">
                         <ng-select [clearable]="false" [multiple]="true" placeholder="Select Framework" id="frameworkID"
                             class="w-100" (add)="onSelectChange($event,'framework')"
-                            (remove)="onDeselectChange($event,'framework')"
-                            (blur)="markFormGroupAsTouched('framework')"
-                            formControlName="selectedFramewrok" >
+                            (remove)="onDeselectChange($event,'framework')" (blur)="markFormGroupAsTouched('framework')"
+                            formControlName="selectedFramewrok">
                             <ng-option *ngFor="let item of frameworks" [value]="item.name">{{item.name}}</ng-option>
                         </ng-select>
                         <!-- start-state-error -->
@@ -44,12 +43,13 @@
                     <label for="country" class="mb-1 cursor-pointer fw-semibold">Programming Languages<span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3">
-                        <ng-select [clearable]="false" [multiple]="true" placeholder="Select Programming Language" id="programmingLangugesId"
-                            class="w-100" (add)="onSelectChange($event,'programmingLanguges')"
+                        <ng-select [clearable]="false" [multiple]="true" placeholder="Select Programming Language"
+                            id="programmingLangugesId" class="w-100"
+                            (add)="onSelectChange($event,'programmingLanguges')"
                             (remove)="onDeselectChange($event,'programmingLanguges')"
-                            (blur)="markFormGroupAsTouched('programmingLanguges')"
-                            formControlName="selectedLanguage">
-                            <ng-option *ngFor="let language of programmingLanguages" [value]="language.name">{{language.name}}</ng-option>
+                            (blur)="markFormGroupAsTouched('programmingLanguges')" formControlName="selectedLanguage">
+                            <ng-option *ngFor="let language of programmingLanguages"
+                                [value]="language.name">{{language.name}}</ng-option>
                         </ng-select>
                         <!-- start-state-error -->
                         <ng-container
@@ -61,7 +61,7 @@
                         </ng-container>
                         <!-- end-state-error -->
                     </div>
-                    <div  class="input-group mb-2" formGroupName="programmingLanguges">
+                    <div class="input-group mb-2" formGroupName="programmingLanguges">
                         <ng-container *ngFor="let control of formContorls['selectedLanguage'].value; let i = index">
                             <div class="col-4">
                                 <label for="customRange1" class="form-label">{{control}}</label>
