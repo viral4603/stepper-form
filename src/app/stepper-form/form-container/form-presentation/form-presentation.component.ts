@@ -21,17 +21,21 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
   public get countryAndState(): any {
     return this._countryAndState;
   }
-  
-  @Input() public set contryAndCity(v : any) {
+
+  @Input() public set contryAndCity(v: any) {
     this._contryAndCity = v;
   }
-  private _contryAndCity : any;
-  public get contryAndCity() : any {
+  private _contryAndCity: any;
+  public get contryAndCity(): any {
     return this._contryAndCity;
   }
-  
 
-  public country: SelectOption[]; 
+  @Input() public projectList!:SelectOption[];
+  @Input() public positionList!: SelectOption[];
+  @Input() public frameWorkList!: SelectOption[];
+  @Input() public languageList!: SelectOption[];
+
+  public country: SelectOption[];
   public count: number;
   public stepperCountSub: Subscription;
 

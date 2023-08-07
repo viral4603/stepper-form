@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs/internal/Subject';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
@@ -15,20 +15,33 @@ import { Framework, ProgrammingLanguages, SelectOption } from 'src/app/stepper-f
 })
 export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
 
+  @Input() public set frameworks(v: SelectOption[]) {
+    this._frameworks = v;
+  }
+  public get frameworks(): SelectOption[] {
+    return this._frameworks;
+  }
+  private _frameworks: SelectOption[];
+
+  @Input() public set programmingLanguages(v: SelectOption[]) {
+    this._programmingLanguages = v;
+  }
+  public get programmingLanguages(): SelectOption[] {
+    return this._programmingLanguages;
+  }
+  private _programmingLanguages: SelectOption[];
+
   public skillForm: FormGroup;
   public isFormValid: boolean;
   public unSubscribe: Subject<any>;
-  public frameWorks: SelectOption[];
-  public programmingLanguages: SelectOption[];
-
 
   constructor(private _skillPresenterService: SkillRatingPresenterService, private _cdr: ChangeDetectorRef,
     private _stepperCountService: StepperCountService) {
     this.skillForm = this._skillPresenterService.skillFormGroup()
     this.isFormValid = true;
     this.unSubscribe = new Subject<any>();
-    this.frameWorks = Framework;
-    this.programmingLanguages = ProgrammingLanguages;
+    this._frameworks = []
+    this._programmingLanguages = []
   }
 
   public get formContorls() {

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ProjectDetailsPresenterService } from '../project-details-presenter/project-details-presenter.service';
 import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs/internal/Subject';
@@ -14,23 +14,21 @@ import { SelectOption } from 'src/app/stepper-form/model/index.model';
   providers: [ProjectDetailsPresenterService]
 })
 export class ProjectDetailsPresentationComponent implements OnInit, OnDestroy {
-  public projects: SelectOption[] = [
-    { id: 1, name: 'NAC' },
-    { id: 2, name: '1TrackIt' },
-    { id: 3, name: '1Talent' },
-    { id: 4, name: 'Vehical Tracking' },
-    { id: 5, name: 'Food Services' },
-    { id: 6, name: 'Expense Tracker' }
-  ];
-  public postions: SelectOption[] = [
-    { id: 1, name: 'Project Manger' },
-    { id: 2, name: 'Web Developer' },
-    { id: 3, name: 'Business analyst' },
-    { id: 4, name: 'Front End Developer' },
-    { id: 5, name: 'Data scientists' },
-    { id: 6, name: 'Quality Assurance' },
-    { id: 7, name: 'Database administrators' },
-  ]
+
+  @Input() public set projects(v: SelectOption[]) {
+    this._projects = v;
+  }
+  public get projects(): SelectOption[] {
+    return this._projects;
+  }
+
+  @Input() public set positions(v: SelectOption[]) {
+    this._positions = v;
+  }
+  public get positions(): SelectOption[] {
+    return this._positions;
+  }
+
   public today: string = new Date().toISOString().split('T')[0];
   public isFormValid: boolean;
   public unSubscribe: Subject<any>
@@ -38,12 +36,17 @@ export class ProjectDetailsPresentationComponent implements OnInit, OnDestroy {
     return this.projectDetailsForm.controls
   }
   public projectDetailsForm: FormGroup;
+
+  private _projects: SelectOption[];
+  private _positions:SelectOption[];
   constructor(private _projectDetailsPresenterService: ProjectDetailsPresenterService,
     private _cdr: ChangeDetectorRef,
     private _stepperCountService: StepperCountService) {
     this.isFormValid = true;
     this.projectDetailsForm = this._projectDetailsPresenterService.buildProjectDetailsForm()
     this.unSubscribe = new Subject<any>();
+    this._projects = []
+    this._positions = []
   }
   ngOnInit(): void {
     this._stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
@@ -63,7 +66,6 @@ export class ProjectDetailsPresentationComponent implements OnInit, OnDestroy {
    */
   submitForm(tab: number) {
     if (this.projectDetailsForm.status !== 'INVALID') {
-      console.log(this.projectDetailsForm)
       this._projectDetailsPresenterService.submitForm(this.projectDetailsForm.value)
       this.navigateTab(tab)
     }

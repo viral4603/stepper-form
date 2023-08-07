@@ -14,7 +14,7 @@
                             (remove)="onDeselectChange($event,'framework')"
                             (blur)="markFormGroupAsTouched('framework')"
                             formControlName="selectedFramewrok" >
-                            <ng-option *ngFor="let item of frameWorks" [value]="item.name">{{item.name}}</ng-option>
+                            <ng-option *ngFor="let item of frameworks" [value]="item.name">{{item.name}}</ng-option>
                         </ng-select>
                         <!-- start-state-error -->
                         <ng-container

@@ -18,7 +18,6 @@ import { SelectOption } from 'src/app/stepper-form/model/index.model';
 export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
   //set country list
   @Input() public set countryAndState(v: any[]) {
-    console.log(v)
     this._countryAndState = v;
   }
   //get countryAndState list for select options
@@ -31,7 +30,6 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
     return this._countryAndCity;
   }
   @Input() public set countryAndCity(v: SelectOption[]) {
-    console.log(v)
     this._countryAndCity = v;
   }
 

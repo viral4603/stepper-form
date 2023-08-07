@@ -31,7 +31,7 @@
                     <div class="input-group mb-4">
                         <!--Using ng-option and for loop-->
                         <ng-select placeholder="Roll" id="roll" class="w-100" formControlName="roll">
-                            <ng-option *ngFor="let role of postions" [value]="role.name">{{role.name}}</ng-option>
+                            <ng-option *ngFor="let role of positions" [value]="role.name">{{role.name}}</ng-option>
                         </ng-select>
                         <!-- start-roll-name-error -->
                         <ng-container
