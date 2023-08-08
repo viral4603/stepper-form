@@ -1,10 +1,10 @@
 <div class="container-xxl h-100">
     <!-- start-form-wraper -->
-    <div class="form-wrapper border rounded d-flex flex-column px-2 px-md-3 py-3 mt-4 m-auto">
+    <div class="form-wrapper rounded d-flex flex-column px-2 px-md-3 py-3 mt-4 m-auto">
         <div class="progress-bar py-4 px-2 px-md--3 no-print">
             <app-progress-count-presentation [steps]="count"></app-progress-count-presentation>
         </div>
-        <div class="active-form flex-grow-1 d-flex px-2 px-md-3 w-100">
+        <div class="active-form flex-grow-1 d-flex px-2 px-md-4 py-lg-4 w-100 border">
             <!-- Basic-Details-form -->
             <app-basic-details-presentation *ngIf="count === 1"></app-basic-details-presentation>
             <!-- Address-Details-form -->
