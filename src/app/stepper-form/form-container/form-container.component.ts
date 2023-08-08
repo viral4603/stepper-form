@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { StpperService } from '../stpper.service';
 import { SelectOption } from '../model/index.model';
 import { Subject, takeUntil } from 'rxjs';
+import { StepperCountService } from '../services/stepper-count.service';
 
 @Component({
   selector: 'app-form-container',
@@ -18,7 +19,7 @@ export class FormContainerComponent implements OnInit, OnDestroy {
   public programmingList: SelectOption[];
   public unSubscribe: Subject<boolean>;
 
-  constructor(private stepperService: StpperService) {
+  constructor(private stepperService: StpperService, private _stepper: StepperCountService) {
     this.projectList = [];
     this.positionList = [];
     this.frameWorkList = [];
@@ -52,6 +53,7 @@ export class FormContainerComponent implements OnInit, OnDestroy {
   postUserData(data: any) {
     this.stepperService.saveUserData(data).subscribe((res: any) => {
       localStorage.clear()
+      this._stepper.setActiveTab(1)
     }, ((error: any) => {
       throw new Error(error)
     }))

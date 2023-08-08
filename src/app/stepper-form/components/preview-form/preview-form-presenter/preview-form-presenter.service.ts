@@ -7,14 +7,14 @@ import { StepperCountService } from 'src/app/stepper-form/services/stepper-count
 
 @Injectable()
 export class PreviewFormPresenterService {
-  public printEnable$:Observable<any>
-  public sendFormData$:Observable<any>;
-  private sendFormData:Subject<any>;
-  private printEnable:Subject<any>;
+  public printEnable$: Observable<any>
+  public sendFormData$: Observable<any>;
+  private sendFormData: Subject<any>;
+  private printEnable: Subject<any>;
 
 
   constructor(private overlay: Overlay, private _stepperCount: StepperCountService
-  ) { 
+  ) {
     this.printEnable = new Subject<any>();
     this.sendFormData = new Subject<any>();
     this.printEnable$ = this.printEnable.asObservable()
@@ -37,6 +37,7 @@ export class PreviewFormPresenterService {
 
     overlayRef.backdropClick().subscribe((res: any) => {
       overlayRef.detach()
+      this.setActiveTab(5)
     })
 
     overlayComponent.instance.close.subscribe((res: any) => {
@@ -62,14 +63,13 @@ export class PreviewFormPresenterService {
     })
 
     overlayComponent.instance.submitdata.subscribe((res: any) => {
-        this.sendFormData.next(formData)
-        overlayRef.detach()
-        this._stepperCount.setActiveTab(5)
+      this.sendFormData.next(formData)
+      overlayRef.detach()
     })
     overlayComponent.instance.formData = formData;
   }
 
-  setActiveTab(tab:number) {
+  setActiveTab(tab: number) {
     this._stepperCount.setActiveTab(tab)
   }
 }
