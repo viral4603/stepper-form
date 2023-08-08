@@ -32,6 +32,19 @@
                             <div class="col-8">
                                 <app-custom-range-slider [formControlName]="$any(control)"
                                     class="w-100"></app-custom-range-slider>
+                                <!-- start-nested-error-frameworks -->
+                                <ng-container
+                                    *ngIf="(frameWorksContorls[control]?.errors && frameWorksContorls[control]?.touched || (!isFormValid && frameWorksContorls[control]?.errors))">
+                                    <h6 *ngIf="frameWorksContorls[control]?.['errors']?.['required']"
+                                        class="text-danger mt-2">
+                                        *{{control}} is required
+                                    </h6>
+                                    <h6 *ngIf="frameWorksContorls[control]?.['errors']?.['min']"
+                                        class="text-danger mt-2">
+                                        *Rating should be greater than 1
+                                    </h6>
+                                </ng-container>
+                                <!-- end-nested-error-frameworks -->
                             </div>
                         </ng-container>
                     </div>
@@ -69,6 +82,20 @@
                             <div class="col-8">
                                 <app-custom-range-slider [formControlName]="$any(control)"
                                     class="w-100"></app-custom-range-slider>
+                                <!-- start-nested-errors-programming -->
+                                <ng-container
+                                    *ngIf="(programmingContorls[control]?.errors && programmingContorls[control]?.touched || (!isFormValid && programmingContorls[control]?.errors))">
+                                    <h6 *ngIf="programmingContorls[control]?.['errors']?.['required']"
+                                        class="text-danger mt-2">
+                                        *{{control}} is required
+                                    </h6>
+                                    <h6 *ngIf="programmingContorls[control]?.['errors']?.['min']"
+                                        class="text-danger mt-2">
+                                        *Rating should be greater than 1
+                                    </h6>
+                                </ng-container>
+                                <!-- end-nested-errors-programming -->
+
                             </div>
                         </ng-container>
                     </div>
@@ -85,6 +112,9 @@
                         *ngIf="(formContorls['leaderShipSkill'].touched && formContorls['leaderShipSkill'].errors) || (!isFormValid && formContorls['leaderShipSkill'].errors)">
                         <h6 *ngIf="formContorls['leaderShipSkill']['errors']['required']" class="text-danger mt-2">
                             *Leadership skill is required field
+                        </h6>
+                        <h6 *ngIf="formContorls['leaderShipSkill']['errors']['min']" class="text-danger mt-2">
+                            *Rating shoudd be greater than 1
                         </h6>
                     </ng-container>
                     <!-- end-leaderShipSkill-error -->

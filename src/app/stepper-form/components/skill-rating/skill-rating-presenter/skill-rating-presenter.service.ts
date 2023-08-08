@@ -20,7 +20,7 @@ export class SkillRatingPresenterService {
       programmingLanguges: this._fb.group({}, {
         validator: this.customValidators() // Adding the custom validator here
       }),
-      leaderShipSkill: [, Validators.required],
+      leaderShipSkill: [, [Validators.required, Validators.min(2)]],
     })
   }
 
@@ -29,7 +29,7 @@ export class SkillRatingPresenterService {
    */
   addControlToNestedGroup(myForm: any, name: string, nestedGroupName: string) {
     const nestedGroup = myForm.get(`${nestedGroupName}`) as FormGroup;
-    nestedGroup.addControl(`${name}`, new FormControl(null, Validators.required));
+    nestedGroup.addControl(`${name}`, new FormControl(null, [Validators.required, Validators.min(2)]));
   }
 
   /**
@@ -62,7 +62,7 @@ export class SkillRatingPresenterService {
    */
   addControls(formGroup: FormGroup, controls: AnalyserNode) {
     Object.keys(controls).forEach((item: any) => {
-      formGroup.addControl(`${item}`, this._fb.control(null, Validators.required))
+      formGroup.addControl(`${item}`, this._fb.control(null, [Validators.required, Validators.min(2)]))
     })
   }
 }

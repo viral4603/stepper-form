@@ -44,6 +44,10 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
     const skillGroup = this.skillForm.controls['framework'] as FormGroup
     return skillGroup['controls']
   }
+  public get programmingContorls() {
+    const skillGroup = this.skillForm.controls['programmingLanguges'] as FormGroup
+    return skillGroup['controls']
+  }
 
   constructor(private _skillPresenterService: SkillRatingPresenterService, private _cdr: ChangeDetectorRef,
     private _stepperCountService: StepperCountService) {
@@ -63,7 +67,6 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
     })
     //patch form value
     const localStorageValue = JSON.parse(localStorage.getItem('skillDetails')!)
-
     if (localStorageValue) {
       for (let item in localStorageValue) {
         if (typeof localStorageValue[`${item}`] === 'object' && !Array.isArray(localStorageValue[`${item}`])) {
@@ -97,6 +100,8 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
  * @description this method submit from data to container
   */
   submitForm(tab: number): void {
+    
+    console.log(this.frameWorksContorls)
     if (this.skillForm.status !== "INVALID") {
       this._skillPresenterService.submitForm(this.skillForm.value)
       this._stepperCountService.setActiveTab(tab)
