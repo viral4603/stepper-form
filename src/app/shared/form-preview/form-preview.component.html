@@ -1,6 +1,6 @@
-<div class="form-details p-3">
+<div class="form-details p-3 w-100">
     <!-- heading-start -->
-    <div class="form-heading d-flex justify-content-between align-items-center py-2">
+    <div class="form-heading d-flex justify-content-between align-items-center no-print py-2">
         <h5>Preview Form Details</h5>
         <button class="btn btn-primary" (click)="closeOverlay()">Close</button>
     </div>
@@ -151,9 +151,9 @@
             </tbody>
         </table>
         <!-- end-basic-details-end -->
-        <div class="footer d-flex justify-content-center w-100 pb-3">
-            <button class="btn btn-success me-4">Print</button>
-            <button class="btn btn-primary">Submit</button>
+        <div class="footer d-flex justify-content-center w-100 pb-3 no-print">
+            <button class="btn btn-success me-4" (click)="printForm()">Print</button>
+            <button class="btn btn-primary" (click)="submitForm()">Submit</button>
         </div>
     </div>
 </div>

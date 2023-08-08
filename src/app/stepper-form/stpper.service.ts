@@ -47,4 +47,12 @@ export class StpperService {
   public getProgrammingLangues():Observable<any> {
     return this._http.get('http://localhost:3000/programminglanguages')
   }
+  /**
+   * @description Api for send user data 
+   * @param data 
+   * @returns 
+   */
+  public saveUserData(data:any):Observable<any> {
+    return this._http.post('http://localhost:3000/employeeData',data)
+  }
 }

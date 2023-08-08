@@ -11,35 +11,54 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   ]
 })
 export class FormPreviewComponent {
-  @Output() public close: EventEmitter<boolean>;
-
-  private _formData: any;
-  public get formData(): any {
-    return this._formData;
-  }
   @Input() public set formData(v: any) {
     this._formData = v;
   }
+  public get formData(): any {
+    return this._formData;
+  }
+
+  @Output() public close: EventEmitter<boolean>;
+  @Output() public print: EventEmitter<boolean>;
+  @Output() public submitdata: EventEmitter<any>;
+
+  private _formData: any;
 
   constructor() {
     this.close = new EventEmitter<boolean>()
+    this.print = new EventEmitter<boolean>()
+    this.submitdata = new EventEmitter<any>()
   }
+  /**
+   * emit custome event for close overlay
+   */
   closeOverlay() {
     this.close.emit(true)
   }
+  /**
+   * emit prit form 
+   */
+  printForm() {
+    this.print.emit(true)
+  }
+  /**
+   * emit submit form
+   */
+  submitForm() {
+    this.submitdata.emit()
+  }
 
-  get getKeyOfObject(): string[] {
-    return Object.keys(this.formData)
-  }
-  
-  getNestedKey(key:string):string[] {
-    return Object.keys(this.formData[`${key}`])
-  }
-  get framworkSkills():string[] {
-    return Object.keys(this.formData['skillDetails']['framework'])
-  }
-  get programmingLangugesSkill():string[]
-  {
-   return Object.keys(this.formData['skillDetails']['programmingLanguges'])
- }
+  // get getKeyOfObject(): string[] {
+  //   return Object.keys(this.formData)
+  // }
+
+  // getNestedKey(key: string): string[] {
+  //   return Object.keys(this.formData[`${key}`])
+  // }
+  // get framworkSkills(): string[] {
+  //   return Object.keys(this.formData['skillDetails']['framework'])
+  // }
+  // get programmingLangugesSkill(): string[] {
+  //   return Object.keys(this.formData['skillDetails']['programmingLanguges'])
+  // }
 }
