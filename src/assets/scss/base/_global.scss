@@ -35,3 +35,15 @@
         min-height: 90vh;
     }
 }
+
+
+@media print {
+    body * .no-print {
+        display: none !important;
+    }
+
+    body * :not(.no-print) .border {
+        border: none !important;
+        padding: 10px 0px !important;
+    }
+}

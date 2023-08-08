@@ -94,36 +94,12 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
     this._skillPresenterService.removeControlFromNestedGroup(this.skillForm, object.value, parentGroup)
   }
   /**
-   * get all conrols of Framework from group
-   */
-  // get frameWorkGroupControls() {
-  //   const resultArray = []
-  //   const nestedGroup = this.skillForm.get('framework') as FormGroup
-  //   for (let key in nestedGroup.controls) {
-  //     resultArray.push(key)
-  //   }
-  //   return resultArray
-  // }
-
-  /**
-  * get all conrols of Programming from group
-  */
-  // get programmingGroupControls() {
-  //   const resultArray = []
-  //   const nestedGroup = this.skillForm.get('programmingLanguges') as FormGroup
-  //   for (let key in nestedGroup.controls) {
-  //     resultArray.push(key)
-  //   }
-  //   return resultArray
-  // }
-
-  /**
  * @description this method submit from data to container
- */
+  */
   submitForm(tab: number): void {
     if (this.skillForm.status !== "INVALID") {
       this._skillPresenterService.submitForm(this.skillForm.value)
-      this.navigateTab(tab)
+      this._stepperCountService.setActiveTab(tab)
     }
     else {
       this.isFormValid = false;
@@ -137,13 +113,6 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
    */
   markFormGroupAsTouched(name: string) {
     this.skillForm.controls[`${name}`].markAsTouched()
-  }
-
-  /**
-   * @description navigation
-   */
-  public navigateTab(tab: number) {
-    this._stepperCountService.setActiveTab(tab)
   }
 
   public ngOnDestroy(): void {

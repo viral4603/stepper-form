@@ -1,7 +1,7 @@
 <div class="container-xxl h-100">
     <!-- start-form-wraper -->
     <div class="form-wrapper border rounded d-flex flex-column px-2 px-md-3 py-3 mt-4 m-auto">
-        <div class="progress-bar py-4 px-2 px-md--3">
+        <div class="progress-bar py-4 px-2 px-md--3 no-print">
             <app-progress-count-presentation [steps]="count"></app-progress-count-presentation>
         </div>
         <div class="active-form flex-grow-1 d-flex px-2 px-md-3 w-100">
@@ -19,7 +19,7 @@
             <!-- Policy-Details-form -->
             <app-policy-details-presentation *ngIf="count === 5"></app-policy-details-presentation>
             <!-- preview-form -->
-            <app-preview-form-presentation *ngIf="count === 6"></app-preview-form-presentation>
+            <app-preview-form-presentation *ngIf="count === 6" (sendFormData)="sendDataToParent($event)"></app-preview-form-presentation>
         </div>
     </div>
     <!-- end-form-wraper -->

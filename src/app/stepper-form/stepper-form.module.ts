@@ -37,7 +37,7 @@ import { StpperService } from './stpper.service';
     OverlayModule,
     CustomRangeSliderComponent,
     ReactiveFormsModule,
-    FormPreviewComponent
+    FormPreviewComponent,
   ],
   exports: [
     FormContainerComponent

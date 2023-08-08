@@ -1,262 +1,315 @@
 {
-    "projects": [
-        {
-            "id": 1,
-            "name": "NAC"
+  "projects": [
+    {
+      "id": 1,
+      "name": "NAC"
+    },
+    {
+      "id": 2,
+      "name": "1TrackIt"
+    },
+    {
+      "id": 3,
+      "name": "1Talent"
+    },
+    {
+      "id": 4,
+      "name": "Vehical Tracking"
+    },
+    {
+      "id": 5,
+      "name": "Food Services"
+    },
+    {
+      "id": 6,
+      "name": "Expense Tracker"
+    }
+  ],
+  "positions": [
+    {
+      "id": 1,
+      "name": "Project Manager"
+    },
+    {
+      "id": 2,
+      "name": "Web Developer"
+    },
+    {
+      "id": 3,
+      "name": "Business Analyst"
+    },
+    {
+      "id": 4,
+      "name": "Front End Developer"
+    },
+    {
+      "id": 5,
+      "name": "Data Scientist"
+    },
+    {
+      "id": 6,
+      "name": "Quality Assurance"
+    },
+    {
+      "id": 7,
+      "name": "Database Administrator"
+    }
+  ],
+  "programminglanguages": [
+    {
+      "name": "JavaScript",
+      "id": 1
+    },
+    {
+      "name": "Python",
+      "id": 2
+    },
+    {
+      "name": "Java",
+      "id": 3
+    },
+    {
+      "name": "Ruby",
+      "id": 4
+    },
+    {
+      "name": "C# (.NET)",
+      "id": 5
+    },
+    {
+      "name": "PHP",
+      "id": 6
+    },
+    {
+      "name": "Go (Golang)",
+      "id": 7
+    },
+    {
+      "name": "Swift",
+      "id": 8
+    },
+    {
+      "name": "Rust",
+      "id": 9
+    },
+    {
+      "name": "Kotlin (Android)",
+      "id": 10
+    },
+    {
+      "name": "C++",
+      "id": 11
+    },
+    {
+      "name": "TypeScript",
+      "id": 12
+    },
+    {
+      "name": "C",
+      "id": 13
+    },
+    {
+      "name": "Perl",
+      "id": 14
+    },
+    {
+      "name": "Haskell",
+      "id": 15
+    },
+    {
+      "name": "Scala",
+      "id": 16
+    },
+    {
+      "name": "Dart",
+      "id": 17
+    },
+    {
+      "name": "Lua",
+      "id": 18
+    },
+    {
+      "name": "R",
+      "id": 19
+    },
+    {
+      "name": "Objective-C",
+      "id": 20
+    },
+    {
+      "name": "Shell",
+      "id": 21
+    },
+    {
+      "name": "Perl",
+      "id": 22
+    },
+    {
+      "name": "SQL",
+      "id": 23
+    },
+    {
+      "name": "PowerShell",
+      "id": 24
+    },
+    {
+      "name": "Julia",
+      "id": 25
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "React.js",
+      "id": 1
+    },
+    {
+      "name": "Angular",
+      "id": 2
+    },
+    {
+      "name": "Vue.js",
+      "id": 3
+    },
+    {
+      "name": "Django",
+      "id": 4
+    },
+    {
+      "name": "Flask",
+      "id": 5
+    },
+    {
+      "name": "TensorFlow",
+      "id": 6
+    },
+    {
+      "name": "Spring Framework",
+      "id": 7
+    },
+    {
+      "name": "Hibernate",
+      "id": 8
+    },
+    {
+      "name": "Apache Struts",
+      "id": 9
+    },
+    {
+      "name": "Ruby on Rails",
+      "id": 10
+    },
+    {
+      "name": "Sinatra",
+      "id": 11
+    },
+    {
+      "name": "ASP.NET",
+      "id": 12
+    },
+    {
+      "name": "Entity Framework",
+      "id": 13
+    },
+    {
+      "name": "Xamarin",
+      "id": 14
+    },
+    {
+      "name": "Laravel",
+      "id": 15
+    },
+    {
+      "name": "Symfony",
+      "id": 16
+    },
+    {
+      "name": "CodeIgniter",
+      "id": 17
+    },
+    {
+      "name": "Gin",
+      "id": 18
+    },
+    {
+      "name": "Echo",
+      "id": 19
+    },
+    {
+      "name": "SwiftUI",
+      "id": 20
+    },
+    {
+      "name": "Combine",
+      "id": 21
+    },
+    {
+      "name": "Rocket",
+      "id": 22
+    },
+    {
+      "name": "Actix",
+      "id": 23
+    },
+    {
+      "name": "Android Jetpack",
+      "id": 24
+    },
+    {
+      "name": "Ktor",
+      "id": 25
+    }
+  ],
+  "employeeData": [
+    {
+      "policyForm": {
+        "communicateTerm": true,
+        "documentTerm": true,
+        "securityTerm": true,
+        "collaborativeTerm": true
+      },
+      "skillDetails": {
+        "selectedFramewrok": [
+          "Angular",
+          "Django"
+        ],
+        "selectedLanguage": [
+          "Python"
+        ],
+        "framework": {
+          "Angular": 2,
+          "Django": 2
         },
-        {
-            "id": 2,
-            "name": "1TrackIt"
+        "programmingLanguges": {
+          "Python": 3
         },
-        {
-            "id": 3,
-            "name": "1Talent"
-        },
-        {
-            "id": 4,
-            "name": "Vehical Tracking"
-        },
-        {
-            "id": 5,
-            "name": "Food Services"
-        },
-        {
-            "id": 6,
-            "name": "Expense Tracker"
-        }
-    ],
-    "positions": [
-        {
-            "id": 1,
-            "name": "Project Manager"
-        },
-        {
-            "id": 2,
-            "name": "Web Developer"
-        },
-        {
-            "id": 3,
-            "name": "Business Analyst"
-        },
-        {
-            "id": 4,
-            "name": "Front End Developer"
-        },
-        {
-            "id": 5,
-            "name": "Data Scientist"
-        },
-        {
-            "id": 6,
-            "name": "Quality Assurance"
-        },
-        {
-            "id": 7,
-            "name": "Database Administrator"
-        }
-    ],
-    "programminglanguages": [
-        {
-            "name": "JavaScript",
-            "id": 1
-        },
-        {
-            "name": "Python",
-            "id": 2
-        },
-        {
-            "name": "Java",
-            "id": 3
-        },
-        {
-            "name": "Ruby",
-            "id": 4
-        },
-        {
-            "name": "C# (.NET)",
-            "id": 5
-        },
-        {
-            "name": "PHP",
-            "id": 6
-        },
-        {
-            "name": "Go (Golang)",
-            "id": 7
-        },
-        {
-            "name": "Swift",
-            "id": 8
-        },
-        {
-            "name": "Rust",
-            "id": 9
-        },
-        {
-            "name": "Kotlin (Android)",
-            "id": 10
-        },
-        {
-            "name": "C++",
-            "id": 11
-        },
-        {
-            "name": "TypeScript",
-            "id": 12
-        },
-        {
-            "name": "C",
-            "id": 13
-        },
-        {
-            "name": "Perl",
-            "id": 14
-        },
-        {
-            "name": "Haskell",
-            "id": 15
-        },
-        {
-            "name": "Scala",
-            "id": 16
-        },
-        {
-            "name": "Dart",
-            "id": 17
-        },
-        {
-            "name": "Lua",
-            "id": 18
-        },
-        {
-            "name": "R",
-            "id": 19
-        },
-        {
-            "name": "Objective-C",
-            "id": 20
-        },
-        {
-            "name": "Shell",
-            "id": 21
-        },
-        {
-            "name": "Perl",
-            "id": 22
-        },
-        {
-            "name": "SQL",
-            "id": 23
-        },
-        {
-            "name": "PowerShell",
-            "id": 24
-        },
-        {
-            "name": "Julia",
-            "id": 25
-        }
-    ],
-    "frameworks": [
-        {
-            "name": "React.js",
-            "id": 1
-        },
-        {
-            "name": "Angular",
-            "id": 2
-        },
-        {
-            "name": "Vue.js",
-            "id": 3
-        },
-        {
-            "name": "Django",
-            "id": 4
-        },
-        {
-            "name": "Flask",
-            "id": 5
-        },
-        {
-            "name": "TensorFlow",
-            "id": 6
-        },
-        {
-            "name": "Spring Framework",
-            "id": 7
-        },
-        {
-            "name": "Hibernate",
-            "id": 8
-        },
-        {
-            "name": "Apache Struts",
-            "id": 9
-        },
-        {
-            "name": "Ruby on Rails",
-            "id": 10
-        },
-        {
-            "name": "Sinatra",
-            "id": 11
-        },
-        {
-            "name": "ASP.NET",
-            "id": 12
-        },
-        {
-            "name": "Entity Framework",
-            "id": 13
-        },
-        {
-            "name": "Xamarin",
-            "id": 14
-        },
-        {
-            "name": "Laravel",
-            "id": 15
-        },
-        {
-            "name": "Symfony",
-            "id": 16
-        },
-        {
-            "name": "CodeIgniter",
-            "id": 17
-        },
-        {
-            "name": "Gin",
-            "id": 18
-        },
-        {
-            "name": "Echo",
-            "id": 19
-        },
-        {
-            "name": "SwiftUI",
-            "id": 20
-        },
-        {
-            "name": "Combine",
-            "id": 21
-        },
-        {
-            "name": "Rocket",
-            "id": 22
-        },
-        {
-            "name": "Actix",
-            "id": 23
-        },
-        {
-            "name": "Android Jetpack",
-            "id": 24
-        },
-        {
-            "name": "Ktor",
-            "id": 25
-        }
-    ]
+        "leaderShipSkill": 3
+      },
+      "projectDetails": {
+        "projectName": "Vehical Tracking",
+        "roll": "Front End Developer",
+        "startDate": "2023-08-05",
+        "endDate": "2023-08-05",
+        "system": "laptop",
+        "mouse": "wireless",
+        "keyboard": "wired"
+      },
+      "addressDetails": {
+        "address": "valsad",
+        "streetAddress": "dungri",
+        "pinCode": "396375",
+        "country": "Algeria",
+        "state": "Aïn Témouchent Province",
+        "city": "Azazga"
+      },
+      "basicDetails": {
+        "firstName": "viral",
+        "lastName": "navinbhai",
+        "email": "pviral4603@gmail.com",
+        "phoneNumber": "121211",
+        "department": "frontEnd",
+        "position": "junior trainee"
+      },
+      "id": 1
+    }
+  ]
 }

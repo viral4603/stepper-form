@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { AddressDetails, SelectOption } from 'src/app/stepper-form/model/index.model';
+import { AddressData, SelectOption } from 'src/app/stepper-form/model/index.model';
 
 @Injectable()
 export class AddressDetailsPresenterService {
@@ -36,6 +36,9 @@ export class AddressDetailsPresenterService {
     const state = stateAndcountry.filter((item: any) => item.name === countryName)[0].states
     return state.map((item: any, i: number) => { return { id: i, name: item.name } })
   }
+  /**
+   * get all cities from country
+   */
   getCitiesFromCountry(cityAndCountry: any[], countryName: string): SelectOption[] {
     const countryData = cityAndCountry.filter((item: any) => item.country === countryName)[0].cities
     return countryData.map((city: string, i: number) => { return { id: i, name: city } })
@@ -44,7 +47,7 @@ export class AddressDetailsPresenterService {
    * submit form value to parent presentaion
    * @param formValues 
    */
-  submitForm(formValues: AddressDetails) {
+  submitForm(formValues: AddressData) {
     localStorage.setItem('addressDetails', JSON.stringify(formValues))
   }
 }

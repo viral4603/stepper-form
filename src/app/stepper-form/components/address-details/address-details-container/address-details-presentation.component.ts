@@ -85,20 +85,15 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
   public submitForm(tab: number) {
     if (this.addressForm.status !== "INVALID") {
       this._addressPresenterService.submitForm(this.addressForm.value)
-      this.navigateToTab(tab)
+      //navigate on tab after submit form
+      this._stepperCountService.setActiveTab(tab);
     }
     else {
       this.isFormValid = false;
       this._cdr.markForCheck()
     }
   }
-  /**
-   * @description navigate user to tab and store changed value 
-   * @param tab number of tab where user want to navigate
-   */
-  navigateToTab(tab: number): void {
-    this._addressPresenterService.submitForm(this.addressForm.value)
-  }
+
   /**
    * @description Provide list of state based on slected country
    * @param value 

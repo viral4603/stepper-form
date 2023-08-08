@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormPresenterService } from '../form-presenter/form-presenter.service';
 import { StepperCountService } from '../../services/stepper-count.service';
 import { Subscription } from 'rxjs';
@@ -34,7 +34,7 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
     return this._contryAndCity;
   }
 
-
+  @Output() sendData:EventEmitter<any>;
   public country: SelectOption[];
   public count: number;
   public stepperCountSub: Subscription;
@@ -47,6 +47,7 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
     this.count = this._formPresenterService.activeTab;
     this.stepperCountSub = new Subscription();
     this.country = [];
+    this.sendData = new EventEmitter<any>();
   }
 
   ngOnInit(): void {
@@ -62,6 +63,13 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
   submitFormData(data: any): void {
     this.count = data.activeTab
     this._formPresenterService.submitFormData(data)
+  }
+  /**
+   * send post data to container
+   * @param data 
+   */
+  sendDataToParent(data:any):void {
+    this.sendData.emit(data)
   }
   /**
    * @description navigate user to previous tab

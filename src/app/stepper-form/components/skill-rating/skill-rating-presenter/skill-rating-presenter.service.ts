@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { SkillsData } from 'src/app/stepper-form/model/index.model';
 
 @Injectable()
 export class SkillRatingPresenterService {
@@ -9,8 +10,8 @@ export class SkillRatingPresenterService {
   }
   skillFormGroup() {
     return this._fb.group({
-      selectedFramewrok:[],
-      selectedLanguage:[],
+      selectedFramewrok: [],
+      selectedLanguage: [],
       framework: this._fb.group({
 
       }, {
@@ -53,7 +54,7 @@ export class SkillRatingPresenterService {
   /**
    * submit Form data
    */
-  submitForm(value: any) {
+  submitForm(value: SkillsData) {
     localStorage.setItem('skillDetails', JSON.stringify(value))
   }
   /**
@@ -61,7 +62,7 @@ export class SkillRatingPresenterService {
    */
   addControls(formGroup: FormGroup, controls: AnalyserNode) {
     Object.keys(controls).forEach((item: any) => {
-      formGroup.addControl(`${item}`,this._fb.control(null,Validators.required))
+      formGroup.addControl(`${item}`, this._fb.control(null, Validators.required))
     })
   }
 }

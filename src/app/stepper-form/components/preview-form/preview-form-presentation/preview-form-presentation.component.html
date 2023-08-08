@@ -1,12 +1,4 @@
-<div class="main-form d-flex flex-column justify-content-between h-100">
-    <h2 class="fs-5 text-primary py-4"><span>5.</span>Preview Form</h2>
-    
-
-    <!-- start:next-button -->
-    <div class="form-footer d-flex justify-content-between py-3 flex-shrink-0">
-        <button class="btn btn-primary text-white">Previous</button>
-        <button type="submit" class="btn btn-secondary text-white">Next</button>
-    </div>
-    <!-- end:next-button -->
+<div class="main-form d-flex flex-column justify-content-between h-100 w-100">
+    <app-form-preview *ngIf="isPrintEnable" [formData]="formData"></app-form-preview>
     <!-- end-basic-details-form -->
 </div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BasicDetails } from 'src/app/stepper-form/model/index.model';
+import { BasicData } from 'src/app/stepper-form/model/index.model';
 
 @Injectable()
 export class BasicDetailsPresenterService {
@@ -24,7 +24,7 @@ export class BasicDetailsPresenterService {
   /**
      * 
      */
-  submitForm(formValues:BasicDetails) {
+  submitForm(formValues:BasicData) {
     localStorage.setItem('basicDetails',JSON.stringify(formValues))  
   }
   

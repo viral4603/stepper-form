@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ProjectData } from 'src/app/stepper-form/model/index.model';
 
 @Injectable()
 export class ProjectDetailsPresenterService {
@@ -25,7 +26,7 @@ export class ProjectDetailsPresenterService {
   /**
    * @description submit form data
    */
-  submitForm(value:any) {
+  submitForm(value:ProjectData) {
     localStorage.setItem('projectDetails',JSON.stringify(value))
   }
 

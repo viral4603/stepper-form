@@ -46,7 +46,17 @@ export class FormContainerComponent implements OnInit, OnDestroy {
       this.programmingList = res;
     })
   }
-  
+  /**
+   * submit user data 
+   */
+  postUserData(data: any) {
+    this.stepperService.saveUserData(data).subscribe((res: any) => {
+      console.log(res)
+    }, ((error: any) => {
+      throw new Error(error)
+    }))
+  }
+
   ngOnDestroy(): void {
     this.unSubscribe.next(true)
     this.unSubscribe.unsubscribe()
