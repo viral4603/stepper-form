@@ -8,13 +8,15 @@ type defineSkill = "None" | "Basic" | "Demonstrating" | "Proficient" | "Expert";
   styleUrls: ['./custom-range-slider.component.scss'],
   standalone: true,
   providers: [
-    CommonModule,
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => CustomRangeSliderComponent),
       multi: true
     },
   ],
+  imports:[
+    CommonModule
+  ]
 })
 
 export class CustomRangeSliderComponent implements ControlValueAccessor, OnInit {
