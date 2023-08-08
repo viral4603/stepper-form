@@ -51,7 +51,7 @@ export class FormContainerComponent implements OnInit, OnDestroy {
    */
   postUserData(data: any) {
     this.stepperService.saveUserData(data).subscribe((res: any) => {
-      console.log(res)
+      localStorage.clear()
     }, ((error: any) => {
       throw new Error(error)
     }))

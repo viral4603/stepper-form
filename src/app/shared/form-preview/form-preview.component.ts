@@ -55,10 +55,11 @@ export class FormPreviewComponent {
   // getNestedKey(key: string): string[] {
   //   return Object.keys(this.formData[`${key}`])
   // }
-  // get framworkSkills(): string[] {
-  //   return Object.keys(this.formData['skillDetails']['framework'])
-  // }
-  // get programmingLangugesSkill(): string[] {
-  //   return Object.keys(this.formData['skillDetails']['programmingLanguges'])
-  // }
+  
+  get framworkSkills(): string[] {
+    return Object.keys(this.formData['skillDetails']['framework'])
+  }
+  get programmingLangugesSkill(): string[] {
+    return Object.keys(this.formData['skillDetails']['programmingLanguges'])
+  }
 }
