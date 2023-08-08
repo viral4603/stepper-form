@@ -60,7 +60,7 @@
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3 flex-column">
                         <input type="text" id="phone" class="form-control w-100" placeholder="Phone Number"
-                            aria-label="First Name" formControlName="phoneNumber">
+                            aria-label="First Name" formControlName="phoneNumber" maxLength="10">
                         <!-- start-phone-number-error -->
                         <ng-container
                             *ngIf="(formContorls['phoneNumber'].touched && formContorls['phoneNumber'].errors) || (!isFormValid && formContorls['phoneNumber'].errors)">
