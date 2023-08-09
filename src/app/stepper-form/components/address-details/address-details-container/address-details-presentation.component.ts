@@ -39,7 +39,7 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
   /** validation flag when user submit form */
   public isFormValid: boolean;
   /** subject for unsubscribe observale */
-  public unSubscribe: Subject<boolean>
+  public unSubscribe: Subject<void>
   /** country list for ng select options */
   public country: SelectOption[];
   /** state list for ng select options */
@@ -58,12 +58,12 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private _addressPresenterService: AddressDetailsPresenterService,
-    private _stepperCountService: StepperCountService,
-    private _cdr: ChangeDetectorRef) {
-    this.addressForm = this._addressPresenterService.basicDeatilsFormGroup();
+    private addressPresenterService: AddressDetailsPresenterService,
+    private stepperCountService: StepperCountService,
+    private cdr: ChangeDetectorRef) {
+    this.addressForm = this.addressPresenterService.basicDeatilsFormGroup();
     this.isFormValid = true;
-    this.unSubscribe = new Subject<boolean>();
+    this.unSubscribe = new Subject<void>();
     this._countryAndState = [];
     this._countryAndCity = [];
     this.country = [];
@@ -72,8 +72,8 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     //set coutry list in select option 
-    this.country = this._addressPresenterService.getAllCountry(this.countryAndState)
-    this._stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
+    this.country = this.addressPresenterService.getAllCountry(this.countryAndState)
+    this.stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
       if (res.activeTab === 2) {
         this.submitForm(res.navigateTo)
       }
@@ -82,8 +82,8 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
     const localStorageValue = localStorage.getItem(AddressDetails)
     if (localStorageValue) {
       const formValue = JSON.parse(localStorageValue)
-      this.state = this._addressPresenterService.getStateFromCountry(this.countryAndState, formValue.country)
-      this.cities = this._addressPresenterService.getCitiesFromCountry(this.countryAndCity, formValue.country)
+      this.state = this.addressPresenterService.getStateFromCountry(this.countryAndState, formValue.country)
+      this.cities = this.addressPresenterService.getCitiesFromCountry(this.countryAndCity, formValue.country)
       this.addressForm.patchValue(formValue)
     }
   }
@@ -94,13 +94,13 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
    */
   public submitForm(tab: number) {
     if (this.addressForm.status !== "INVALID") {
-      this._addressPresenterService.submitForm(this.addressForm.value)
+      this.addressPresenterService.submitForm(this.addressForm.value)
       //navigate on tab after submit form
-      this._stepperCountService.setActiveTab(tab);
+      this.stepperCountService.setActiveTab(tab);
     }
     else {
       this.isFormValid = false;
-      this._cdr.markForCheck()
+      this.cdr.markForCheck()
     }
   }
 
@@ -112,13 +112,13 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
     if (value) {
       this.addressForm.controls['state'].reset()
       this.addressForm.controls['city'].reset()
-      this.state = this._addressPresenterService.getStateFromCountry(this.countryAndState, value)
-      this.cities = this._addressPresenterService.getCitiesFromCountry(this.countryAndCity, value)
+      this.state = this.addressPresenterService.getStateFromCountry(this.countryAndState, value)
+      this.cities = this.addressPresenterService.getCitiesFromCountry(this.countryAndCity, value)
     }
   }
 
   ngOnDestroy(): void {
-    this.unSubscribe.next(true)
+    this.unSubscribe.next()
     this.unSubscribe.unsubscribe()
   }
 }

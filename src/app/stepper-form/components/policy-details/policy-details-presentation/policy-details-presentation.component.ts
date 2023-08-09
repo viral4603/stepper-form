@@ -19,15 +19,15 @@ export class PolicyDetailsPresentationComponent {
   /** policy form instance */
   public policyForm: FormGroup;
   /** subject for unsbscribe observable */
-  public unSubscribe: Subject<boolean>;
+  public unSubscribe: Subject<void>;
 
-  constructor(private _policyPresenterService: PolicyDetailsPresenterService, private _stepperCountService: StepperCountService, private _cdr: ChangeDetectorRef) {
-    this.policyForm = _policyPresenterService.buildPolicyForm();
-    this.unSubscribe = new Subject<boolean>();
+  constructor(private policyPresenterService: PolicyDetailsPresenterService, private stepperCountService: StepperCountService, private cdr: ChangeDetectorRef) {
+    this.policyForm = policyPresenterService.buildPolicyForm();
+    this.unSubscribe = new Subject<void>();
   }
 
   ngOnInit(): void {
-    this._stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
+    this.stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
       if (res.activeTab === 5) {
         this.submitForm(res.navigateTo)
       }
@@ -44,18 +44,18 @@ export class PolicyDetailsPresentationComponent {
    */
   public submitForm(tab: number) {
     if (this.policyForm.valid) {
-      this._policyPresenterService.submitForm(this.policyForm.value)
-      this._stepperCountService.setActiveTab(tab)
-      this._stepperCountService.setLastStepReached(true)
+      this.policyPresenterService.submitForm(this.policyForm.value)
+      this.stepperCountService.setActiveTab(tab)
+      this.stepperCountService.setLastStepReached(true)
     }
     else {
       this.policyForm.markAsTouched()
-      this._cdr.markForCheck()
+      this.cdr.markForCheck()
     }
   }
 
   ngOnDestroy(): void {
-    this.unSubscribe.next(true)
+    this.unSubscribe.next()
     this.unSubscribe.unsubscribe()
   }
 

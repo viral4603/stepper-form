@@ -20,13 +20,13 @@ export class BasicDetailsPresentationComponent implements OnInit, OnDestroy {
   /** validition flag while user submit form */
   public isFormValid: boolean;
   /** subject for unsubscribe observable */
-  public unSubscribe: Subject<boolean>
+  public unSubscribe: Subject<void>
 
-  constructor(private _presenterService: BasicDetailsPresenterService, private _stepperCountService: StepperCountService,
-    private _cdr: ChangeDetectorRef) {
-    this.basicDetails = this._presenterService.basicDeatilsFormGroup();
+  constructor(private presenterService: BasicDetailsPresenterService, private stepperCountService: StepperCountService,
+    private cdr: ChangeDetectorRef) {
+    this.basicDetails = this.presenterService.basicDeatilsFormGroup();
     this.isFormValid = true;
-    this.unSubscribe = new Subject<boolean>();
+    this.unSubscribe = new Subject<void>();
   }
 
 
@@ -36,7 +36,7 @@ export class BasicDetailsPresentationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
+    this.stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
       if (res.activeTab === 1) {
         this.submitForm(res.navigateTo)
       }
@@ -54,17 +54,17 @@ export class BasicDetailsPresentationComponent implements OnInit, OnDestroy {
    */
   public submitForm(tab: number): void {
     if (this.basicDetails.status !== "INVALID") {
-      this._presenterService.submitForm(this.basicDetails.value)
-      this._stepperCountService.setActiveTab(tab)
+      this.presenterService.submitForm(this.basicDetails.value)
+      this.stepperCountService.setActiveTab(tab)
     }
     else {
       this.isFormValid = false;
-      this._cdr.markForCheck()
+      this.cdr.markForCheck()
     }
   }
   
   ngOnDestroy(): void {
-    this.unSubscribe.next(true)
+    this.unSubscribe.next()
     this.unSubscribe.unsubscribe()
   }
 }

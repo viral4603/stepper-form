@@ -34,13 +34,13 @@ export class ProgressCountPresentationComponent {
   /**active steps */
   private _steps!: number;
 
-  constructor(private _stepperCountService: StepperCountService,
-    private _progressCountPresenter: ProgressCountService) {
+  constructor(private stepperCountService: StepperCountService,
+    private progressCountPresenter: ProgressCountService) {
     this.isLastStepReach = false;
   }
 
   ngOnInit(): void {
-    this.formValidtionSub = this._stepperCountService.lastStepReached$.subscribe((res: boolean) => {
+    this.formValidtionSub = this.stepperCountService.lastStepReached$.subscribe((res: boolean) => {
       this.isLastStepReach = res;
     })
   }
@@ -55,7 +55,7 @@ export class ProgressCountPresentationComponent {
       navigateTo: tabValue,
       isLastStepReach: this.isLastStepReach
     }
-    this._progressCountPresenter.setActiveTab(navigationOption)
+    this.progressCountPresenter.setActiveTab(navigationOption)
   }
 
   ngOnDestroy(): void {

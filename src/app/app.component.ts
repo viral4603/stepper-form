@@ -11,11 +11,11 @@ export class AppComponent implements OnInit {
   title = 'stepper-form';
   //loader for hide and show loader
   public isLoader: boolean;
-  constructor(private _loaderService: LoaderService) {
+  constructor(private loaderService: LoaderService) {
     this.isLoader = false;
   }
   ngOnInit(): void {
-    this._loaderService.isLoader$.subscribe((res: boolean) => {
+    this.loaderService.isLoader$.subscribe((res: boolean) => {
       setTimeout(()=>{
         this.isLoader = res;
       },1000)

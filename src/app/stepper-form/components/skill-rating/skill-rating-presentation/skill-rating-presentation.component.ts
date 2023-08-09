@@ -38,7 +38,7 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
   /** flag for form validation when user submit form */
   public isFormValid: boolean;
   /** subject for unsubscribe observer */
-  public unSubscribe: Subject<boolean>;
+  public unSubscribe: Subject<void>;
 
   /**framework list */
   private _frameworks: SelectOption[];
@@ -61,18 +61,18 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
     return skillGroup['controls']
   }
 
-  constructor(private _skillPresenterService: SkillRatingPresenterService, private _cdr: ChangeDetectorRef,
-    private _stepperCountService: StepperCountService) {
-    this.skillForm = this._skillPresenterService.skillFormGroup()
+  constructor(private skillPresenterService: SkillRatingPresenterService, private cdr: ChangeDetectorRef,
+    private stepperCountService: StepperCountService) {
+    this.skillForm = this.skillPresenterService.skillFormGroup()
     this.isFormValid = true;
-    this.unSubscribe = new Subject<boolean>();
+    this.unSubscribe = new Subject<void>();
     this._frameworks = []
     this._programmingLanguages = []
   }
 
 
   ngOnInit(): void {
-    this._stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
+    this.stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
       if (res.activeTab === 3) {
         this.submitForm(res.navigateTo)
       }
@@ -83,7 +83,7 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
       for (let item in localStorageValue) {
         if (typeof localStorageValue[`${item}`] === 'object' && !Array.isArray(localStorageValue[`${item}`])) {
           const nestedGroup = this.skillForm.controls[`${item}`] as FormGroup
-          this._skillPresenterService.addControls(nestedGroup, localStorageValue[`${item}`])
+          this.skillPresenterService.addControls(nestedGroup, localStorageValue[`${item}`])
         }
       }
       this.skillForm.patchValue(localStorageValue)
@@ -95,9 +95,9 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
    * @param controlName Name of the control
    * @param parentGroup Name of fromgroup where control should add
    */
-  public onSelectChange(controlName: string, parentGroup: string) {
+  public onSelectChange(controlName: string, parentGroup: string): void {
     if (controlName) {
-      this._skillPresenterService.addControlToNestedGroup(this.skillForm, controlName, parentGroup)
+      this.skillPresenterService.addControlToNestedGroup(this.skillForm, controlName, parentGroup)
     }
   }
   /**
@@ -105,22 +105,22 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
    * @param object Object of event
    * @param parentGroup Name of fromgroup from where control will remove.
    */
-  public onDeselectChange(object: any, parentGroup: string) {
-    this._skillPresenterService.removeControlFromNestedGroup(this.skillForm, object.value, parentGroup)
+  public onDeselectChange(object: any, parentGroup: string): void {
+    this.skillPresenterService.removeControlFromNestedGroup(this.skillForm, object.value, parentGroup)
   }
   /**
- * @description save form data
- * @param tab tab number where user will navigate
-  */
+   * @description save form data
+   * @param tab tab number where user will navigate
+   */
   public submitForm(tab: number): void {
     console.log(this.frameWorksContorls)
     if (this.skillForm.status !== "INVALID") {
-      this._skillPresenterService.submitForm(this.skillForm.value)
-      this._stepperCountService.setActiveTab(tab)
+      this.skillPresenterService.submitForm(this.skillForm.value)
+      this.stepperCountService.setActiveTab(tab)
     }
     else {
       this.isFormValid = false;
-      this._cdr.markForCheck()
+      this.cdr.markForCheck()
     }
   }
 
@@ -128,12 +128,12 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
    * @description change state of nested form group to touched
    * @param name nested form group name
    */
-  public markFormGroupAsTouched(name: string) {
+  public markFormGroupAsTouched(name: string): void {
     this.skillForm.controls[`${name}`].markAsTouched()
   }
 
   public ngOnDestroy(): void {
-    this.unSubscribe.next(true)
+    this.unSubscribe.next()
     this.unSubscribe.unsubscribe()
   }
 }

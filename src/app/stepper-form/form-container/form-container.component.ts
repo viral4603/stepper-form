@@ -25,7 +25,7 @@ export class FormContainerComponent implements OnInit, OnDestroy {
   /** subject form unsubscribe observers */
   public unSubscribe: Subject<boolean>;
 
-  constructor(private stepperService: StpperService, private _stepper: StepperCountService) {
+  constructor(private stepperService: StpperService, private stepperCountService: StepperCountService) {
     this.projectList = [];
     this.positionList = [];
     this.frameWorkList = [];
@@ -60,7 +60,7 @@ export class FormContainerComponent implements OnInit, OnDestroy {
   postUserData(data: StepperFormData) {
     this.stepperService.saveUserData(data).subscribe((res: any) => {
       localStorage.clear()
-      this._stepper.setActiveTab(1)
+      this.stepperCountService.setActiveTab(1)
     }, ((error: any) => {
       throw new Error(error)
     }))

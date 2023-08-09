@@ -17,28 +17,28 @@ export class PreviewFormPresentationComponent implements OnInit {
 
   public formData!: StepperFormData;
 
-  constructor(private _previewPresenterService: PreviewFormPresenterService, private _cdr: ChangeDetectorRef) {
+  constructor(private previewPresenterService: PreviewFormPresenterService, private cdr: ChangeDetectorRef) {
     this.isPrintEnable = false;
     this.sendFormData = new EventEmitter<StepperFormData>()
   }
   ngOnInit(): void {
-    this._previewPresenterService.showDetailsOverlay()
+    this.previewPresenterService.showDetailsOverlay()
 
     /**print form details */
-    this._previewPresenterService.printEnable$.subscribe((data: StepperFormData) => {
+    this.previewPresenterService.printEnable$.subscribe((data: StepperFormData) => {
       if (data) {
         this.isPrintEnable = true;
         this.formData = data;
-        this._cdr.markForCheck()
+        this.cdr.markForCheck()
         setTimeout(() => {
           window.print()
-          this._previewPresenterService.setActiveTab(5)
+          this.previewPresenterService.setActiveTab(5)
         }, 100)
       }
     })
 
     /** submit form data to presentation */
-    this._previewPresenterService.sendFormData$.subscribe((data: StepperFormData) => {
+    this.previewPresenterService.sendFormData$.subscribe((data: StepperFormData) => {
       if (data) {
         this.sendFormData.emit(data)
       }

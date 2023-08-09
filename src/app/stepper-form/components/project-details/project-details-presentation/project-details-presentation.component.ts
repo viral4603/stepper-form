@@ -40,7 +40,7 @@ export class ProjectDetailsPresentationComponent implements OnInit, OnDestroy {
   /** flag for validation when user submit form */
   public isFormValid: boolean;
   /** subject for unsubscribe obserable */
-  public unSubscribe: Subject<any>
+  public unSubscribe: Subject<void>
   /** Project list */
   private _projects: SelectOption[];
   /** position list */
@@ -50,18 +50,18 @@ export class ProjectDetailsPresentationComponent implements OnInit, OnDestroy {
     return this.projectDetailsForm.controls
   }
 
-  constructor(private _projectDetailsPresenterService: ProjectDetailsPresenterService,
-    private _cdr: ChangeDetectorRef,
-    private _stepperCountService: StepperCountService) {
+  constructor(private projectDetailsPresenterService: ProjectDetailsPresenterService,
+    private cdr: ChangeDetectorRef,
+    private stepperCountService: StepperCountService) {
     this.isFormValid = true;
-    this.projectDetailsForm = this._projectDetailsPresenterService.buildProjectDetailsForm()
-    this.unSubscribe = new Subject<any>();
+    this.projectDetailsForm = this.projectDetailsPresenterService.buildProjectDetailsForm()
+    this.unSubscribe = new Subject<void>();
     this._projects = []
     this._positions = []
   }
 
   ngOnInit(): void {
-    this._stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
+    this.stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
       if (res.activeTab === 4) {
         this.submitForm(res.navigateTo)
       }
@@ -77,19 +77,19 @@ export class ProjectDetailsPresentationComponent implements OnInit, OnDestroy {
    * save form data 
    * @param tab tab number where user will navigate after form submit
    */
-  public submitForm(tab: number) {
+  public submitForm(tab: number): void {
     if (this.projectDetailsForm.status !== 'INVALID') {
-      this._projectDetailsPresenterService.submitForm(this.projectDetailsForm.value)
-      this._stepperCountService.setActiveTab(tab)
+      this.projectDetailsPresenterService.submitForm(this.projectDetailsForm.value)
+      this.stepperCountService.setActiveTab(tab)
     }
     else {
       this.isFormValid = false
-      this._cdr.markForCheck()
+      this.cdr.markForCheck()
     }
   }
 
   ngOnDestroy(): void {
-    this.unSubscribe.next(true)
+    this.unSubscribe.next()
     this.unSubscribe.unsubscribe()
   }
 }

@@ -55,8 +55,8 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
   /** list of country with city */
   private _contryAndCity: any;
 
-  constructor(private _stepperCountService: StepperCountService,
-    private _cdr: ChangeDetectorRef) {
+  constructor(private stepperCountService: StepperCountService,
+    private cdr: ChangeDetectorRef) {
     this.count = 1;
     this.stepperCountSub = new Subscription();
     this.country = [];
@@ -64,9 +64,9 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.stepperCountSub = this._stepperCountService.activeCount$.subscribe((res: any) => {
+    this.stepperCountSub = this.stepperCountService.activeCount$.subscribe((res: any) => {
       this.count = res;
-      this._cdr.markForCheck()
+      this.cdr.markForCheck()
     })
   }
 
@@ -74,7 +74,7 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
    * send final form data to conatiner
    * @param data final form data
    */
-  sendDataToParent(data: StepperFormData): void {
+  public sendDataToParent(data: StepperFormData): void {
     this.sendData.emit(data)
   }
 

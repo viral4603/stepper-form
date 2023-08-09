@@ -28,7 +28,7 @@ export class ProjectDetailsPresenterService {
   /**
    * @description submit form data
    */
-  public submitForm(value: ProjectData) {
+  public submitForm(value: ProjectData): void {
     localStorage.setItem(ProjectDetails, JSON.stringify(value))
   }
 

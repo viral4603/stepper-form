@@ -67,7 +67,7 @@ export class SkillRatingPresenterService {
    * save form data to local storage
    * @param value form data
    */
-  public submitForm(value: SkillsData) {
+  public submitForm(value: SkillsData): void {
     localStorage.setItem(SkillDetails, JSON.stringify(value))
   }
 
@@ -76,7 +76,7 @@ export class SkillRatingPresenterService {
    * @param formGroup instance of form group where control will add
    * @param controls control name
    */
-  addControls(formGroup: FormGroup, controls: string) {
+  addControls(formGroup: FormGroup, controls: string): void {
     Object.keys(controls).forEach((item: string) => {
       formGroup.addControl(`${item}`, this._fb.control(null, [Validators.required, Validators.min(2)]))
     })
