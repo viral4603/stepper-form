@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs/internal/Subject';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { SelectOption } from 'src/app/stepper-form/model/index.model';
 import { StepperCountService } from 'src/app/stepper-form/services/stepper-count.service';
 import { SkillRatingPresenterService } from '../skill-rating-presenter/skill-rating-presenter.service';
+import { SkillDetails } from 'src/app/stepper-form/constant/stpper.constant';
 
 @Component({
   selector: 'app-skill-rating-presentation',
@@ -14,37 +15,48 @@ import { SkillRatingPresenterService } from '../skill-rating-presenter/skill-rat
   providers: [SkillRatingPresenterService]
 })
 export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
-
+  /** Input and setter for framwork list */
   @Input() public set frameworks(v: SelectOption[]) {
     this._frameworks = v;
   }
+  /**getter for framework list of ng select */
   public get frameworks(): SelectOption[] {
     return this._frameworks;
   }
 
+  /** Input and setter for programming language list */
   @Input() public set programmingLanguages(v: SelectOption[]) {
     this._programmingLanguages = v;
   }
+  /**getter for programming language list of ng select */
   public get programmingLanguages(): SelectOption[] {
     return this._programmingLanguages;
   }
 
+  /**form instance of skill form */
   public skillForm: FormGroup;
+  /** flag for form validation when user submit form */
   public isFormValid: boolean;
-  public unSubscribe: Subject<any>;
+  /** subject for unsubscribe observer */
+  public unSubscribe: Subject<boolean>;
 
+  /**framework list */
   private _frameworks: SelectOption[];
+  /**programming langauge list */
   private _programmingLanguages: SelectOption[];
 
-  public get formContorls() {
+  /**get all form controls for validation */
+  public get formContorls(): { [key: string]: AbstractControl } {
     return this.skillForm.controls;
   }
 
-  public get frameWorksContorls() {
+  /**get nested framework group controls for validation */
+  public get frameWorksContorls(): { [key: string]: AbstractControl } {
     const skillGroup = this.skillForm.controls['framework'] as FormGroup
     return skillGroup['controls']
   }
-  public get programmingContorls() {
+  /** get nested programming language group controls for validation */
+  public get programmingContorls(): { [key: string]: AbstractControl } {
     const skillGroup = this.skillForm.controls['programmingLanguges'] as FormGroup
     return skillGroup['controls']
   }
@@ -53,7 +65,7 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
     private _stepperCountService: StepperCountService) {
     this.skillForm = this._skillPresenterService.skillFormGroup()
     this.isFormValid = true;
-    this.unSubscribe = new Subject<any>();
+    this.unSubscribe = new Subject<boolean>();
     this._frameworks = []
     this._programmingLanguages = []
   }
@@ -65,8 +77,8 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
         this.submitForm(res.navigateTo)
       }
     })
-    //patch form value
-    const localStorageValue = JSON.parse(localStorage.getItem('skillDetails')!)
+    /** patch form value from local storage */
+    const localStorageValue = JSON.parse(localStorage.getItem(SkillDetails)!)
     if (localStorageValue) {
       for (let item in localStorageValue) {
         if (typeof localStorageValue[`${item}`] === 'object' && !Array.isArray(localStorageValue[`${item}`])) {
@@ -79,11 +91,11 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * @description Add range control in the form group
+   * @description Add range controls in the nested form group
    * @param controlName Name of the control
-   * @param parentGroup Name of fromgroup where control should add.
+   * @param parentGroup Name of fromgroup where control should add
    */
-  onSelectChange(controlName: string, parentGroup: string) {
+  public onSelectChange(controlName: string, parentGroup: string) {
     if (controlName) {
       this._skillPresenterService.addControlToNestedGroup(this.skillForm, controlName, parentGroup)
     }
@@ -93,14 +105,14 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
    * @param object Object of event
    * @param parentGroup Name of fromgroup from where control will remove.
    */
-  onDeselectChange(object: any, parentGroup: string) {
+  public onDeselectChange(object: any, parentGroup: string) {
     this._skillPresenterService.removeControlFromNestedGroup(this.skillForm, object.value, parentGroup)
   }
   /**
- * @description this method submit from data to container
+ * @description save form data
+ * @param tab tab number where user will navigate
   */
-  submitForm(tab: number): void {
-    
+  public submitForm(tab: number): void {
     console.log(this.frameWorksContorls)
     if (this.skillForm.status !== "INVALID") {
       this._skillPresenterService.submitForm(this.skillForm.value)
@@ -116,7 +128,7 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
    * @description change state of nested form group to touched
    * @param name nested form group name
    */
-  markFormGroupAsTouched(name: string) {
+  public markFormGroupAsTouched(name: string) {
     this.skillForm.controls[`${name}`].markAsTouched()
   }
 

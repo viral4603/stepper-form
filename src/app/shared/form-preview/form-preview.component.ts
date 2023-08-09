@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { StepperFormData } from 'src/app/stepper-form/model/index.model';
 
 @Component({
   selector: 'app-form-preview',
@@ -11,18 +12,23 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   ]
 })
 export class FormPreviewComponent {
-  @Input() public set formData(v: any) {
-    this._formData = v;
+  /** input for all form data that display in preview form */
+  @Input() public set formData(value: StepperFormData) {
+    this._formData = value;
   }
-  public get formData(): any {
+  /** getter of form fata */
+  public get formData(): StepperFormData {
     return this._formData;
   }
-
+  /** custom event for colse overlay */
   @Output() public close: EventEmitter<boolean>;
+  /** custom event for print form */
   @Output() public print: EventEmitter<boolean>;
+  /** custom event for submit form data */
   @Output() public submitdata: EventEmitter<any>;
 
-  private _formData: any;
+  /*form data */
+  private _formData!: StepperFormData;
 
   constructor() {
     this.close = new EventEmitter<boolean>()
@@ -32,19 +38,19 @@ export class FormPreviewComponent {
   /**
    * emit custome event for close overlay
    */
-  closeOverlay() {
+  public closeOverlay(): void {
     this.close.emit(true)
   }
   /**
    * emit prit form 
    */
-  printForm() {
+  public printForm(): void {
     this.print.emit(true)
   }
   /**
    * emit submit form
    */
-  submitForm() {
+  public submitForm(): void {
     this.submitdata.emit()
   }
 
@@ -55,10 +61,12 @@ export class FormPreviewComponent {
   // getNestedKey(key: string): string[] {
   //   return Object.keys(this.formData[`${key}`])
   // }
-  
+
+  /** get all property in frameworks */
   get framworkSkills(): string[] {
     return Object.keys(this.formData['skillDetails']['framework'])
   }
+  /** get all property programming languges */
   get programmingLangugesSkill(): string[] {
     return Object.keys(this.formData['skillDetails']['programmingLanguges'])
   }

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { StepperCountService } from 'src/app/stepper-form/services/stepper-count.service';
 import { ProgressCountService } from '../progress-count-presenter/progress-count.service';
+import { StyleCSS } from 'src/app/stepper-form/model/index.model';
 
 @Component({
   selector: 'app-progress-count-presentation',
@@ -11,26 +12,28 @@ import { ProgressCountService } from '../progress-count-presenter/progress-count
   providers: [ProgressCountService]
 })
 export class ProgressCountPresentationComponent {
-  private _steps!: number;
-  public get value(): number {
-    return this._steps;
-  }
+  /** input setter for active step number */
   @Input() public set steps(v: number) {
     if (v) {
       this._steps = v;
       this.styleExpression = {
-        width: `${(v - 1) * 25}%`
+        width: `${(v - 1) * 25}%`,
       }
     }
   }
-
+  /** getter active step */
   public get steps() {
     return this._steps
   }
-
-  public styleExpression: any;
+  /** style for progress bar width */
+  public styleExpression!: StyleCSS;
+  /** subscriber of form validation*/
   public formValidtionSub!: Subscription;
+  /** flag for final step reach */
   public isLastStepReach: boolean;
+  /**active steps */
+  private _steps!: number;
+
   constructor(private _stepperCountService: StepperCountService,
     private _progressCountPresenter: ProgressCountService) {
     this.isLastStepReach = false;
@@ -44,6 +47,7 @@ export class ProgressCountPresentationComponent {
 
   /**
  * @description This will provide value to active tab through subjet
+ * @param tabValue active tab number 
  */
   setActiveTab(tabValue: number): void {
     const navigationOption = {

@@ -5,6 +5,7 @@ import { StepperCountService } from 'src/app/stepper-form/services/stepper-count
 import { Subject } from 'rxjs/internal/Subject';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { SelectOption } from 'src/app/stepper-form/model/index.model';
+import { AddressDetails } from 'src/app/stepper-form/constant/stpper.constant';
 
 @Component({
   selector: 'app-address-details-presentation',
@@ -16,33 +17,42 @@ import { SelectOption } from 'src/app/stepper-form/model/index.model';
   ]
 })
 export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
-  //set country with state
-  @Input() public set countryAndState(v: any[]) {
-    this._countryAndState = v;
+  /** input and setter for country with state list */
+  @Input() public set countryAndState(value: any[]) {
+    this._countryAndState = value;
   }
-  //get countryAndState list for select options
+  /** getter for country and state */
   public get countryAndState(): any[] {
     return this._countryAndState;
   }
-  //set country with city
-  @Input() public set countryAndCity(v: SelectOption[]) {
-    this._countryAndCity = v;
+  /** input and setter fot country with state list */
+  @Input() public set countryAndCity(value: any[]) {
+    console.log(value)
+    this._countryAndCity = value;
   }
-  public get countryAndCity(): SelectOption[] {
+  /** getter for country and city  */
+  public get countryAndCity(): any[] {
     return this._countryAndCity;
   }
-
+  /** form instance of address form */
   public addressForm: FormGroup;
+  /** validation flag when user submit form */
   public isFormValid: boolean;
-  public unSubscribe: Subject<any>
+  /** subject for unsubscribe observale */
+  public unSubscribe: Subject<boolean>
+  /** country list for ng select options */
   public country: SelectOption[];
+  /** state list for ng select options */
   public state: SelectOption[];
+  /** city list for ng select options */
   public cities: SelectOption[]
 
+  /** county with state */
   private _countryAndState: any[];
-  private _countryAndCity: SelectOption[];
+  /** county with city */
+  private _countryAndCity: any[];
 
-  //get all form control in a form group
+  /** get form controls for valditation */
   public get formContorls() {
     return this.addressForm.controls
   }
@@ -53,7 +63,7 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
     private _cdr: ChangeDetectorRef) {
     this.addressForm = this._addressPresenterService.basicDeatilsFormGroup();
     this.isFormValid = true;
-    this.unSubscribe = new Subject<any>();
+    this.unSubscribe = new Subject<boolean>();
     this._countryAndState = [];
     this._countryAndCity = [];
     this.country = [];
@@ -68,8 +78,8 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
         this.submitForm(res.navigateTo)
       }
     })
-    //patch form Value
-    const localStorageValue = localStorage.getItem('addressDetails')
+    /**patch form value from local storage */
+    const localStorageValue = localStorage.getItem(AddressDetails)
     if (localStorageValue) {
       const formValue = JSON.parse(localStorageValue)
       this.state = this._addressPresenterService.getStateFromCountry(this.countryAndState, formValue.country)
@@ -96,9 +106,9 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
 
   /**
    * @description Provide list of state based on slected country
-   * @param value 
+   * @param value country name
    */
-  onSelectCountry(value: string) {
+  public onSelectCountry(value: string) {
     if (value) {
       this.addressForm.controls['state'].reset()
       this.addressForm.controls['city'].reset()

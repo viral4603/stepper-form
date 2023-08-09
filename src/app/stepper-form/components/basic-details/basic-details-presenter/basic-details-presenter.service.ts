@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BasicDetails } from 'src/app/stepper-form/constant/stpper.constant';
 import { BasicData } from 'src/app/stepper-form/model/index.model';
 
 @Injectable()
@@ -11,7 +12,7 @@ export class BasicDetailsPresenterService {
   /**
    * @description initialise basic deatils form group
    */
-  basicDeatilsFormGroup() {
+  public basicDeatilsFormGroup() {
     return this._fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -19,15 +20,13 @@ export class BasicDetailsPresenterService {
       phoneNumber: ['', Validators.required],
       department: ['', Validators.required],
       position: ['', Validators.required]
-    })    
+    })
   }
-  /**
-     * 
-     */
-  submitForm(formValues:BasicData) {
-    localStorage.setItem('basicDetails',JSON.stringify(formValues))  
+  /** save form data to local storage*/
+  public submitForm(formValues: BasicData) {
+    localStorage.setItem(BasicDetails, JSON.stringify(formValues))
   }
-  
+
 
 
 }

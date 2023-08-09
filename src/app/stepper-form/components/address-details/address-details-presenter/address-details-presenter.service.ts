@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AddressDetails } from 'src/app/stepper-form/constant/stpper.constant';
 import { AddressData, SelectOption } from 'src/app/stepper-form/model/index.model';
 
 @Injectable()
@@ -48,6 +49,6 @@ export class AddressDetailsPresenterService {
    * @param formValues 
    */
   submitForm(formValues: AddressData) {
-    localStorage.setItem('addressDetails', JSON.stringify(formValues))
+    localStorage.setItem(AddressDetails, JSON.stringify(formValues))
   }
 }

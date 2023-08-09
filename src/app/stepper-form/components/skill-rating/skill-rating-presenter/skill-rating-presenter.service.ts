@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { SkillDetails } from 'src/app/stepper-form/constant/stpper.constant';
 import { SkillsData } from 'src/app/stepper-form/model/index.model';
 
 @Injectable()
@@ -8,7 +9,11 @@ export class SkillRatingPresenterService {
   constructor(private _fb: FormBuilder) {
 
   }
-  skillFormGroup() {
+  /**
+   * initialize form group
+   * @returns form group instance
+   */
+  public skillFormGroup(): FormGroup {
     return this._fb.group({
       selectedFramewrok: [],
       selectedLanguage: [],
@@ -25,24 +30,31 @@ export class SkillRatingPresenterService {
   }
 
   /**
-   * @description This method add controls in fromGroup while user select fields
+   * Add input range control in nested form group
+   * @param form instance of main form group
+   * @param name name of control
+   * @param groupName name of nested group where control is append
    */
-  addControlToNestedGroup(myForm: any, name: string, nestedGroupName: string) {
-    const nestedGroup = myForm.get(`${nestedGroupName}`) as FormGroup;
+  public addControlToNestedGroup(form: FormGroup<any>, name: string, groupName: string) {
+    const nestedGroup = form.get(`${groupName}`) as FormGroup;
     nestedGroup.addControl(`${name}`, new FormControl(null, [Validators.required, Validators.min(2)]));
   }
 
   /**
-   *@description This method is remove control from nested gruop while user remove fields 
-  ***/
-  removeControlFromNestedGroup(form: any, controlName: string, nestedGroupName: string) {
-    const nestedGroup = form.get(`${nestedGroupName}`) as FormGroup;
+   * Remove control from nested form group
+   * @param form instance of main form group
+   * @param controlName control name
+   * @param groupName nested form group name where control is remove
+   */
+  public removeControlFromNestedGroup(form: FormGroup<any>, controlName: string, groupName: string) {
+    const nestedGroup = form.get(`${groupName}`) as FormGroup;
     nestedGroup.removeControl(`${controlName}`)
   }
   /**
-   * @description Add custom error to nested formGroup
+   * custome required validator for nested form group
+   * @returns validator function 
    */
-  customValidators(): ValidatorFn {
+  public customValidators(): ValidatorFn {
     let validateFun = (fg: FormGroup): ValidationErrors => {
       if (!Object.keys(fg.controls).length) {
         return { required: true }
@@ -52,16 +64,20 @@ export class SkillRatingPresenterService {
     return validateFun as ValidatorFn;
   }
   /**
-   * submit Form data
+   * save form data to local storage
+   * @param value form data
    */
-  submitForm(value: SkillsData) {
-    localStorage.setItem('skillDetails', JSON.stringify(value))
+  public submitForm(value: SkillsData) {
+    localStorage.setItem(SkillDetails, JSON.stringify(value))
   }
+
   /**
-   * add control in from group while initilize form
+   * add contorls in nested form group before patch value
+   * @param formGroup instance of form group where control will add
+   * @param controls control name
    */
-  addControls(formGroup: FormGroup, controls: AnalyserNode) {
-    Object.keys(controls).forEach((item: any) => {
+  addControls(formGroup: FormGroup, controls: string) {
+    Object.keys(controls).forEach((item: string) => {
       formGroup.addControl(`${item}`, this._fb.control(null, [Validators.required, Validators.min(2)]))
     })
   }

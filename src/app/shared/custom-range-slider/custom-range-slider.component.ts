@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-type defineSkill = "None" | "Basic" | "Demonstrating" | "Proficient" | "Expert";
+import { SkillLevel } from 'src/app/stepper-form/model/index.model';
 @Component({
   selector: 'app-custom-range-slider',
   templateUrl: './custom-range-slider.component.html',
@@ -60,35 +60,35 @@ export class CustomRangeSliderComponent implements ControlValueAccessor {
    */
   onSliderChange(event: Event): void {
     if (event.target instanceof HTMLInputElement) {
-      //target element range input
+      /** target element range input */
       const targetElement = event.target
-      //value of range input
+      /** value of range input */
       const value = +targetElement.value
-      //get lable element where tooltip appeare
+      /** get lable element where tooltip appeare */
       const label = targetElement.nextElementSibling as HTMLElement
-      //get max value of range slider
+      /** get max value of range slider */
       const max = +targetElement.max
-      //get min value of range slider
+      /** get min value of range slider */
       const min = +targetElement.min
-      //get width of input element 
+      /** get width of input element */
       const getOffcetWidth = targetElement.offsetWidth;
-      //setp difference 
+      /** setp difference */
       const stepDiffrence = max - min;
-      //ge value distance between to range
+      /** ge value distance between to range */
       const rangeDistance = getOffcetWidth / stepDiffrence;
-      //lable left postion 
+      /** lable left postion */
       const left = (value * rangeDistance) - rangeDistance;
 
-      //css style for label
+      /** css style for label */
       label.style.left = `${left}px`
       label.style.visibility = 'visible'
-      //convert number value in in string and assign to lable
+      /** convert number value in in string and assign to lable */
       label.innerHTML = this.convertToSkillName(value)
-      //invoke onchange and onTouched to assign values and state changes
+      /** invoke onchange and onTouched to assign values and state changes */
       this.onChange(value)
       this.onTouched(value)
 
-      //hide appear lable 
+      /** hide appear lable  */
       setTimeout(() => {
         label.style.visibility = 'hidden'
       }, 1000)
@@ -100,18 +100,20 @@ export class CustomRangeSliderComponent implements ControlValueAccessor {
    * @description define skill levels on basis of value
    * @param value range value select by user 
    */
-  convertToSkillName(value: number): any {
+  convertToSkillName(value: number): SkillLevel {
     switch (value) {
       case 1:
-        return 'None'
+        return SkillLevel.None
       case 2:
-        return 'Basic'
+        return SkillLevel.Basic
       case 3:
-        return 'Demonstrating'
+        return SkillLevel.Demonstrating
       case 4:
-        return 'Proficient'
+        return SkillLevel.Proficient
       case 5:
-        return 'Expert'
+        return SkillLevel.Expert
+      default:
+        return SkillLevel.None
     }
   }
 }

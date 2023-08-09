@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { PolicyDetails } from 'src/app/stepper-form/constant/stpper.constant';
 import { StepperCountService } from 'src/app/stepper-form/services/stepper-count.service';
 
 @Injectable()
@@ -18,7 +19,7 @@ export class PolicyDetailsPresenterService {
  * @description submit form data
  */
   submitForm(value:any) {
-    localStorage.setItem('policyForm',JSON.stringify(value)) 
+    localStorage.setItem(PolicyDetails,JSON.stringify(value)) 
   }
 
   /**

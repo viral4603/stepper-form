@@ -30,17 +30,17 @@
                             class="text-danger">*</span></label>
                     <div class="input-group mb-4">
                         <!--Using ng-option and for loop-->
-                        <ng-select placeholder="Roll" id="roll" class="w-100" formControlName="roll">
+                        <ng-select placeholder="Role" id="roll" class="w-100" formControlName="role">
                             <ng-option *ngFor="let role of positions" [value]="role.name">{{role.name}}</ng-option>
                         </ng-select>
-                        <!-- start-roll-name-error -->
+                        <!-- start-role-name-error -->
                         <ng-container
-                            *ngIf="(formContorls['roll'].touched && formContorls['roll'].errors) || (!isFormValid && formContorls['roll'].errors)">
-                            <h6 *ngIf="formContorls['roll']['errors']['required']" class="text-danger mt-2">
+                            *ngIf="(formContorls['role'].touched && formContorls['role'].errors) || (!isFormValid && formContorls['role'].errors)">
+                            <h6 *ngIf="formContorls['role']['errors']['required']" class="text-danger mt-2">
                                 *Roll is required field
                             </h6>
                         </ng-container>
-                        <!-- end-roll-name-error -->
+                        <!-- end-role-name-error -->
                     </div>
                 </div>
                 <!-- roll-end -->
@@ -187,7 +187,7 @@
         </div>
         <!-- start:next-button -->
         <div class="form-footer d-flex justify-content-between py-3 flex-shrink-0">
-            <button class="btn btn-primary text-white" (click)="navigateTab(3)">Previous</button>
+            <button class="btn btn-primary text-white" (click)="submitForm(3)">Previous</button>
             <button type="submit" class="btn btn-secondary text-white">Next</button>
         </div>
         <!-- end:next-button -->

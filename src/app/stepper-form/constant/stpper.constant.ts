@@ -1,0 +1,5 @@
+export const BasicDetails = 'basicDetails'
+export const AddressDetails = 'addressDetails'
+export const SkillDetails = 'skillDetails'
+export const ProjectDetails = 'projectDetails'
+export const PolicyDetails = 'policyForm'

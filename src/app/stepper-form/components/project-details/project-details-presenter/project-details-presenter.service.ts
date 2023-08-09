@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProjectDetails } from 'src/app/stepper-form/constant/stpper.constant';
 import { ProjectData } from 'src/app/stepper-form/model/index.model';
 
 @Injectable()
@@ -12,10 +13,10 @@ export class ProjectDetailsPresenterService {
    * Initialize form group
    * @returns formGroup
    */
-  buildProjectDetailsForm() {
+  public buildProjectDetailsForm(): FormGroup {
     return this._fb.group({
       projectName: [, Validators.required],
-      roll: [, Validators.required],
+      role: [, Validators.required],
       startDate: [, Validators.required],
       endDate: [, Validators.required],
       system: [, Validators.required],
@@ -23,11 +24,12 @@ export class ProjectDetailsPresenterService {
       keyboard: [, Validators.required]
     })
   }
+
   /**
    * @description submit form data
    */
-  submitForm(value:ProjectData) {
-    localStorage.setItem('projectDetails',JSON.stringify(value))
+  public submitForm(value: ProjectData) {
+    localStorage.setItem(ProjectDetails, JSON.stringify(value))
   }
 
 
