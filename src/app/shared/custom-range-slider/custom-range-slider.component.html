@@ -1,7 +1,8 @@
 <div class="custom-range w-100 text-center d-flex flex-column">
-    <input type="range" class="form-range" id="customRange1" min="1" max="5" (change)="onSliderChange($event)" step="1"
+
+    <input type="range" class="form-range" id="skillRange" min="1" max="5" (change)="onSliderChange($event)" step="1"
         (input)="onSliderChange($event)" (blur)="onTouched($event)" [value]="sliderValue" #slider>
-    <label for="customRange1"></label>
+    <label for="skillRange"></label>
     <!-- step-label-start -->
     <div class="step-labels" id="step-labels">
         <span class="step" data-value="1">1</span>

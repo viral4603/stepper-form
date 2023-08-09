@@ -14,28 +14,38 @@ type defineSkill = "None" | "Basic" | "Demonstrating" | "Proficient" | "Expert";
       multi: true
     },
   ],
-  imports:[
+  imports: [
     CommonModule
   ]
 })
 
-export class CustomRangeSliderComponent implements ControlValueAccessor, OnInit {
-
-  ngOnInit(): void {
-  }
+export class CustomRangeSliderComponent implements ControlValueAccessor {
+  //provide value of control
   public sliderValue!: string | number;
-  public onChange: (value: any) => void = (value) => {
+  /**
+   * mark contorl as changed and assign value
+   * @param value input range value
+   */
+  public onChange: (value: number) => void = (value) => {
     this.sliderValue = value
   };
+  /**
+   * mark custom conrol as touched 
+   */
   public onTouched: (value: any) => void = (value) => {
   };
-  writeValue(value: number): void {
+  /**
+   * assign value to control during control initilization
+   * @param value initial value
+   */
+  public writeValue(value: number): void {
     if (value) {
       this.sliderValue = value;
     } else {
       this.sliderValue = 0;
     }
   }
+
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
@@ -43,30 +53,51 @@ export class CustomRangeSliderComponent implements ControlValueAccessor, OnInit 
     this.onTouched = fn;
   }
   setDisabledState?(isDisabled: boolean): void {
-    // throw new Error('Method not implemented.');
   }
-  onSliderChange(e: any) {
-    const value = +e.target.value
-    this.onChange(value)
-    this.onTouched(value)
-    const label = e.target.nextElementSibling
-    const max = +e.target.max
-    const min = +e.target.min
-    const getOffcetWidth = e.target.offsetWidth;
-    const stepDiffrence = max - min;
-    const leftStepValue = getOffcetWidth / stepDiffrence;
-    const left = value * leftStepValue - leftStepValue;
-    label.style.left = `${left}px`
-    label.style.visibility = 'visible'
-    label.innerHTML = this.convertToSkillName(value)
-    label.style.visibility = 'visible'
-    setTimeout(() => {
-      label.style.visibility = 'hidden'
-    }, 1000)
+  /**
+   * assign value to input control and appear lable that indicate levels
+   * @param event
+   */
+  onSliderChange(event: Event): void {
+    if (event.target instanceof HTMLInputElement) {
+      //target element range input
+      const targetElement = event.target
+      //value of range input
+      const value = +targetElement.value
+      //get lable element where tooltip appeare
+      const label = targetElement.nextElementSibling as HTMLElement
+      //get max value of range slider
+      const max = +targetElement.max
+      //get min value of range slider
+      const min = +targetElement.min
+      //get width of input element 
+      const getOffcetWidth = targetElement.offsetWidth;
+      //setp difference 
+      const stepDiffrence = max - min;
+      //ge value distance between to range
+      const rangeDistance = getOffcetWidth / stepDiffrence;
+      //lable left postion 
+      const left = (value * rangeDistance) - rangeDistance;
+
+      //css style for label
+      label.style.left = `${left}px`
+      label.style.visibility = 'visible'
+      //convert number value in in string and assign to lable
+      label.innerHTML = this.convertToSkillName(value)
+      //invoke onchange and onTouched to assign values and state changes
+      this.onChange(value)
+      this.onTouched(value)
+
+      //hide appear lable 
+      setTimeout(() => {
+        label.style.visibility = 'hidden'
+      }, 1000)
+
+    }
   }
 
   /**
-   * @description define skill on basis of value
+   * @description define skill levels on basis of value
    * @param value range value select by user 
    */
   convertToSkillName(value: number): any {

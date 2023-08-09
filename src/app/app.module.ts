@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { StepperFormModule } from './stepper-form/stepper-form.module';
+import { LoaderComponent } from './shared/loader/loader.component';
+import { InterceptorService } from './core/interceptor/interceptor.service';
+import { LoaderService } from './core/loader/loader.service';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -11,9 +15,17 @@ import { StepperFormModule } from './stepper-form/stepper-form.module';
   imports: [
     BrowserModule,
     StepperFormModule,
-    HttpClientModule
+    HttpClientModule,
+    LoaderComponent
   ],
-  providers: [],
+  providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:InterceptorService,
+      multi:true
+    },
+    LoaderService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
