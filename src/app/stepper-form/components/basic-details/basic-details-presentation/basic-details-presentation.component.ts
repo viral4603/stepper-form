@@ -27,6 +27,7 @@ export class BasicDetailsPresentationComponent implements OnInit, OnDestroy {
     this.basicDetails = this.presenterService.basicDeatilsFormGroup();
     this.isFormValid = true;
     this.unSubscribe = new Subject<void>();
+
   }
 
 
@@ -36,6 +37,7 @@ export class BasicDetailsPresentationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+ 
     this.stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
       if (res.activeTab === 1) {
         this.submitForm(res.navigateTo)

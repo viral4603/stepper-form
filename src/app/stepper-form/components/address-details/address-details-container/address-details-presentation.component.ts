@@ -27,7 +27,6 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
   }
   /** input and setter fot country with state list */
   @Input() public set countryAndCity(value: any[]) {
-    console.log(value)
     this._countryAndCity = value;
   }
   /** getter for country and city  */

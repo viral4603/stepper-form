@@ -113,7 +113,6 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
    * @param tab tab number where user will navigate
    */
   public submitForm(tab: number): void {
-    console.log(this.frameWorksContorls)
     if (this.skillForm.status !== "INVALID") {
       this.skillPresenterService.submitForm(this.skillForm.value)
       this.stepperCountService.setActiveTab(tab)

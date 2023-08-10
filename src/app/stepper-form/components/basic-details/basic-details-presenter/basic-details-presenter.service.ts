@@ -17,7 +17,7 @@ export class BasicDetailsPresenterService {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phoneNumber: ['', Validators.required],
+      phoneNumber: ['', [Validators.required,Validators.minLength(10)]],
       department: ['', Validators.required],
       position: ['', Validators.required]
     })
