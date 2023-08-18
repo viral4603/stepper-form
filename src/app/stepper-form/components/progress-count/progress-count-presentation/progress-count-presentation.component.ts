@@ -16,18 +16,26 @@ export class ProgressCountPresentationComponent {
   @Input() public set steps(v: number) {
     if (v) {
       this._steps = v;
-      this.styleExpression = {
-        width: `${(v - 1) * 20}%`,
-        height: `5px`
+      if(this.orientation === 'vertical') {
+        this.styleExpression = {
+          height: `${(v - 1) * 20}%`,
+        }
+      }
+      else {
+        this.styleExpression = {
+          width: `${(v - 1) * 20}%`,
+        }
       }
     }
   }
+  
   /** getter active step */
   public get steps() {
     return this._steps
   }
   //dynamic css
   @Input() public stpeerCountShape!: string;
+  @Input() public orientation!:string;
   /** style for progress bar width */
   public styleExpression!: StyleCSS;
   /** subscriber of form validation*/
@@ -36,6 +44,7 @@ export class ProgressCountPresentationComponent {
   public isLastStepReach: boolean;
   /**active steps */
   private _steps!: number;
+  /**orientation */
 
   public get stepCountClass(): string[] {
     const result: string[] = []

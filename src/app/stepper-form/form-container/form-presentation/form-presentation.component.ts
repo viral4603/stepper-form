@@ -50,6 +50,9 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
   /** subscriber of step numbers */
   public stepperCountSub: Subscription;
 
+  /**orientation for steps */
+  public orientation:string;
+
   /** list of country with state */
   private _countryAndState: any;
   /** list of country with city */
@@ -61,6 +64,7 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
     this.stepperCountSub = new Subscription();
     this.country = [];
     this.sendData = new EventEmitter<StepperFormData>();
+    this.orientation = 'vertical'
   }
 
   ngOnInit(): void {
