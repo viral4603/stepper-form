@@ -4,7 +4,9 @@
 }
 
 .active {
-    .count-button, .step-details {
+
+    .count-button,
+    .step-details {
         color: $success;
     }
 }
@@ -28,16 +30,17 @@
 .nav-items {
     width: 20%;
 }
+
 .step-progress-bar {
     background: $light;
     position: absolute;
     top: 50%;
     z-index: -1;
+
     .progress-bar-active {
-        transition-timing-function:ease-out;
+        transition-timing-function: ease-out;
         transition: all 0.4s;
         height: 40%;
         background-color: $secondary;
     }
 }
-
