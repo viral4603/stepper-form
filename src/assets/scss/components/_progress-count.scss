@@ -7,17 +7,17 @@
         .nav-items {
             height: calc((100% - 40px)/5);
             width: initial;
-            flex-direction: column !important;
+
             &:last-child {
                 height: initial;
             }
         }
 
         .step-title {
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            margin: 14px;
-            transform: scale(-1);
+            // writing-mode: vertical-rl;
+            // text-orientation: mixed;
+            margin-top: 10px;
+            // transform: scale(-1);
         }
 
         .step-progress-bar {
