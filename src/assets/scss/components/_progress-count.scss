@@ -2,14 +2,14 @@
     position: relative;
     z-index: 11;
 }
-.progress {
-    position: absolute;
-    z-index: -1;
-    top: 40%;
-    width: 100%;
+
+.active {
+    .count-button, .step-details {
+        color: $success;
+    }
 }
 
-.active .count-button {
+.completed .count-button {
     background-color: $secondary;
     color: $white;
 }
@@ -22,14 +22,22 @@
     font-weight: bold;
     color: $secondary;
     border: none;
-    &:active {
+    flex-shrink: 0;
+}
+
+.nav-items {
+    width: 20%;
+}
+.step-progress-bar {
+    background: $light;
+    position: absolute;
+    top: 50%;
+    z-index: -1;
+    .progress-bar-active {
+        transition-timing-function:ease-out;
+        transition: all 0.4s;
+        height: 40%;
         background-color: $secondary;
-        border: none;
     }
 }
 
-.step-progress {
-    .progress-bar {
-        height: 40%;
-    }
-}
