@@ -17,7 +17,8 @@ export class ProgressCountPresentationComponent {
     if (v) {
       this._steps = v;
       this.styleExpression = {
-        width: `${(v - 1) * 25}%`,
+        width: `${(v - 1) * 20}%`,
+        height: `5px`
       }
     }
   }
@@ -25,6 +26,8 @@ export class ProgressCountPresentationComponent {
   public get steps() {
     return this._steps
   }
+  //dynamic css
+  @Input() public stpeerCountShape!: string;
   /** style for progress bar width */
   public styleExpression!: StyleCSS;
   /** subscriber of form validation*/
@@ -33,6 +36,17 @@ export class ProgressCountPresentationComponent {
   public isLastStepReach: boolean;
   /**active steps */
   private _steps!: number;
+
+  public get stepCountClass(): string[] {
+    const result: string[] = []
+    if (this.stpeerCountShape === 'square') {
+      result.push('rounded')
+    }
+    else {
+      result.push('rounded-circle')
+    }
+    return result;
+  }
 
   constructor(private stepperCountService: StepperCountService,
     private progressCountPresenter: ProgressCountService) {
