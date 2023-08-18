@@ -86,3 +86,27 @@
     }
 
 }
+
+//responisive css for steps widget
+@media screen and (max-width: 576px) {
+    .count-button {
+        height: 30px;
+        width: 30px;
+    }
+
+    .nav-items {
+        width: calc((100% - 30px)/5);
+    }
+
+    .counts.vertical-orientation {
+
+        .nav-items {
+            height: calc((100% - 30px)/5);
+        }
+
+        .step-progress-bar {
+            left: 13px;
+        }
+    }
+
+}
