@@ -51,7 +51,7 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
   public stepperCountSub: Subscription;
 
   /**orientation for steps */
-  public orientation:string;
+  public orientation: string;
 
   /** list of country with state */
   private _countryAndState: any;

@@ -1,12 +1,13 @@
 <div class="container-xxl h-100">
     <!-- start-form-wraper -->
     <div class="form-wrapper rounded d-flex px-2 px-md-3 py-3 mt-4 m-auto"
-        [ngClass]="{ 'flex-column' :orientation !== 'vertical'}">
-        <div class="py-4 px-2 px-md--3 no-print">
-            <app-progress-count-presentation [steps]="count"
-                [stpeerCountShape]="'square'" [orientation]="orientation"></app-progress-count-presentation>
+        [ngClass]="{ 'flex-column py-4' :orientation !== 'vertical'}">
+        <div class="px-2 px-md--3 no-print">
+            <app-progress-count-presentation [steps]="count" [stpeerCountShape]="'square'"
+                [orientation]="orientation"></app-progress-count-presentation>
         </div>
-        <div class="active-form flex-grow-1 d-flex px-2 px-md-4 py-lg-4 w-100 border">
+        <div class="active-form flex-grow-1 d-flex px-2 px-md-4 py-lg-4 w-100 border"
+            [ngClass]="{ 'mt-5' :orientation !== 'vertical'}">
             <!-- Basic-Details-form -->
             <app-basic-details-presentation *ngIf="count === 1"></app-basic-details-presentation>
             <!-- Address-Details-form -->

@@ -3,14 +3,29 @@
     z-index: 11;
 
     .nav-items {
-        width: 20%;
+        width: calc((100% - 40px)/5);
+
+        &:last-child {
+            width: initial;
+        }
     }
 
     &.vertical-orientation {
 
         .nav-items {
-            height: 20%;
+            height: calc((100% - 40px)/5);
             width: initial;
+            flex-direction: column !important;
+            &:last-child {
+                height: initial;
+            }
+        }
+
+        .step-title {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            margin: 14px;
+            transform: scale(-1);
         }
 
         .step-progress-bar {

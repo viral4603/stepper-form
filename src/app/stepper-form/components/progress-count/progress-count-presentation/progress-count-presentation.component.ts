@@ -33,9 +33,20 @@ export class ProgressCountPresentationComponent {
   public get steps() {
     return this._steps
   }
+
+  
+  public get orientation() : string {
+    return this._orientation;
+  }
+  @Input() public set orientation(value : string) {
+    if(value) {
+      this._orientation = value;
+    }
+  }
+  
   //dynamic css
   @Input() public stpeerCountShape!: string;
-  @Input() public orientation!:string;
+  
   /** style for progress bar width */
   public styleExpression!: StyleCSS;
   /** subscriber of form validation*/
@@ -45,7 +56,8 @@ export class ProgressCountPresentationComponent {
   /**active steps */
   private _steps!: number;
   /**orientation */
-
+  private _orientation! : string;
+  
   public get stepCountClass(): string[] {
     const result: string[] = []
     if (this.stpeerCountShape === 'square') {
