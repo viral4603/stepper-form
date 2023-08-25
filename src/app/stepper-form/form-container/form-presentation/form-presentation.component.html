@@ -4,7 +4,7 @@
         [ngClass]="{ 'flex-column py-4' :orientation !== 'vertical'}">
         <div class="px-2 px-md--3 no-print">
             <app-progress-count-presentation [steps]="count" [stpeerCountShape]="'square'"
-                [orientation]="orientation"></app-progress-count-presentation>
+                [orientation]="orientation" [styles]="customStyles"></app-progress-count-presentation >
         </div>
         <div class="active-form flex-grow-1 d-flex px-2 px-md-4 py-lg-4 w-100 border"
             [ngClass]="{ 'mt-5' :orientation !== 'vertical'}">

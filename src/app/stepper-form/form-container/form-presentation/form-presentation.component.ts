@@ -52,6 +52,8 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
 
   /**orientation for steps */
   public orientation: string;
+  /**custom css */
+  public customStyles: any;
 
   /** list of country with state */
   private _countryAndState: any;
@@ -65,6 +67,14 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
     this.country = [];
     this.sendData = new EventEmitter<StepperFormData>();
     this.orientation = 'vertical'
+    this.customStyles = {
+      defaultcolor: '#008DFF',
+      defaultBackGround: '#e9ecef',
+      activeColor: '#3bcb44',
+      activeBackground: 'blue',
+      completedColor: '#ffffff',
+      completedBackground: '#f65551'
+    }
   }
 
   ngOnInit(): void {

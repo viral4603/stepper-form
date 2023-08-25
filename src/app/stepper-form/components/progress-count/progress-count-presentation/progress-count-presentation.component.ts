@@ -13,17 +13,17 @@ import { StyleCSS } from 'src/app/stepper-form/model/index.model';
 })
 export class ProgressCountPresentationComponent {
   /** input setter for active step number */
-  @Input() public set steps(v: number) {
-    if (v) {
-      this._steps = v;
-      if(this.orientation === 'vertical') {
+  @Input() public set steps(setpsNumber: number) {
+    if (setpsNumber) {
+      this._steps = setpsNumber;
+      if (this.orientation === 'vertical') {
         this.styleExpression = {
-          height: `${(v - 1) * 20}%`,
+          height: `${(setpsNumber - 1) * 20}%`,
         }
       }
       else {
         this.styleExpression = {
-          width: `${(v - 1) * 20}%`,
+          width: `${(setpsNumber - 1) * 20}%`,
         }
       }
     }
@@ -38,15 +38,16 @@ export class ProgressCountPresentationComponent {
   public get orientation() : string {
     return this._orientation;
   }
-  @Input() public set orientation(value : string) {
-    if(value) {
+  @Input() public set orientation(value: string) {
+    if (value) {
       this._orientation = value;
     }
   }
   
   //dynamic css
-  @Input() public stpeerCountShape!: string;
-  
+  @Input() public stpeerCountShape!: string;  
+  @Input() public styles!:any ; 
+
   /** style for progress bar width */
   public styleExpression!: StyleCSS;
   /** subscriber of form validation*/
@@ -56,8 +57,8 @@ export class ProgressCountPresentationComponent {
   /**active steps */
   private _steps!: number;
   /**orientation */
-  private _orientation! : string;
-  
+  private _orientation!: string;
+
   public get stepCountClass(): string[] {
     const result: string[] = []
     if (this.stpeerCountShape === 'square') {
@@ -68,6 +69,8 @@ export class ProgressCountPresentationComponent {
     }
     return result;
   }
+  public rootElement = document.querySelector(':root') as HTMLElement;
+
 
   constructor(private stepperCountService: StepperCountService,
     private progressCountPresenter: ProgressCountService) {
@@ -78,6 +81,10 @@ export class ProgressCountPresentationComponent {
     this.formValidtionSub = this.stepperCountService.lastStepReached$.subscribe((res: boolean) => {
       this.isLastStepReach = res;
     })
+    //set setps widget dynamic styles
+    for (let key in this.styles) {
+      this.rootElement.style.setProperty(`--${key}`, this.styles[key]);
+    }
   }
 
   /**

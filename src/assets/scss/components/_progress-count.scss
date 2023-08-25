@@ -38,10 +38,12 @@
 .count-button {
     height: 40px;
     width: 40px;
-    background-color: $light;
+    // background-color: $light;
+    background-color: var(--defaultBackGround);
     font-size: 16px;
     font-weight: bold;
-    color: $secondary;
+    // color: $secondary;
+    color: var(--defaultcolor);
     border: none;
     flex-shrink: 0;
 }
@@ -56,17 +58,19 @@
     }
 
     &.active {
-
         .count-button,
         .step-details {
-            color: $success;
+            // color: $success;
+            color: var(--activeColor);
         }
     }
 
     &.completed {
         .count-button {
-            background-color: $secondary;
-            color: $white;
+            // background-color: $secondary;
+            // color: $white;
+            background-color: var(--completedBackground);
+            color: var(--completedColor);
         }
     }
 }
@@ -82,7 +86,7 @@
         transition-timing-function: ease-out;
         transition: all 0.4s;
         height: 5px;
-        background-color: $secondary;
+        background-color: var(--completedBackground);
     }
 
 }
