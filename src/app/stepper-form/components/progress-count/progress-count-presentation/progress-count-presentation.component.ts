@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { StepperCountService } from 'src/app/stepper-form/services/stepper-count.service';
 import { ProgressCountService } from '../progress-count-presenter/progress-count.service';
-import { StyleCss } from 'src/app/stepper-form/model/index.model';
+import { CountWidgetStyle, StyleCss } from 'src/app/stepper-form/model/index.model';
 
 @Component({
   selector: 'app-progress-count-presentation',
@@ -13,7 +13,7 @@ import { StyleCss } from 'src/app/stepper-form/model/index.model';
 })
 export class ProgressCountPresentationComponent {
   /** set count widget style */
-  @Input() public set countWidgetstyles(styles: any) {
+  @Input() public set countWidgetstyles(styles: CountWidgetStyle) {
     if (styles) {
       this._countWidgetstyles = styles;
       //set widget colors
@@ -23,7 +23,7 @@ export class ProgressCountPresentationComponent {
     }
   }
   /**getter for count widget style */
-  public get countWidgetstyles(): any {
+  public get countWidgetstyles(): CountWidgetStyle {
     return this._countWidgetstyles;
   }
 
@@ -31,7 +31,7 @@ export class ProgressCountPresentationComponent {
   @Input() public set steps(setpsNumber: number) {
     if (setpsNumber) {
       this._steps = setpsNumber;
-      if (this.countWidgetstyles.orientaion === 'vertical') {
+      if (this.countWidgetstyles.orientation === 'vertical') {
         this.styleExpression = {
           height: `${(setpsNumber - 1) * 20}%`,
         }
@@ -61,7 +61,6 @@ export class ProgressCountPresentationComponent {
   /**active steps */
   private _steps!: number;
   /**orientation */
-  private _orientation!: string;
 
   public get stepCountClass(): string[] {
     const result: string[] = []
@@ -73,12 +72,13 @@ export class ProgressCountPresentationComponent {
     }
     return result;
   }
-  public rootElement = document.querySelector(':root') as HTMLElement;
+  public rootElement: HTMLElement;
 
 
   constructor(private stepperCountService: StepperCountService,
     private progressCountPresenter: ProgressCountService) {
     this.isLastStepReach = false;
+    this.rootElement = document.querySelector(':root') as HTMLElement;
   }
 
   ngOnInit(): void {

@@ -63,6 +63,9 @@
             // color: $success;
             color: var(--active);
         }
+        .count-button {
+            background: var(--activeBg);
+        }
     }
 
     &.completed {
