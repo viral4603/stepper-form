@@ -3,8 +3,8 @@
     <div class="form-wrapper rounded d-flex px-2 px-md-3 py-3 mt-4 m-auto"
         [ngClass]="{ 'flex-column py-4' :countWidgetStyles.orientation !== 'vertical'}">
         <div class="px-2 px-md--3 no-print">
-            <app-progress-count-presentation [steps]="count"
-                [countWidgetstyles]="countWidgetStyles"></app-progress-count-presentation>
+            <app-progress-count-presentation [countWidgetstyles]="countWidgetStyles"
+                [steps]="count"></app-progress-count-presentation>
         </div>
         <div class="active-form flex-grow-1 d-flex px-2 px-md-4 py-lg-4 w-100 border"
             [ngClass]="{ 'mt-5' :countWidgetStyles.orientation !== 'vertical'}">
