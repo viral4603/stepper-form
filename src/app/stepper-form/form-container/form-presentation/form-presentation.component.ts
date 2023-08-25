@@ -69,7 +69,7 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
         default: '#008DFF',
         backround: '#e9ecef',
         active: '#3bcb44',
-        activeBg: 'blue',
+        activeBg: '#e9ecef',
         completed: '#ffffff',
         completedBg: '#008DFF'
       },
