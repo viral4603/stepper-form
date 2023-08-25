@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { StepperCountService } from 'src/app/stepper-form/services/stepper-count.service';
 import { ProgressCountService } from '../progress-count-presenter/progress-count.service';
-import { StyleCSS } from 'src/app/stepper-form/model/index.model';
+import { StyleCss } from 'src/app/stepper-form/model/index.model';
 
 @Component({
   selector: 'app-progress-count-presentation',
@@ -12,11 +12,26 @@ import { StyleCSS } from 'src/app/stepper-form/model/index.model';
   providers: [ProgressCountService]
 })
 export class ProgressCountPresentationComponent {
+  /** set count widget style */
+  @Input() public set countWidgetstyles(styles: any) {
+    if (styles) {
+      this._countWidgetstyles = styles;
+      //set widget colors
+      for (let key in styles.colors) {
+        this.rootElement.style.setProperty(`--${key}`, styles.colors[key]);
+      }
+    }
+  }
+  /**getter for count widget style */
+  public get countWidgetstyles(): any {
+    return this._countWidgetstyles;
+  }
+
   /** input setter for active step number */
   @Input() public set steps(setpsNumber: number) {
     if (setpsNumber) {
       this._steps = setpsNumber;
-      if (this.orientation === 'vertical') {
+      if (this.countWidgetstyles.orientaion === 'vertical') {
         this.styleExpression = {
           height: `${(setpsNumber - 1) * 20}%`,
         }
@@ -28,32 +43,21 @@ export class ProgressCountPresentationComponent {
       }
     }
   }
-  
   /** getter active step */
   public get steps() {
     return this._steps
   }
 
-  
-  public get orientation() : string {
-    return this._orientation;
-  }
-  @Input() public set orientation(value: string) {
-    if (value) {
-      this._orientation = value;
-    }
-  }
-  
-  //dynamic css
-  @Input() public stpeerCountShape!: string;  
-  @Input() public styles!:any ; 
-
   /** style for progress bar width */
-  public styleExpression!: StyleCSS;
+  public styleExpression!: StyleCss;
   /** subscriber of form validation*/
-  public formValidtionSub!: Subscription;
+  public formValidtionSubscription!: Subscription;
+
   /** flag for final step reach */
   public isLastStepReach: boolean;
+
+  /**custom styles for count widget */
+  private _countWidgetstyles!: any;
   /**active steps */
   private _steps!: number;
   /**orientation */
@@ -61,7 +65,7 @@ export class ProgressCountPresentationComponent {
 
   public get stepCountClass(): string[] {
     const result: string[] = []
-    if (this.stpeerCountShape === 'square') {
+    if (this.countWidgetstyles.shape === 'square') {
       result.push('rounded')
     }
     else {
@@ -78,13 +82,10 @@ export class ProgressCountPresentationComponent {
   }
 
   ngOnInit(): void {
-    this.formValidtionSub = this.stepperCountService.lastStepReached$.subscribe((res: boolean) => {
+    this.formValidtionSubscription = this.stepperCountService.lastStepReached$.subscribe((res: boolean) => {
       this.isLastStepReach = res;
     })
-    //set setps widget dynamic styles
-    for (let key in this.styles) {
-      this.rootElement.style.setProperty(`--${key}`, this.styles[key]);
-    }
+
   }
 
   /**
@@ -101,7 +102,7 @@ export class ProgressCountPresentationComponent {
   }
 
   ngOnDestroy(): void {
-    this.formValidtionSub.unsubscribe()
+    this.formValidtionSubscription.unsubscribe()
   }
 
 }

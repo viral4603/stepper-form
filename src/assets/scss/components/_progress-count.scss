@@ -39,11 +39,11 @@
     height: 40px;
     width: 40px;
     // background-color: $light;
-    background-color: var(--defaultBackGround);
+    background-color: var(--backround);
     font-size: 16px;
     font-weight: bold;
     // color: $secondary;
-    color: var(--defaultcolor);
+    color: var(--default);
     border: none;
     flex-shrink: 0;
 }
@@ -61,7 +61,7 @@
         .count-button,
         .step-details {
             // color: $success;
-            color: var(--activeColor);
+            color: var(--active);
         }
     }
 
@@ -69,15 +69,15 @@
         .count-button {
             // background-color: $secondary;
             // color: $white;
-            background-color: var(--completedBackground);
-            color: var(--completedColor);
+            background-color: var(--completedBg);
+            color: var(--completed);
         }
     }
 }
 
 //progress bar css
 .step-progress-bar {
-    background: $light;
+    background: var(--backround);
     position: absolute;
     top: 50%;
     z-index: -1;
@@ -86,7 +86,8 @@
         transition-timing-function: ease-out;
         transition: all 0.4s;
         height: 5px;
-        background-color: var(--completedBackground);
+        width: 0%;
+        background-color: var(--completedBg);
     }
 
 }

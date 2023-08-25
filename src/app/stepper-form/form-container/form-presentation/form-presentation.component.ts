@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { FormPresenterService } from '../form-presenter/form-presenter.service';
-import { StepperCountService } from '../../services/stepper-count.service';
 import { Subscription } from 'rxjs';
-import { SelectOption, StepperFormData } from '../../model/index.model';
+import { CountWidgetStyle, SelectOption, StepperFormData } from '../../model/index.model';
+import { StepperCountService } from '../../services/stepper-count.service';
+import { FormPresenterService } from '../form-presenter/form-presenter.service';
 
 @Component({
   selector: 'app-form-presentation',
@@ -48,12 +48,10 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
   /** active tab number */
   public count: number;
   /** subscriber of step numbers */
-  public stepperCountSub: Subscription;
+  public stepperCountSubcription: Subscription;
 
-  /**orientation for steps */
-  public orientation: string;
-  /**custom css */
-  public customStyles: any;
+  /**custom count widget shape css */
+  public countWidgetStyles: CountWidgetStyle;
 
   /** list of country with state */
   private _countryAndState: any;
@@ -63,22 +61,25 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
   constructor(private stepperCountService: StepperCountService,
     private cdr: ChangeDetectorRef) {
     this.count = 1;
-    this.stepperCountSub = new Subscription();
+    this.stepperCountSubcription = new Subscription();
     this.country = [];
     this.sendData = new EventEmitter<StepperFormData>();
-    this.orientation = 'vertical'
-    this.customStyles = {
-      defaultcolor: '#008DFF',
-      defaultBackGround: '#e9ecef',
-      activeColor: '#3bcb44',
-      activeBackground: 'blue',
-      completedColor: '#ffffff',
-      completedBackground: '#f65551'
+    this.countWidgetStyles = {
+      colors: {
+        default: '#008DFF',
+        backround: '#e9ecef',
+        active: '#3bcb44',
+        activeBg: 'blue',
+        completed: '#ffffff',
+        completedBg: '#008DFF'
+      },
+      shape: 'square',
+      orientation: 'horizontal'
     }
   }
 
   ngOnInit(): void {
-    this.stepperCountSub = this.stepperCountService.activeCount$.subscribe((res: any) => {
+    this.stepperCountSubcription = this.stepperCountService.activeCount$.subscribe((res: any) => {
       this.count = res;
       this.cdr.markForCheck()
     })
@@ -93,6 +94,6 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.stepperCountSub.unsubscribe();
+    this.stepperCountSubcription.unsubscribe();
   }
 }

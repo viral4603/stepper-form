@@ -1,10 +1,10 @@
-<div class="counts" [ngClass]="{'vertical-orientation h-100': orientation === 'vertical'}">
+<div class="counts" [ngClass]="{'vertical-orientation h-100': countWidgetstyles.orientation === 'vertical'}">
     <!-- start-number-of-count-widget -->
     <div class="step-progress-bar align-items-center w-100" role="progressbar" aria-label="Animated striped example">
         <div class="progress-bar-active" [style]="styleExpression"></div>
     </div>
     <ul class="count-list nav d-flex"
-        [ngClass]="{'flex-column justify-content-between h-100': orientation === 'vertical'}">
+        [ngClass]="{'flex-column justify-content-between h-100': countWidgetstyles.orientation === 'vertical'}">
         <li class="nav-items d-flex" [ngClass]="{'active':steps === 1 , 'completed' : steps > 1}">
             <button class="count-button d-flex align-items-center justify-content-center" [class]="stepCountClass"
                 (click)="setActiveTab(1)"><span
