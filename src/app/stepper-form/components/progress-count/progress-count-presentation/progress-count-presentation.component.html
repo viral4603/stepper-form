@@ -1,23 +1,54 @@
-<div class="counts">
+<div class="counts" [ngClass]="{'vertical-orientation h-100': countWidgetstyles.orientation === 'vertical'}">
     <!-- start-number-of-count-widget -->
-    <div class="progress step-progress align-items-center" role="progressbar" aria-label="Animated striped example">
-        <div class="progress-bar" [style]="styleExpression"></div>        
+    <div class="step-progress-bar align-items-center w-100" role="progressbar" aria-label="Animated striped example">
+        <div class="progress-bar-active" [style]="styleExpression"></div>
     </div>
-    <ul class="count-list nav d-flex justify-content-between">
-        <li class="nav-items" [class]="steps >= 1 ? 'active' : ''">
-            <button class="count-button d-flex align-items-center justify-content-center rounded-circle" (click)="setActiveTab(1)">1</button>
+    <ul class="count-list nav d-flex"
+        [ngClass]="{'flex-column justify-content-between h-100': countWidgetstyles.orientation === 'vertical'}">
+        <li class="nav-items d-flex" [ngClass]="{'active':steps === 1 , 'completed' : steps > 1}">
+            <button class="count-button d-flex align-items-center justify-content-center" [class]="stepCountClass"
+                (click)="setActiveTab(1)"><span
+                    [class]="[steps === 1 && 'icon-user-active',steps > 1 ? 'icon-active' : 'icon-basic'] "></span></button>
+            <div class="step-details ps-2">
+                <h6 class="mb-0 step-title ">Basic</h6>
+            </div>
         </li>
-        <li class="nav-items " [class]="steps >= 2 ? 'active' : ''">
-            <button class="count-button d-flex align-items-center justify-content-center rounded-circle" (click)="setActiveTab(2)">2</button>
+        <li class="nav-items d-flex" [ngClass]="{'active':steps === 2 , 'completed' : steps > 2}">
+            <button class="count-button d-flex align-items-center justify-content-center" [class]="stepCountClass"
+                (click)="setActiveTab(2)"><span
+                    [class]="[steps === 2 && 'icon-user-active',steps > 2 ? 'icon-active' : 'icon-address']"></span></button>
+            <div class="step-details ps-2">
+                <h6 class="mb-0 step-title">Address</h6>
+            </div>
         </li>
-        <li class="nav-items" [class]="steps >= 3 ? 'active' : ''">
-            <button class="count-button d-flex align-items-center justify-content-center rounded-circle" (click)="setActiveTab(3)">3</button>
+        <li class="nav-items d-flex" [ngClass]="{'active':steps === 3 , 'completed' : steps > 3}">
+            <button class="count-button d-flex align-items-center justify-content-center" [class]="stepCountClass"
+                (click)="setActiveTab(3)"><span
+                    [class]="[steps === 3 && 'icon-user-active',steps > 3 ? 'icon-active' : 'icon-skill']"></span></button>
+            <div class="step-details ps-2">
+                <h6 class="mb-0 step-title">Skills</h6>
+            </div>
         </li>
-        <li class="nav-items" [class]="steps >= 4 ? 'active' : ''">
-            <button class="count-button d-flex align-items-center justify-content-center rounded-circle" (click)="setActiveTab(4)">4</button>
+        <li class="nav-items d-flex" [ngClass]="{'active':steps === 4 , 'completed' : steps > 4}">
+            <button class="count-button d-flex align-items-center justify-content-center" [class]="stepCountClass"
+                (click)="setActiveTab(4)"><span
+                    [class]="[steps === 4 && 'icon-user-active',steps > 4 ? 'icon-active' : 'icon-project']"></span></button>
+            <div class="step-details ps-2">
+                <h6 class="mb-0 step-title">Projects</h6>
+            </div>
         </li>
-        <li class="nav-items" [class]="steps >= 5 ? 'active' : ''">
-            <button class="count-button d-flex align-items-center justify-content-center rounded-circle" (click)="setActiveTab(5)">5</button>
+        <li class="nav-items d-flex" [ngClass]="{'active':steps === 5 , 'completed' : steps > 5 }">
+            <button class="count-button d-flex align-items-center justify-content-center" [class]="stepCountClass"
+                (click)="setActiveTab(5)"><span
+                    [class]="[steps === 5 && 'icon-user-active',steps > 5 ? 'icon-active' : 'icon-policy']"></span></button>
+            <div class="step-details ps-2">
+                <h6 class="mb-0 step-title">Policies</h6>
+            </div>
+        </li>
+        <li class="nav-items d-flex" [ngClass]="{'active':steps === 6 , 'completed' : steps > 6}">
+            <button class="count-button d-flex align-items-center justify-content-center" [class]="stepCountClass"
+                (click)="setActiveTab(6)"><span
+                    [class]="[steps === 6 ? 'icon-user-active' : 'icon-active']"></span></button>
         </li>
     </ul>
     <!-- end-number-of-count-widget -->

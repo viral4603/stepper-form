@@ -1,10 +1,13 @@
-<div class="container-xxl h-100">
+<div class="px-0 container-xxl h-100">
     <!-- start-form-wraper -->
-    <div class="form-wrapper rounded d-flex flex-column px-2 px-md-3 py-3 mt-4 m-auto">
-        <div class="progress-bar py-4 px-2 px-md--3 no-print">
-            <app-progress-count-presentation [steps]="count"></app-progress-count-presentation>
+    <div class="form-wrapper rounded d-flex px-2 px-md-3 py-3 mt-4 m-auto"
+        [ngClass]="{ 'flex-column py-4' :countWidgetStyles.orientation !== 'vertical'}">
+        <div class="px-2 px-md--3 no-print">
+            <app-progress-count-presentation [countWidgetstyles]="countWidgetStyles"
+                [steps]="count"></app-progress-count-presentation>
         </div>
-        <div class="active-form flex-grow-1 d-flex px-2 px-md-4 py-lg-4 w-100 border">
+        <div class="active-form flex-grow-1 d-flex px-2 px-md-4 py-lg-4 w-100 border"
+            [ngClass]="{ 'mt-5' :countWidgetStyles.orientation !== 'vertical'}">
             <!-- Basic-Details-form -->
             <app-basic-details-presentation *ngIf="count === 1"></app-basic-details-presentation>
             <!-- Address-Details-form -->
@@ -19,7 +22,8 @@
             <!-- Policy-Details-form -->
             <app-policy-details-presentation *ngIf="count === 5"></app-policy-details-presentation>
             <!-- preview-form -->
-            <app-preview-form-presentation *ngIf="count === 6" (sendFormData)="sendDataToParent($event)"></app-preview-form-presentation>
+            <app-preview-form-presentation *ngIf="count === 6"
+                (sendFormData)="sendDataToParent($event)"></app-preview-form-presentation>
         </div>
     </div>
     <!-- end-form-wraper -->

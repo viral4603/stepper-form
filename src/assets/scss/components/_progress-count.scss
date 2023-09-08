@@ -1,35 +1,120 @@
 .counts {
     position: relative;
     z-index: 11;
-}
-.progress {
-    position: absolute;
-    z-index: -1;
-    top: 40%;
-    width: 100%;
+
+    &.vertical-orientation {
+
+        .nav-items {
+            height: calc((100% - 40px)/5);
+            width: initial;
+
+            &:last-child {
+                height: initial;
+            }
+        }
+
+        .step-title {
+            // writing-mode: vertical-rl;
+            // text-orientation: mixed;
+            margin-top: 10px;
+            // transform: scale(-1);
+        }
+
+        .step-progress-bar {
+            left: 17px;
+            top: 0;
+            width: 5px !important;
+            height: 100%;
+
+            .progress-bar-active {
+                width: 5px !important;
+            }
+
+        }
+    }
 }
 
-.active .count-button {
-    background-color: $secondary;
-    color: $white;
-}
-
+//count-widget css
 .count-button {
     height: 40px;
     width: 40px;
-    background-color: $light;
+    // background-color: $light;
+    background-color: var(--backround);
     font-size: 16px;
     font-weight: bold;
-    color: $secondary;
+    // color: $secondary;
+    color: var(--default);
     border: none;
-    &:active {
-        background-color: $secondary;
-        border: none;
+    flex-shrink: 0;
+}
+
+
+//steps state css 
+.nav-items {
+    width: calc((100% - 40px)/5);
+
+    &:last-child {
+        width: initial;
+    }
+
+    &.active {
+        .count-button,
+        .step-details {
+            // color: $success;
+            color: var(--active);
+        }
+        .count-button {
+            background: var(--activeBg);
+        }
+    }
+
+    &.completed {
+        .count-button {
+            // background-color: $secondary;
+            // color: $white;
+            background-color: var(--completedBg);
+            color: var(--completed);
+        }
     }
 }
 
-.step-progress {
-    .progress-bar {
-        height: 40%;
+//progress bar css
+.step-progress-bar {
+    background: var(--backround);
+    position: absolute;
+    top: 50%;
+    z-index: -1;
+
+    .progress-bar-active {
+        transition-timing-function: ease-out;
+        transition: all 0.4s;
+        height: 5px;
+        width: 0%;
+        background-color: var(--completedBg);
     }
+
+}
+
+//responisive css for steps widget
+@media screen and (max-width: 576px) {
+    .count-button {
+        height: 30px;
+        width: 30px;
+    }
+
+    .nav-items {
+        width: calc((100% - 30px)/5);
+    }
+
+    .counts.vertical-orientation {
+
+        .nav-items {
+            height: calc((100% - 30px)/5);
+        }
+
+        .step-progress-bar {
+            left: 13px;
+        }
+    }
+
 }

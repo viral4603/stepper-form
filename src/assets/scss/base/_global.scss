@@ -22,9 +22,7 @@
     overflow-y: auto;
     padding-bottom: 20px;
 }
-.active-form {
-    margin-top: 40px;
-}
+
 .close-preview-icon {
     height: auto;
     width: 20px;
@@ -46,6 +44,9 @@
 @media screen and (max-width: 768px) {
     .form-wrapper {
         min-height: 90vh;
+    }
+    .step-title {
+        display: none;
     }
 }
 

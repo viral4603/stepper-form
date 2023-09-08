@@ -9,7 +9,7 @@
                     <label for="country" class="mb-1 cursor-pointer fw-semibold">Frameworks<span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3 ">
-                        <ng-select [clearable]="false" [multiple]="true" placeholder="Select Framework" id="frameworkID"
+                        <ng-select [clearable]="false" [multiple]="true" [closeOnSelect]="false" placeholder="Select Framework" id="frameworkID"
                             class="w-100" (add)="onSelectChange($event,'framework')"
                             (remove)="onDeselectChange($event,'framework')" (blur)="markFormGroupAsTouched('framework')"
                             formControlName="selectedFramewrok">
@@ -56,7 +56,7 @@
                     <label for="country" class="mb-1 cursor-pointer fw-semibold">Programming Languages<span
                             class="text-danger">*</span></label>
                     <div class="input-group mb-3">
-                        <ng-select [clearable]="false" [multiple]="true" placeholder="Select Programming Language"
+                        <ng-select [clearable]="false" [multiple]="true" [closeOnSelect]="false" placeholder="Select Programming Language"
                             id="programmingLangugesId" class="w-100"
                             (add)="onSelectChange($event,'programmingLanguges')"
                             (remove)="onDeselectChange($event,'programmingLanguges')"

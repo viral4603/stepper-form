@@ -80,6 +80,14 @@ export enum SkillLevel {
     Expert = 'Expert'
 }
 
-export interface StyleCSS {
+export interface StyleCss {
     readonly [key: string]: string
+}
+
+export type Shape = 'circle' | 'square';
+export type Orientation = 'vertical' | 'horizontal'
+export interface CountWidgetStyle {
+    colors: StyleCss;
+    orientation: Orientation;
+    shape: Shape
 }
