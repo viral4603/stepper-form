@@ -4,6 +4,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { StepperCountService } from 'src/app/stepper-form/services/stepper-count.service';
 import { BasicDetailsPresenterService } from '../basic-details-presenter/basic-details-presenter.service';
 import { BasicDetails } from 'src/app/stepper-form/constant/stpper.constant';
+import { StepperForm } from 'src/app/shared/custom-stepper/model';
 
 @Component({
   selector: 'app-basic-details-presentation',
@@ -14,18 +15,18 @@ import { BasicDetails } from 'src/app/stepper-form/constant/stpper.constant';
     BasicDetailsPresenterService
   ],
 })
-export class BasicDetailsPresentationComponent implements OnInit, OnDestroy {
+export class BasicDetailsPresentationComponent implements OnInit, OnDestroy, StepperForm {
   /** form instance of basic details form */
   public basicDetails: FormGroup;
   /** validition flag while user submit form */
-  public isFormValid: boolean;
+  public isValid: boolean;
   /** subject for unsubscribe observable */
   public unSubscribe: Subject<void>
 
   constructor(private presenterService: BasicDetailsPresenterService, private stepperCountService: StepperCountService,
     private cdr: ChangeDetectorRef) {
     this.basicDetails = this.presenterService.basicDeatilsFormGroup();
-    this.isFormValid = true;
+    this.isValid = true;
     this.unSubscribe = new Subject<void>();
 
   }
@@ -37,12 +38,6 @@ export class BasicDetailsPresentationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
- 
-    this.stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
-      if (res.activeTab === 1) {
-        this.submitForm(res.navigateTo)
-      }
-    })
     /** patch form value from local storage */
     const localStorageValue = localStorage.getItem(BasicDetails)
     if (localStorageValue) {
@@ -54,17 +49,20 @@ export class BasicDetailsPresentationComponent implements OnInit, OnDestroy {
    * Submit form data to presenter service
    * @param tab tab nuber where user will navigate after form submit
    */
-  public submitForm(tab: number): void {
+  public submitForm(): void {
     if (this.basicDetails.status !== "INVALID") {
       this.presenterService.submitForm(this.basicDetails.value)
-      this.stepperCountService.setActiveTab(tab)
     }
     else {
-      this.isFormValid = false;
+      this.isValid = false;
       this.cdr.markForCheck()
     }
   }
-  
+  /** get form group for parent access */
+  getFormData(): FormGroup<any> {
+    return this.basicDetails
+  }
+
   ngOnDestroy(): void {
     this.unSubscribe.next()
     this.unSubscribe.unsubscribe()

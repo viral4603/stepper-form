@@ -1,196 +1,186 @@
-<div class="main-form d-flex flex-column justify-content-between h-100">
-    <h2 class="fs-5 text-primary py-4 "><span>4.</span>Project Details & Equipment Preference</h2>
-    <!-- start-basic-details-form -->
-    <form class="flex-grow-1 d-flex flex-column" [formGroup]="projectDetailsForm" (ngSubmit)="submitForm(5)">
-        <div class="form-details flex-grow-1">
-            <div class="row">
-                <!-- project-start -->
-                <div class="col-12 col-lg-6">
-                    <label for="project" class="mb-1 cursor-pointer fw-semibold">Project<span
-                            class="text-danger">*</span></label>
-                    <div class="input-group mb-4">
-                        <!--Using ng-option and for loop-->
-                        <ng-select placeholder="Select Project" id="project" class="w-100" formControlName="projectName">
-                            <ng-option *ngFor="let project of projects" [value]="project.name">{{project.name}}</ng-option>
-                        </ng-select>
-                        <!-- start-project-name-error -->
-                        <ng-container
-                            *ngIf="(formContorls['projectName'].touched && formContorls['projectName'].errors) || (!isFormValid && formContorls['projectName'].errors)">
-                            <h6 *ngIf="formContorls['projectName']['errors']['required']" class="text-danger mt-2">
-                                *Project Name is required field
-                            </h6>
-                        </ng-container>
-                        <!-- end-project-name-error -->
-                    </div>
+<!-- start-basic-details-form -->
+<form class="flex-grow-1 d-flex flex-column" [formGroup]="projectDetailsForm">
+    <div class="form-details flex-grow-1">
+        <div class="row">
+            <!-- project-start -->
+            <div class="col-12 col-lg-6">
+                <label for="project" class="mb-1 cursor-pointer fw-semibold">Project<span
+                        class="text-danger">*</span></label>
+                <div class="input-group mb-4">
+                    <!--Using ng-option and for loop-->
+                    <ng-select placeholder="Select Project" id="project" class="w-100" formControlName="projectName">
+                        <ng-option *ngFor="let project of projects" [value]="project.name">{{project.name}}</ng-option>
+                    </ng-select>
+                    <!-- start-project-name-error -->
+                    <ng-container
+                        *ngIf="(formContorls['projectName'].touched && formContorls['projectName'].errors) || (!isFormValid && formContorls['projectName'].errors)">
+                        <h6 *ngIf="formContorls['projectName']['errors']['required']" class="text-danger mt-2">
+                            *Project Name is required field
+                        </h6>
+                    </ng-container>
+                    <!-- end-project-name-error -->
                 </div>
-                <!-- project-end -->
-                <!-- roll-start -->
-                <div class="col-12 col-lg-6">
-                    <label for="roll" class="mb-1 cursor-pointer fw-semibold">Position in Project<span
-                            class="text-danger">*</span></label>
-                    <div class="input-group mb-4">
-                        <!--Using ng-option and for loop-->
-                        <ng-select placeholder="Role" id="roll" class="w-100" formControlName="role">
-                            <ng-option *ngFor="let role of positions" [value]="role.name">{{role.name}}</ng-option>
-                        </ng-select>
-                        <!-- start-role-name-error -->
-                        <ng-container
-                            *ngIf="(formContorls['role'].touched && formContorls['role'].errors) || (!isFormValid && formContorls['role'].errors)">
-                            <h6 *ngIf="formContorls['role']['errors']['required']" class="text-danger mt-2">
-                                *Roll is required field
-                            </h6>
-                        </ng-container>
-                        <!-- end-role-name-error -->
-                    </div>
-                </div>
-                <!-- roll-end -->
-                <!-- project-startDate-start -->
-                <div class="col-12 col-lg-6">
-                    <label for="startDate" class="mb-1 cursor-pointer fw-semibold">Project Start From<span
-                            class="text-danger">*</span></label>
-                    <div class="input-group mb-4">
-                        <input type="date" id="startDate" class="form-control w-100" placeholder="Start Date"
-                            aria-label="Start Date" formControlName="startDate" [min]="today">
-                        <!-- start-error-start-date -->
-                        <ng-container
-                            *ngIf="(formContorls['startDate'].touched && formContorls['startDate'].errors) || (!isFormValid && formContorls['startDate'].errors)">
-                            <h6 *ngIf="formContorls['startDate']['errors']['required']" class="text-danger mt-2">
-                                *Start Date is required field
-                            </h6>
-                        </ng-container>
-                        <!-- -error-start-date -->
-                    </div>
-                </div>
-                <!-- project-startDate-end -->
-                <!-- project-endDate-start -->
-                <div class="col-12 col-lg-6">
-                    <label for="city" class="mb-1 cursor-pointer fw-semibold">Project End<span
-                            class="text-danger">*</span></label>
-                    <div class="input-group mb-4">
-                        <input type="date" id="endDate" class="form-control w-100" placeholder="End Date"
-                            aria-label="End Date" formControlName="endDate" [min]="today">
-                        <!-- start-error-end-date -->
-                        <ng-container
-                            *ngIf="(formContorls['endDate'].touched && formContorls['endDate'].errors) || (!isFormValid && formContorls['endDate'].errors)">
-                            <h6 *ngIf="formContorls['endDate']['errors']['required']" class="text-danger mt-2">
-                                *End Date is required field
-                            </h6>
-                        </ng-container>
-                        <!-- end-error-end-date -->
-                    </div>
-                </div>
-                <!-- project-endDate-end -->
-                <!-- start-system-preference -->
-                <div class="col-12 col-lg-6 d-flex flex-column">
-                    <div class="d-flex">
-                        <div class="col-6">
-                            <label for="system" class="mb-1 cursor-pointer fw-semibold  text-truncate w-100"
-                                title="System Preference">System Preference<span class="text-danger">*</span></label>
-                        </div>
-                        <div class="col-6 d-flex">
-                            <!-- computer-radio-input -->
-                            <div>
-                                <input class="form-check-input me-3" type="radio" formControlName="system" id="computer"
-                                    value="computer">
-                                <label for="computer" class="mb-1 cursor-pointer">Computer</label>
-                            </div>
-                            <!-- laptop-radio-input -->
-                            <div class="ps-4">
-                                <input class="form-check-input me-3" type="radio" formControlName="system" id="laptop"
-                                    value="laptop">
-                                <label for="laptop" class="mb-1 cursor-pointer">Laptop</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <!-- start-error-system-preference -->
-                        <ng-container
-                            *ngIf="(formContorls['system'].touched && formContorls['system'].errors) || (!isFormValid && formContorls['system'].errors)">
-                            <h6 *ngIf="formContorls['system']['errors']['required']" class="text-danger mt-2">
-                                *System preference is required field
-                            </h6>
-                        </ng-container>
-                        <!-- end-error-system-preference -->
-                    </div>
-                </div>
-                <!-- start-system-preference -->
-                <!-- start-mouse-preference -->
-                <div class="col-12 col-lg-6 d-flex flex-column">
-                    <div class="d-flex">
-                        <div class="col-6">
-                            <label for="systemPreference" class="mb-1 cursor-pointer fw-semibold text-truncate w-100"
-                                title="Mouse Preference">Mouse Preference<span class="text-danger">*</span></label>
-                        </div>
-                        <div class="col-6 d-flex">
-                            <!-- wireless-radio-input -->
-                            <div>
-                                <input class="form-check-input me-3" type="radio" formControlName="mouse"
-                                    value="wireless" id="wirelessMouse">
-                                <label for="wirelessMouse" class="mb-1 cursor-pointer">Wireless</label>
-                            </div>
-                            <!-- wired-radio-input -->
-                            <div class="ps-4">
-                                <input class="form-check-input me-3" type="radio" formControlName="mouse" value="wired"
-                                    id="wiredMouse">
-                                <label for="wiredMouse" class="mb-1 cursor-pointer">Wired</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <!-- start-error-mouse-preference -->
-                        <ng-container
-                            *ngIf="(formContorls['mouse'].touched && formContorls['mouse'].errors) || (!isFormValid && formContorls['mouse'].errors)">
-                            <h6 *ngIf="formContorls['mouse']['errors']['required']" class="text-danger mt-2">
-                                *System preference is required field
-                            </h6>
-                        </ng-container>
-                        <!-- end-error-mouse-preference -->
-                    </div>
-                </div>
-                <!-- end-mouse-preference -->
-                <!-- start-keyboard-preference -->
-                <div class="col-12 col-lg-6 d-flex flex-column">
-                    <div class="d-flex">
-                        <div class="col-6">
-                            <label for="keyboard" class="mb-1 cursor-pointer fw-semibold text-truncate w-100"
-                                title="Keyboard Preference">Keyboard Preference<span
-                                    class="text-danger">*</span></label>
-                        </div>
-                        <div class="col-6 d-flex">
-                            <!-- wireless-radio-input -->
-                            <div>
-                                <input class="form-check-input me-3" type="radio" formControlName="keyboard"
-                                    value="wireless" id="wirelessKeyboard">
-                                <label for="wirelessKeyboard" class="mb-1 cursor-pointer">Wireless</label>
-                            </div>
-                            <!-- wired-radio-input -->
-                            <div class="ps-4">
-                                <input class="form-check-input me-3" type="radio" formControlName="keyboard"
-                                    value="wired" id="wiredKeyboard">
-                                <label for="wiredKeyboard" class="mb-1 cursor-pointer">Wired</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <!-- start-error-keyboard-preference -->
-                        <ng-container
-                            *ngIf="(formContorls['keyboard'].touched && formContorls['keyboard'].errors) || (!isFormValid && formContorls['keyboard'].errors)">
-                            <h6 *ngIf="formContorls['keyboard']['errors']['required']" class="text-danger mt-2">
-                                *System preference is required field
-                            </h6>
-                        </ng-container>
-                        <!-- end-error-keyboard-preference -->
-                    </div>
-                </div>
-                <!-- end-keyboard-preference -->
             </div>
+            <!-- project-end -->
+            <!-- roll-start -->
+            <div class="col-12 col-lg-6">
+                <label for="roll" class="mb-1 cursor-pointer fw-semibold">Position in Project<span
+                        class="text-danger">*</span></label>
+                <div class="input-group mb-4">
+                    <!--Using ng-option and for loop-->
+                    <ng-select placeholder="Role" id="roll" class="w-100" formControlName="role">
+                        <ng-option *ngFor="let role of positions" [value]="role.name">{{role.name}}</ng-option>
+                    </ng-select>
+                    <!-- start-role-name-error -->
+                    <ng-container
+                        *ngIf="(formContorls['role'].touched && formContorls['role'].errors) || (!isFormValid && formContorls['role'].errors)">
+                        <h6 *ngIf="formContorls['role']['errors']['required']" class="text-danger mt-2">
+                            *Roll is required field
+                        </h6>
+                    </ng-container>
+                    <!-- end-role-name-error -->
+                </div>
+            </div>
+            <!-- roll-end -->
+            <!-- project-startDate-start -->
+            <div class="col-12 col-lg-6">
+                <label for="startDate" class="mb-1 cursor-pointer fw-semibold">Project Start From<span
+                        class="text-danger">*</span></label>
+                <div class="input-group mb-4">
+                    <input type="date" id="startDate" class="form-control w-100" placeholder="Start Date"
+                        aria-label="Start Date" formControlName="startDate" [min]="today">
+                    <!-- start-error-start-date -->
+                    <ng-container
+                        *ngIf="(formContorls['startDate'].touched && formContorls['startDate'].errors) || (!isFormValid && formContorls['startDate'].errors)">
+                        <h6 *ngIf="formContorls['startDate']['errors']['required']" class="text-danger mt-2">
+                            *Start Date is required field
+                        </h6>
+                    </ng-container>
+                    <!-- -error-start-date -->
+                </div>
+            </div>
+            <!-- project-startDate-end -->
+            <!-- project-endDate-start -->
+            <div class="col-12 col-lg-6">
+                <label for="city" class="mb-1 cursor-pointer fw-semibold">Project End<span
+                        class="text-danger">*</span></label>
+                <div class="input-group mb-4">
+                    <input type="date" id="endDate" class="form-control w-100" placeholder="End Date"
+                        aria-label="End Date" formControlName="endDate" [min]="today">
+                    <!-- start-error-end-date -->
+                    <ng-container
+                        *ngIf="(formContorls['endDate'].touched && formContorls['endDate'].errors) || (!isFormValid && formContorls['endDate'].errors)">
+                        <h6 *ngIf="formContorls['endDate']['errors']['required']" class="text-danger mt-2">
+                            *End Date is required field
+                        </h6>
+                    </ng-container>
+                    <!-- end-error-end-date -->
+                </div>
+            </div>
+            <!-- project-endDate-end -->
+            <!-- start-system-preference -->
+            <div class="col-12 col-lg-6 d-flex flex-column">
+                <div class="d-flex">
+                    <div class="col-6">
+                        <label for="system" class="mb-1 cursor-pointer fw-semibold  text-truncate w-100"
+                            title="System Preference">System Preference<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-6 d-flex">
+                        <!-- computer-radio-input -->
+                        <div>
+                            <input class="form-check-input me-3" type="radio" formControlName="system" id="computer"
+                                value="computer">
+                            <label for="computer" class="mb-1 cursor-pointer">Computer</label>
+                        </div>
+                        <!-- laptop-radio-input -->
+                        <div class="ps-4">
+                            <input class="form-check-input me-3" type="radio" formControlName="system" id="laptop"
+                                value="laptop">
+                            <label for="laptop" class="mb-1 cursor-pointer">Laptop</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <!-- start-error-system-preference -->
+                    <ng-container
+                        *ngIf="(formContorls['system'].touched && formContorls['system'].errors) || (!isFormValid && formContorls['system'].errors)">
+                        <h6 *ngIf="formContorls['system']['errors']['required']" class="text-danger mt-2">
+                            *System preference is required field
+                        </h6>
+                    </ng-container>
+                    <!-- end-error-system-preference -->
+                </div>
+            </div>
+            <!-- start-system-preference -->
+            <!-- start-mouse-preference -->
+            <div class="col-12 col-lg-6 d-flex flex-column">
+                <div class="d-flex">
+                    <div class="col-6">
+                        <label for="systemPreference" class="mb-1 cursor-pointer fw-semibold text-truncate w-100"
+                            title="Mouse Preference">Mouse Preference<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-6 d-flex">
+                        <!-- wireless-radio-input -->
+                        <div>
+                            <input class="form-check-input me-3" type="radio" formControlName="mouse" value="wireless"
+                                id="wirelessMouse">
+                            <label for="wirelessMouse" class="mb-1 cursor-pointer">Wireless</label>
+                        </div>
+                        <!-- wired-radio-input -->
+                        <div class="ps-4">
+                            <input class="form-check-input me-3" type="radio" formControlName="mouse" value="wired"
+                                id="wiredMouse">
+                            <label for="wiredMouse" class="mb-1 cursor-pointer">Wired</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <!-- start-error-mouse-preference -->
+                    <ng-container
+                        *ngIf="(formContorls['mouse'].touched && formContorls['mouse'].errors) || (!isFormValid && formContorls['mouse'].errors)">
+                        <h6 *ngIf="formContorls['mouse']['errors']['required']" class="text-danger mt-2">
+                            *System preference is required field
+                        </h6>
+                    </ng-container>
+                    <!-- end-error-mouse-preference -->
+                </div>
+            </div>
+            <!-- end-mouse-preference -->
+            <!-- start-keyboard-preference -->
+            <div class="col-12 col-lg-6 d-flex flex-column">
+                <div class="d-flex">
+                    <div class="col-6">
+                        <label for="keyboard" class="mb-1 cursor-pointer fw-semibold text-truncate w-100"
+                            title="Keyboard Preference">Keyboard Preference<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-6 d-flex">
+                        <!-- wireless-radio-input -->
+                        <div>
+                            <input class="form-check-input me-3" type="radio" formControlName="keyboard"
+                                value="wireless" id="wirelessKeyboard">
+                            <label for="wirelessKeyboard" class="mb-1 cursor-pointer">Wireless</label>
+                        </div>
+                        <!-- wired-radio-input -->
+                        <div class="ps-4">
+                            <input class="form-check-input me-3" type="radio" formControlName="keyboard" value="wired"
+                                id="wiredKeyboard">
+                            <label for="wiredKeyboard" class="mb-1 cursor-pointer">Wired</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <!-- start-error-keyboard-preference -->
+                    <ng-container
+                        *ngIf="(formContorls['keyboard'].touched && formContorls['keyboard'].errors) || (!isFormValid && formContorls['keyboard'].errors)">
+                        <h6 *ngIf="formContorls['keyboard']['errors']['required']" class="text-danger mt-2">
+                            *System preference is required field
+                        </h6>
+                    </ng-container>
+                    <!-- end-error-keyboard-preference -->
+                </div>
+            </div>
+            <!-- end-keyboard-preference -->
         </div>
-        <!-- start:next-button -->
-        <div class="form-footer d-flex justify-content-between py-3 flex-shrink-0">
-            <button class="btn btn-primary text-white" (click)="submitForm(3)">Previous</button>
-            <button type="submit" class="btn btn-secondary text-white">Next</button>
-        </div>
-        <!-- end:next-button -->
-    </form>
-    <!-- end-basic-details-form -->
-</div>
+    </div>
+</form>
+<!-- end-basic-details-form -->

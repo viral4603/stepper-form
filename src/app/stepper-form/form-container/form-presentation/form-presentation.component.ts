@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { CountWidgetStyle, SelectOption, StepperFormData } from '../../model/index.model';
 import { StepperCountService } from '../../services/stepper-count.service';
 import { FormPresenterService } from '../form-presenter/form-presenter.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form-presentation',
@@ -50,7 +51,7 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
   /** subscriber of step numbers */
   public stepperCountSubcription: Subscription;
 
-  /**custom count widget shape css */
+  /** custom count widget shape css */
   public countWidgetStyles: CountWidgetStyle;
 
   /** list of country with state */
@@ -58,8 +59,13 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
   /** list of country with city */
   private _contryAndCity: any;
 
+  /** form Group */
+  public myForm: FormGroup;
+
+
   constructor(private stepperCountService: StepperCountService,
-    private cdr: ChangeDetectorRef) {
+    private cdr: ChangeDetectorRef,
+    private fb: FormBuilder) {
     this.count = 1;
     this.stepperCountSubcription = new Subscription();
     this.country = [];
@@ -76,6 +82,7 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
       shape: 'square',
       orientation: 'horizontal'
     }
+    this.myForm = this.fb.group({})
   }
 
   ngOnInit(): void {

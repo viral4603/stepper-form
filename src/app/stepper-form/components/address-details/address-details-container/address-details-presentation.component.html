@@ -1,121 +1,117 @@
-<div class="main-form d-flex flex-column justify-content-between h-100">
-    <h2 class="fs-5 pt-4 pb-2 text-primary"><span>2.</span>Address Details</h2>
-    <!-- start-basic-details-form -->
-    <form class="flex-grow-1 d-flex flex-column" [formGroup]="addressForm" (ngSubmit)="submitForm(3)">
-        <div class="form-details flex-grow-1">
-            <div class="row">
-                <div class="col-12 col-lg-6">
-                    <label for="address" class="mb-1 cursor-pointer fw-semibold">Address<span
-                            class="text-danger">*</span></label>
-                    <div class="input-group mb-3 flex-column">
-                        <input type="text" id="address" class="form-control w-100" placeholder="Address"
-                            aria-label="address" formControlName="address">
-                        <!-- start-address-error -->
-                        <ng-container
-                            *ngIf="(formContorls['address'].touched && formContorls['address'].errors) || (!isFormValid && formContorls['address'].errors)">
-                            <h6 *ngIf="formContorls['address']['errors']['required']" class="text-danger mt-2">
-                                *Address is required field
-                            </h6>
-                        </ng-container>
-                        <!-- end-address-error -->
-                    </div>
+<!-- start-basic-details-form -->
+<form class="flex-grow-1 d-flex flex-column" [formGroup]="addressForm">
+    <div class="form-details flex-grow-1">
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <label for="address" class="mb-1 cursor-pointer fw-semibold">Address<span
+                        class="text-danger">*</span></label>
+                <div class="input-group mb-3 flex-column">
+                    <input type="text" id="address" class="form-control w-100" placeholder="Address"
+                        aria-label="address" formControlName="address">
+                    <!-- start-address-error -->
+                    <ng-container
+                        *ngIf="(formContorls['address'].touched && formContorls['address'].errors) || (!isValid && formContorls['address'].errors)">
+                        <h6 *ngIf="formContorls['address']['errors']['required']" class="text-danger mt-2">
+                            *Address is required field
+                        </h6>
+                    </ng-container>
+                    <!-- end-address-error -->
                 </div>
-                <div class="col-12 col-lg-6">
-                    <label for="streetAddress" class="mb-1 cursor-pointer fw-semibold">Street Address<span
-                            class="text-danger">*</span></label>
-                    <div class="input-group mb-3 flex-column">
-                        <input type="text" id="streetAddress" class="form-control w-100" placeholder="Street Address"
-                            aria-label="Street Address" formControlName="streetAddress">
-                        <!-- start-street-address -->
-                        <ng-container
-                            *ngIf="(formContorls['streetAddress'].touched && formContorls['streetAddress'].errors) || (!isFormValid && formContorls['streetAddress'].errors)">
-                            <h6 *ngIf="formContorls['streetAddress']['errors']['required']" class="text-danger mt-2">
-                                *Street Address is required field
-                            </h6>
-                        </ng-container>
-                        <!-- end-street-address -->
-                    </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <label for="streetAddress" class="mb-1 cursor-pointer fw-semibold">Street Address<span
+                        class="text-danger">*</span></label>
+                <div class="input-group mb-3 flex-column">
+                    <input type="text" id="streetAddress" class="form-control w-100" placeholder="Street Address"
+                        aria-label="Street Address" formControlName="streetAddress">
+                    <!-- start-street-address -->
+                    <ng-container
+                        *ngIf="(formContorls['streetAddress'].touched && formContorls['streetAddress'].errors) || (!isValid && formContorls['streetAddress'].errors)">
+                        <h6 *ngIf="formContorls['streetAddress']['errors']['required']" class="text-danger mt-2">
+                            *Street Address is required field
+                        </h6>
+                    </ng-container>
+                    <!-- end-street-address -->
                 </div>
+            </div>
 
-                <div class="col-12 col-lg-6">
-                    <label for="country" class="mb-1 cursor-pointer fw-semibold">Country<span
-                            class="text-danger">*</span></label>
-                    <div class="input-group mb-3 flex-column">
-                        <!--Using ng-option and for loop-->
-                        <ng-select placeholder="Country" id="country" class="w-100" formControlName="country"
-                            (change)="onSelectCountry($event)" [clearable]="false">
-                            <ng-option *ngFor="let item of country" [value]="item.name">{{item.name}}</ng-option>
-                        </ng-select>
-                        <!-- start-country-error -->
-                        <ng-container
-                            *ngIf="(formContorls['country'].touched && formContorls['country'].errors) || (!isFormValid && formContorls['country'].errors)">
-                            <h6 *ngIf="formContorls['country']['errors']['required']" class="text-danger mt-2">
-                                *Country required field
-                            </h6>
-                        </ng-container>
-                        <!-- end-country-error -->
-                    </div>
+            <div class="col-12 col-lg-6">
+                <label for="country" class="mb-1 cursor-pointer fw-semibold">Country<span
+                        class="text-danger">*</span></label>
+                <div class="input-group mb-3 flex-column">
+                    <!--Using ng-option and for loop-->
+                    <ng-select placeholder="Country" id="country" class="w-100" formControlName="country"
+                        (change)="onSelectCountry($event)" [clearable]="false">
+                        <ng-option *ngFor="let item of country" [value]="item.name">{{item.name}}</ng-option>
+                    </ng-select>
+                    <!-- start-country-error -->
+                    <ng-container
+                        *ngIf="(formContorls['country'].touched && formContorls['country'].errors) || (!isValid && formContorls['country'].errors)">
+                        <h6 *ngIf="formContorls['country']['errors']['required']" class="text-danger mt-2">
+                            *Country required field
+                        </h6>
+                    </ng-container>
+                    <!-- end-country-error -->
                 </div>
-                <div class="col-12 col-lg-6">
-                    <label for="state" class="mb-1 cursor-pointer fw-semibold">State<span
-                            class="text-danger">*</span></label>
-                    <div class="input-group mb-3 flex-column">
-                        <ng-select placeholder="State" class="w-100" id="state" formControlName="state"
-                            [clearable]="false">
-                            <ng-option *ngFor="let item of state;let i = index" [value]="item.name">{{item.name}}</ng-option>
-                        </ng-select>
-                        <!-- start-state-error -->
-                        <ng-container
-                            *ngIf="(formContorls['state'].touched && formContorls['state'].errors) || (!isFormValid && formContorls['state'].errors)">
-                            <h6 *ngIf="formContorls['state']['errors']['required']" class="text-danger mt-2">
-                                *State required field
-                            </h6>
-                        </ng-container>
-                        <!-- end-state-error -->
-                    </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <label for="state" class="mb-1 cursor-pointer fw-semibold">State<span
+                        class="text-danger">*</span></label>
+                <div class="input-group mb-3 flex-column">
+                    <ng-select placeholder="State" class="w-100" id="state" formControlName="state" [clearable]="false">
+                        <ng-option *ngFor="let item of state;let i = index"
+                            [value]="item.name">{{item.name}}</ng-option>
+                    </ng-select>
+                    <!-- start-state-error -->
+                    <ng-container
+                        *ngIf="(formContorls['state'].touched && formContorls['state'].errors) || (!isValid && formContorls['state'].errors)">
+                        <h6 *ngIf="formContorls['state']['errors']['required']" class="text-danger mt-2">
+                            *State required field
+                        </h6>
+                    </ng-container>
+                    <!-- end-state-error -->
                 </div>
-                <div class="col-12 col-lg-6">
-                    <label for="city" class="mb-1 cursor-pointer fw-semibold">City<span
-                            class="text-danger">*</span></label>
-                    <div class="input-group mb-3 flex-column">
-                        <!--Using ng-option and for loop-->
-                        <ng-select placeholder="City" class="w-100" id="city" formControlName="city" [clearable]="false">
-                            <ng-option *ngFor="let city of cities" [value]="city.name">{{city.name}}</ng-option>
-                        </ng-select>
-                        <!-- start-state-error -->
-                        <ng-container
-                            *ngIf="(formContorls['city'].touched && formContorls['city'].errors) || (!isFormValid && formContorls['city'].errors)">
-                            <h6 *ngIf="formContorls['city']['errors']['required']" class="text-danger mt-2">
-                                *City required field
-                            </h6>
-                        </ng-container>
-                        <!-- end-state-error -->
-                    </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <label for="city" class="mb-1 cursor-pointer fw-semibold">City<span class="text-danger">*</span></label>
+                <div class="input-group mb-3 flex-column">
+                    <!--Using ng-option and for loop-->
+                    <ng-select placeholder="City" class="w-100" id="city" formControlName="city" [clearable]="false">
+                        <ng-option *ngFor="let city of cities" [value]="city.name">{{city.name}}</ng-option>
+                    </ng-select>
+                    <!-- start-state-error -->
+                    <ng-container
+                        *ngIf="(formContorls['city'].touched && formContorls['city'].errors) || (!isValid && formContorls['city'].errors)">
+                        <h6 *ngIf="formContorls['city']['errors']['required']" class="text-danger mt-2">
+                            *City required field
+                        </h6>
+                    </ng-container>
+                    <!-- end-state-error -->
                 </div>
-                <div class="col-12 col-lg-6">
-                    <label for="pinCode" class="mb-1 cursor-pointer fw-semibold">Pin Code<span
-                            class="text-danger">*</span></label>
-                    <div class="input-group mb-3 flex-column">
-                        <input type="text" id="pinCode" class="form-control w-100" placeholder="Pin Code"
-                            aria-label="Pin Code" formControlName="pinCode">
-                        <!-- start-pincode-error -->
-                        <ng-container
-                            *ngIf="(formContorls['pinCode'].touched && formContorls['pinCode'].errors) || (!isFormValid && formContorls['pinCode'].errors)">
-                            <h6 *ngIf="formContorls['pinCode']['errors']['required']" class="text-danger mt-2">
-                                *Pin Code is required field
-                            </h6>
-                        </ng-container>
-                        <!-- end-pincode-error -->
-                    </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <label for="pinCode" class="mb-1 cursor-pointer fw-semibold">Pin Code<span
+                        class="text-danger">*</span></label>
+                <div class="input-group mb-3 flex-column">
+                    <input type="text" id="pinCode" class="form-control w-100" placeholder="Pin Code"
+                        aria-label="Pin Code" formControlName="pinCode">
+                    <!-- start-pincode-error -->
+                    <ng-container
+                        *ngIf="(formContorls['pinCode'].touched && formContorls['pinCode'].errors) || (!isValid && formContorls['pinCode'].errors)">
+                        <h6 *ngIf="formContorls['pinCode']['errors']['required']" class="text-danger mt-2">
+                            *Pin Code is required field
+                        </h6>
+                    </ng-container>
+                    <!-- end-pincode-error -->
                 </div>
             </div>
         </div>
-        <!-- start:submit-button -->
-        <div class="form-footer d-flex justify-content-between py-3 flex-shrink-0">
+    </div>
+    <!-- start:submit-button -->
+    <!-- <div class="form-footer d-flex justify-content-between py-3 flex-shrink-0">
             <button class="btn btn-primary text-white" (click)="submitForm(1)">Previous</button>
             <button type="submit" class="btn btn-secondary text-white">Next</button>
-        </div>
-        <!-- end:submit-button -->
-    </form>
-    <!-- end-basic-details-form -->
-</div>
+        </div> -->
+    <!-- end:submit-button -->
+</form>
+<!-- end-basic-details-form -->

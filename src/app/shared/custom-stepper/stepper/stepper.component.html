@@ -1,0 +1,41 @@
+<div class="main-form d-flex flex-column h-100">
+    <!-- progress-bar-start -->
+    <div class="counts">
+        <!-- start-number-of-count-widget -->
+        <div class="step-progress-bar align-items-center w-100" role="progressbar"
+            aria-label="Animated striped example">
+            <div class="progress-bar-active" [style]="progressbarStyle"></div>
+        </div>
+        <ul class="count-list nav d-flex">
+            <ng-container *ngFor="let step of steps;let i = index">
+                <li class="nav-items d-flex" [ngClass]="{'active': i === currentStep , 'completed' :  currentStep > i}"
+                    [style]="itemWidth">
+                    <button class="count-button d-flex align-items-center justify-content-center rounded-circle"
+                        (click)="navigateToStep(i)" [disabled]="!isCurrentFormValid"><span
+                            [class]="[i === currentStep && 'icon-user-active', currentStep > i ? 'icon-active' : step.icon] "></span></button>
+                    <div class="step-details ps-2">
+                        <h6 class="mb-0 step-title ">{{step.title}}</h6>
+                    </div>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+    <!-- progress-bar-end -->
+    <div class="form-wrapper d-flex flex-column w-100 flex-grow-1">
+        <!-- start-form-content -->
+        <ng-content></ng-content>
+        <!-- end-form-content -->
+
+        <!-- start:submit-button -->
+        <div class="stepper-navigation form-footer d-flex  py-3 flex-shrink-0"
+            [ngClass]="[currentStep === 0 ? 'justify-content-end' : 'justify-content-between']">
+            <button class="btn btn-primary" (click)="prev()" *ngIf="currentStep !== 0"
+                [disabled]="!isCurrentFormValid">Previous</button>
+            <button class="btn btn-secondary" (click)="next()" *ngIf="currentStep !== steps.length - 1"
+                [disabled]="!isCurrentFormValid">Next</button>
+            <button class="btn btn-danger" (click)="submitForm()" *ngIf="currentStep === steps.length - 1"
+                [disabled]="!isCurrentFormValid">Submit</button>
+        </div>
+        <!-- end:submit-button -->
+    </div>
+</div>

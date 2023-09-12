@@ -6,6 +6,7 @@ import { Subject } from 'rxjs/internal/Subject';
 import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { SelectOption } from 'src/app/stepper-form/model/index.model';
 import { AddressDetails } from 'src/app/stepper-form/constant/stpper.constant';
+import { StepperForm } from 'src/app/shared/custom-stepper/model';
 
 @Component({
   selector: 'app-address-details-presentation',
@@ -16,10 +17,13 @@ import { AddressDetails } from 'src/app/stepper-form/constant/stpper.constant';
     AddressDetailsPresenterService
   ]
 })
-export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
+export class AddressDetailsPresentationComponent implements OnInit, OnDestroy, StepperForm {
   /** input and setter for country with state list */
   @Input() public set countryAndState(value: any[]) {
-    this._countryAndState = value;
+    if (value) {
+      this._countryAndState = value;
+      this.country = this.addressPresenterService.getAllCountry(this.countryAndState)
+    }
   }
   /** getter for country and state */
   public get countryAndState(): any[] {
@@ -55,7 +59,8 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
   public get formContorls() {
     return this.addressForm.controls
   }
-
+  /** valid state for from */
+  public isValid: boolean;
   constructor(
     private addressPresenterService: AddressDetailsPresenterService,
     private stepperCountService: StepperCountService,
@@ -68,15 +73,12 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
     this.country = [];
     this.state = [];
     this.cities = [];
+    this.isValid = true;
   }
+
+
+
   ngOnInit(): void {
-    //set coutry list in select option 
-    this.country = this.addressPresenterService.getAllCountry(this.countryAndState)
-    this.stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
-      if (res.activeTab === 2) {
-        this.submitForm(res.navigateTo)
-      }
-    })
     /**patch form value from local storage */
     const localStorageValue = localStorage.getItem(AddressDetails)
     if (localStorageValue) {
@@ -91,14 +93,12 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
    * @description submit form data and neavigate to next tab
    * @param tab next tab value
    */
-  public submitForm(tab: number) {
+  public submitForm() {
     if (this.addressForm.status !== "INVALID") {
       this.addressPresenterService.submitForm(this.addressForm.value)
-      //navigate on tab after submit form
-      this.stepperCountService.setActiveTab(tab);
     }
     else {
-      this.isFormValid = false;
+      this.isValid = false;
       this.cdr.markForCheck()
     }
   }
@@ -114,6 +114,10 @@ export class AddressDetailsPresentationComponent implements OnInit, OnDestroy {
       this.state = this.addressPresenterService.getStateFromCountry(this.countryAndState, value)
       this.cities = this.addressPresenterService.getCitiesFromCountry(this.countryAndCity, value)
     }
+  }
+  /** get form group for parent access */
+  getFormData(): FormGroup<any> {
+    return this.addressForm
   }
 
   ngOnDestroy(): void {

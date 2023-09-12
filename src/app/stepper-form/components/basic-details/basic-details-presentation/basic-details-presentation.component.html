@@ -1,7 +1,5 @@
-<div class="main-form d-flex flex-column justify-content-between h-100" id="contentToPrint">
-    <h2 class="fs-5 pt-4 pb-2 text-primary"><span>1.</span>Basic Details</h2>
     <!-- start-basic-details-form -->
-    <form class="flex-grow-1 d-flex flex-column" [formGroup]="basicDetails" (ngSubmit)="submitForm(2)">
+    <form class="flex-grow-1 d-flex flex-column" [formGroup]="basicDetails">
         <div class="form-details flex-grow-1">
             <div class="row">
                 <div class="col-12 col-md-6">
@@ -12,7 +10,7 @@
                             aria-label="First Name" formControlName="firstName">
                         <!-- start-first-name-error -->
                         <ng-container
-                            *ngIf="(formContorls['firstName'].touched && formContorls['firstName'].errors) || (!isFormValid && formContorls['firstName'].errors)">
+                            *ngIf="(formContorls['firstName'].touched && formContorls['firstName'].errors) || (!isValid && formContorls['firstName'].errors)">
                             <h6 *ngIf="formContorls['firstName']['errors']['required']" class="text-danger mt-2">
                                 *First name is required field
                             </h6>
@@ -28,7 +26,7 @@
                             aria-label="Last Name" formControlName="lastName">
                         <!-- start-last-name-error -->
                         <ng-container
-                            *ngIf="(formContorls['lastName'].touched && formContorls['lastName'].errors) || (!isFormValid && formContorls['lastName'].errors)">
+                            *ngIf="(formContorls['lastName'].touched && formContorls['lastName'].errors) || (!isValid && formContorls['lastName'].errors)">
                             <h6 *ngIf="formContorls['lastName']['errors']['required']" class="text-danger mt-2">
                                 *Last name is required field
                             </h6>
@@ -44,7 +42,7 @@
                             formControlName="email">
                         <!-- start-email-error -->
                         <ng-container
-                            *ngIf="(formContorls['email'].touched && formContorls['email'].errors) || (!isFormValid && formContorls['email'].errors)">
+                            *ngIf="(formContorls['email'].touched && formContorls['email'].errors) || (!isValid && formContorls['email'].errors)">
                             <h6 *ngIf="formContorls['email']['errors']['required']" class="text-danger mt-2">
                                 *Email is required field
                             </h6>
@@ -63,7 +61,7 @@
                             aria-label="First Name" formControlName="phoneNumber" maxLength="10">
                         <!-- start-phone-number-error -->
                         <ng-container
-                            *ngIf="(formContorls['phoneNumber'].touched && formContorls['phoneNumber'].errors) || (!isFormValid && formContorls['phoneNumber'].errors)">
+                            *ngIf="(formContorls['phoneNumber'].touched && formContorls['phoneNumber'].errors) || (!isValid && formContorls['phoneNumber'].errors)">
                             <h6 *ngIf="formContorls['phoneNumber']['errors']['required']" class="text-danger mt-2">
                                 *Phone Number is required field
                             </h6>
@@ -82,7 +80,7 @@
                             aria-label="First Name" formControlName="department">
                         <!-- start-phone-number-error -->
                         <ng-container
-                            *ngIf="(formContorls['department'].touched && formContorls['department'].errors) || (!isFormValid && formContorls['department'].errors)">
+                            *ngIf="(formContorls['department'].touched && formContorls['department'].errors) || (!isValid && formContorls['department'].errors)">
                             <h6 *ngIf="formContorls['department']['errors']['required']" class="text-danger mt-2">
                                 *Department is required field
                             </h6>
@@ -98,7 +96,7 @@
                             aria-label="First Name" formControlName="position">
                         <!-- start-position-error -->
                         <ng-container
-                            *ngIf="(formContorls['position'].touched && formContorls['position'].errors) || (!isFormValid && formContorls['position'].errors)">
+                            *ngIf="(formContorls['position'].touched && formContorls['position'].errors) || (!isValid && formContorls['position'].errors)">
                             <h6 *ngIf="formContorls['position']['errors']['required']" class="text-danger mt-2">
                                 *Position is required field
                             </h6>
@@ -108,11 +106,5 @@
                 </div>
             </div>
         </div>
-        <!-- start:next-button -->
-        <div class="form-footer d-flex justify-content-end py-3 flex-shrink-0">
-            <button class="btn btn-secondary text-white">Next</button>
-        </div>
-        <!-- end:next-button -->
     </form>
     <!-- end-basic-details-form -->
-</div>

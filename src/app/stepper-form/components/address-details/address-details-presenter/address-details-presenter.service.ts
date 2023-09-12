@@ -26,7 +26,7 @@ export class AddressDetailsPresenterService {
    * get conytry list 
    */
   public getAllCountry(stateAndcountry: any[]): SelectOption[] {
-    return stateAndcountry.map((item: any, i: number) => {
+    return stateAndcountry?.map((item: any, i: number) => {
       return { id: i, name: item.name }
     })
   }
@@ -34,15 +34,18 @@ export class AddressDetailsPresenterService {
    *  get all state of the selected country 
    */
   getStateFromCountry(stateAndcountry: any[], countryName: string): SelectOption[] {
-    const state = stateAndcountry.filter((item: any) => item.name === countryName)[0].states
-    return state.map((item: any, i: number) => { return { id: i, name: item.name } })
+    if (!stateAndcountry.length) {
+      return []
+    }
+    const state = stateAndcountry?.filter((item: any) => item.name === countryName)[0].states
+    return state?.map((item: any, i: number) => { return { id: i, name: item.name } })
   }
   /**
    * get all cities from country
    */
   getCitiesFromCountry(cityAndCountry: any[], countryName: string): SelectOption[] {
-    const countryData = cityAndCountry.filter((item: any) => item.country === countryName)[0].cities
-    return countryData.map((city: string, i: number) => { return { id: i, name: city } })
+    const countryData = cityAndCountry?.filter((item: any) => item.country === countryName)[0].cities
+    return countryData?.map((city: string, i: number) => { return { id: i, name: city } })
   }
   /**
    * submit form value to parent presentaion

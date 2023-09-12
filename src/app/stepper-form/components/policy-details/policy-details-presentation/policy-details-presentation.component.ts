@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/internal/operators/takeUntil';
 import { StepperCountService } from 'src/app/stepper-form/services/stepper-count.service';
 import { PolicyDetailsPresenterService } from '../policy-details-presenter/policy-details-presenter.service';
 import { PolicyDetails } from 'src/app/stepper-form/constant/stpper.constant';
+import { StepperForm } from 'src/app/shared/custom-stepper/model';
 
 @Component({
   selector: 'app-policy-details-presentation',
@@ -15,7 +16,7 @@ import { PolicyDetails } from 'src/app/stepper-form/constant/stpper.constant';
     PolicyDetailsPresenterService
   ]
 })
-export class PolicyDetailsPresentationComponent {
+export class PolicyDetailsPresentationComponent implements StepperForm {
   /** policy form instance */
   public policyForm: FormGroup;
   /** subject for unsbscribe observable */
@@ -26,12 +27,8 @@ export class PolicyDetailsPresentationComponent {
     this.unSubscribe = new Subject<void>();
   }
 
+
   ngOnInit(): void {
-    this.stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
-      if (res.activeTab === 5) {
-        this.submitForm(res.navigateTo)
-      }
-    })
     /** patch form values */
     const localStorageValue = localStorage.getItem(PolicyDetails)
     if (localStorageValue) {
@@ -42,16 +39,18 @@ export class PolicyDetailsPresentationComponent {
    * submit form data 
    * @param tab tab number where user will navigate
    */
-  public submitForm(tab: number) {
+  public submitForm() {
     if (this.policyForm.valid) {
       this.policyPresenterService.submitForm(this.policyForm.value)
-      this.stepperCountService.setActiveTab(tab)
-      this.stepperCountService.setLastStepReached(true)
     }
     else {
       this.policyForm.markAsTouched()
       this.cdr.markForCheck()
     }
+  }
+  
+  getFormData(): FormGroup<any> {
+    return this.policyForm
   }
 
   ngOnDestroy(): void {

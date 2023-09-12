@@ -56,11 +56,11 @@ export class ProgressCountPresentationComponent {
   /** flag for final step reach */
   public isLastStepReach: boolean;
 
-  /**custom styles for count widget */
+  /** custom styles for count widget */
   private _countWidgetstyles!: any;
-  /**active steps */
+  /** active steps */
   private _steps!: number;
-  /**orientation */
+  /** orientation */
 
   public get stepCountClass(): string[] {
     const result: string[] = []

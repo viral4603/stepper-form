@@ -27,6 +27,12 @@
     height: auto;
     width: 20px;
 }
+.active-form {
+    min-height:70vh ;
+}
+button:disabled {
+    cursor: not-allowed;
+}
 
 //responsive 
 @media screen and (max-width: 992px) {
