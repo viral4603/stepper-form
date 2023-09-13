@@ -7,7 +7,7 @@
                 <header>
                     <h2 class="fs-5 pt-4 pb-2 text-primary"><span>1.</span>Basic Details</h2>
                 </header>
-                <app-basic-details-presentation #childComponent></app-basic-details-presentation>
+                <app-basic-details-presentation #formSelector></app-basic-details-presentation>
             </app-step>
 
             <!-- address-details-form -->
@@ -15,8 +15,8 @@
                 <header>
                     <h2 class="fs-5 pt-4 pb-2 text-primary"><span>2.</span>Address Details</h2>
                 </header>
-                <app-address-details-presentation [countryAndState]="countryAndState"
-                    [countryAndCity]="contryAndCity" #childComponent></app-address-details-presentation>
+                <app-address-details-presentation [countryAndState]="countryAndState" [countryAndCity]="contryAndCity"
+                    #formSelector></app-address-details-presentation>
             </app-step>
 
             <!-- skill-details-form -->
@@ -24,8 +24,8 @@
                 <header>
                     <h2 class="fs-5 pt-4 pb-2 text-primary"><span>3.</span>Skill Details</h2>
                 </header>
-                <app-skill-rating-presentation [frameworks]="frameWorkList"
-                    [programmingLanguages]="languageList" #childComponent></app-skill-rating-presentation>
+                <app-skill-rating-presentation [frameworks]="frameWorkList" [programmingLanguages]="languageList"
+                    #formSelector></app-skill-rating-presentation>
             </app-step>
 
             <!-- project-details-form -->
@@ -33,8 +33,8 @@
                 <header>
                     <h2 class="fs-5 pt-4 pb-2 text-primary"><span>4.</span>Project Details</h2>
                 </header>
-                <app-project-details-presentation [projects]="projectList"
-                    [positions]="positionList" #childComponent></app-project-details-presentation>
+                <app-project-details-presentation [projects]="projectList" [positions]="positionList"
+                    #formSelector></app-project-details-presentation>
             </app-step>
 
             <!-- policy-details-form -->

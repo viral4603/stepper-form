@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterContentInit, AfterViewInit, Component, ContentChild, Input } from '@angular/core';
+import { Component, ContentChild, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './step.component.html',
   styleUrls: ['./step.component.scss']
 })
-export class StepComponent implements AfterContentInit,AfterViewInit {
+export class StepComponent {
   /** count widget title */
   @Input() title!: string;
 
@@ -18,19 +18,11 @@ export class StepComponent implements AfterContentInit,AfterViewInit {
   /** set current step is active or not */
   public isActive: boolean;
   /** form instance */
-  // To get a reference to the child component without being sure about its type
-  @ContentChild('childComponent', { static: false }) childComponentRef: any;
+
+  /** To get a reference to the child component without being sure about its type */
+  @ContentChild('formSelector', { static: false }) childComponentRef: any;
+
   constructor() {
     this.isActive = false;
   }
-
-  ngAfterContentInit(): void {
-    // console.log(this.stepForm)\
-    // console.log(this.childComponentRef)
-    
-  }
-  ngAfterViewInit() {
-    // console.log(this.childComponentRef)
-  }
-
 }

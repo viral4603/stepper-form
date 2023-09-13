@@ -51,6 +51,7 @@ export class StepperComponent implements AfterContentInit {
    */
   public next() {
     if (this.currentStep < this.steps.length - 1) {
+      this.submitForm()
       this.toggleCurrentFormState()
       this.currentStep++;
       this.currentForm = this.steps.toArray()[this.currentStep]
@@ -62,7 +63,9 @@ export class StepperComponent implements AfterContentInit {
    * navigate to the previous form
    */
   public prev() {
+
     if (this.currentStep > 0) {
+      this.submitForm()
       this.toggleCurrentFormState()
       this.currentStep--;
       this.currentForm = this.steps.toArray()[this.currentStep]
@@ -78,6 +81,7 @@ export class StepperComponent implements AfterContentInit {
    * navigate to step while user click on progress count
    */
   public navigateToStep(stepIndex: number) {
+    this.submitForm()
     this.currentStep = stepIndex;
     this.toggleCurrentFormState();
     this.currentForm = this.steps.toArray()[this.currentStep]
