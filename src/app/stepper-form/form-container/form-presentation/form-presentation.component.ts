@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { CountWidgetStyle, SelectOption, StepperFormData } from '../../model/index.model';
+import { CountWidgetStyles } from 'src/app/shared/custom-stepper/model';
+import { SelectOption, StepperFormData } from '../../model/index.model';
 import { StepperCountService } from '../../services/stepper-count.service';
 import { FormPresenterService } from '../form-presenter/form-presenter.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-form-presentation',
@@ -41,6 +42,7 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
   public get contryAndCity(): any {
     return this._contryAndCity;
   }
+
   /** custom event for send data to container */
   @Output() sendData: EventEmitter<StepperFormData>;
 
@@ -52,7 +54,7 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
   public stepperCountSubcription: Subscription;
 
   /** custom count widget shape css */
-  public countWidgetStyles: CountWidgetStyle;
+  public countWidgetStyles: CountWidgetStyles;
 
   /** list of country with state */
   private _countryAndState: any;
@@ -73,7 +75,7 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
     this.countWidgetStyles = {
       colors: {
         default: '#008DFF',
-        backround: '#e9ecef',
+        background: '#e9ecef',
         active: '#3bcb44',
         activeBg: '#e9ecef',
         completed: '#ffffff',

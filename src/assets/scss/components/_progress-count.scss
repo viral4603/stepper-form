@@ -39,12 +39,12 @@
 .count-button {
     height: 40px;
     width: 40px;
-    background-color: $light;
-    // background-color: var(--backround);
+    // background-color: $light;
+    background-color: var(--background);
     font-size: 16px;
     font-weight: bold;
     color: $secondary;
-    // color: var(--default);
+    color: var(--default);
     border: none;
     flex-shrink: 0;
 }
@@ -52,37 +52,38 @@
 
 //steps state css 
 .nav-items {
-    // width: calc((100% - 100px)/4);
 
     &:last-child {
-        width: initial;
+        width: initial !important;
+        justify-content: flex-end;
     }
 
     &.active {
+
         .count-button,
         .step-details {
-
-            color: $success;
-            // color: var(--active);
+            // color: $success;
+            color: var(--active);
         }
+
         .count-button {
-            // background: var(--activeBg);
-            background: $light;
+            background: var(--activeBg);
+            // background: $light;
         }
     }
 
     &.completed {
         .count-button {
-            background-color: $secondary;
-            color: $white;
+            background-color: var(--completedBg);
+            color: var(--completed);
         }
     }
 }
 
 //progress bar css
 .step-progress-bar {
-    // background: var(--backround);
-    background: $light;
+    background: var(--background);
+    // background: $light;
     position: absolute;
     top: 50%;
     z-index: -1;
@@ -92,8 +93,8 @@
         transition: all 0.4s;
         height: 5px;
         width: 0%;
-        // background-color: var(--completedBg);
-        background-color: $secondary;
+        background-color: var(--completedBg);
+        // background-color: $secondary;
     }
 
 }

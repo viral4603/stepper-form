@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class StepComponent {
   /** count widget title */
-  @Input() title!: string;
+  @Input() countTitle!: string;
 
   /** count widget icon */
   @Input() icon!: string;

@@ -12,9 +12,9 @@
                     [style]="itemWidth">
                     <button class="count-button d-flex align-items-center justify-content-center rounded-circle"
                         (click)="navigateToStep(i)" [disabled]="!isCurrentFormValid"><span
-                            [class]="[i === currentStep && 'icon-user-active', currentStep > i ? 'icon-active' : step.icon] "></span></button>
+                            [class]="[i === currentStep && 'icon-user-active', currentStep > i ? 'icon-active' : step.icon]"></span></button>
                     <div class="step-details ps-2">
-                        <h6 class="mb-0 step-title ">{{step.title}}</h6>
+                        <h6 class="mb-0 step-title ">{{step.countTitle}}</h6>
                     </div>
                 </li>
             </ng-container>

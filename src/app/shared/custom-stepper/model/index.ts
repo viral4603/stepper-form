@@ -10,3 +10,17 @@ export interface StepperForm {
      */
     getFormData(): FormGroup;
 }
+
+export interface CountWidgetStyles {
+    colors: {
+        [key:string]:string;
+        default: string;
+        background: string;
+        active: string;
+        activeBg: string;
+        completed: string;
+        completedBg: string;
+    };
+    shape?: string;
+    orientation: string;
+}

@@ -13,8 +13,10 @@
 }
 
 .form-wrapper {
-    min-height: 80vh;
     width: 80%;
+    .form-details {
+        min-height: 50vh;
+    }
 }
 
 //overlay

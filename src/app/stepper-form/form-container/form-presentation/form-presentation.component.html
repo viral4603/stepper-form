@@ -1,9 +1,9 @@
 <div class="px-0 container-xxl h-100">
     <div class="active-form flex-grow-1 d-flex px-2 px-md-4 py-lg-4 w-100 border"
         [ngClass]="{ 'mt-5' :countWidgetStyles.orientation !== 'vertical'}">
-        <app-stepper>
+        <app-stepper [customStyle]="countWidgetStyles">
             <!-- basic-details-form -->
-            <app-step title="Basic" icon="icon-basic">
+            <app-step countTitle="Basic" icon="icon-basic">
                 <header>
                     <h2 class="fs-5 pt-4 pb-2 text-primary"><span>1.</span>Basic Details</h2>
                 </header>
@@ -11,7 +11,7 @@
             </app-step>
 
             <!-- address-details-form -->
-            <app-step title="Address" icon="icon-address">
+            <app-step countTitle="Address" icon="icon-address">
                 <header>
                     <h2 class="fs-5 pt-4 pb-2 text-primary"><span>2.</span>Address Details</h2>
                 </header>
@@ -20,7 +20,7 @@
             </app-step>
 
             <!-- skill-details-form -->
-            <app-step title="Skill" icon="icon-skill">
+            <app-step countTitle="Skill" icon="icon-skill">
                 <header>
                     <h2 class="fs-5 pt-4 pb-2 text-primary"><span>3.</span>Skill Details</h2>
                 </header>
@@ -29,7 +29,7 @@
             </app-step>
 
             <!-- project-details-form -->
-            <app-step title="Project" icon="icon-project">
+            <app-step countTitle="Project" icon="icon-project">
                 <header>
                     <h2 class="fs-5 pt-4 pb-2 text-primary"><span>4.</span>Project Details</h2>
                 </header>
@@ -38,11 +38,11 @@
             </app-step>
 
             <!-- policy-details-form -->
-            <app-step title="Policy" icon="icon-policy">
+            <app-step countTitle="Policy" icon="icon-policy">
                 <header>
                     <h2 class="fs-5 pt-4 pb-2 text-primary"><span>5.</span>Policy Details</h2>
                 </header>
-                <app-policy-details-presentation #childComponent></app-policy-details-presentation>
+                <app-policy-details-presentation #formSelector></app-policy-details-presentation>
             </app-step>
         </app-stepper>
     </div>

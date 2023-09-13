@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { AfterContentInit, Component, ContentChildren, QueryList } from '@angular/core';
+import { AfterContentInit, Component, ContentChildren, Input, QueryList } from '@angular/core';
 import { StepComponent } from '../step/step.component';
+import { CountWidgetStyles } from '../model';
 
 @Component({
   selector: 'app-stepper',
@@ -11,24 +12,38 @@ import { StepComponent } from '../step/step.component';
 })
 export class StepperComponent implements AfterContentInit {
 
+  /** custom style for count widget */
+  /** set count widget style */
+  @Input() public set customStyle(styles: CountWidgetStyles) {
+    if (styles) {
+      //set widget colors
+      for (let key in styles.colors) {
+        this.rootElement.style.setProperty(`--${key}`, styles.colors[key]);
+      }
+    }
+  }
+
   /** get steps component */
   @ContentChildren(StepComponent) steps!: QueryList<StepComponent>;
+
 
   /** active step number */
   public currentStep: number;
   /** current active form instance */
   public currentForm!: StepComponent;
+  /** root elemnet refernce for setting css varible */
+  public rootElement: HTMLElement;
 
   /** get progress bar width */
   get progressbarStyle() {
     return {
-      width: `${this.currentStep * (100 / this.steps.length)}%`,
+      width: `calc(${this.currentStep * (100 / (this.steps.length - 1))}% - ${(this.currentStep * 40)}px)`
     }
   }
   /** get width of progress bar card */
   get itemWidth() {
     return {
-      width: `${100 / this.steps.length}%`
+      width: `calc(${100 / (this.steps.length - 1)}% - 40px)`
     }
   }
   /** get current form validation state */
@@ -39,6 +54,7 @@ export class StepperComponent implements AfterContentInit {
 
   constructor() {
     this.currentStep = 0;
+    this.rootElement = document.querySelector(':root') as HTMLElement
   }
 
   ngAfterContentInit(): void {
