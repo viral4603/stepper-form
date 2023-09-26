@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { CountWidgetStyle, SelectOption, StepperFormData } from '../../model/index.model';
+import { CountWidgetStyles } from 'src/app/shared/custom-stepper/model';
+import { SelectOption, StepperFormData } from '../../model/index.model';
 import { StepperCountService } from '../../services/stepper-count.service';
 import { FormPresenterService } from '../form-presenter/form-presenter.service';
 
@@ -40,6 +42,7 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
   public get contryAndCity(): any {
     return this._contryAndCity;
   }
+
   /** custom event for send data to container */
   @Output() sendData: EventEmitter<StepperFormData>;
 
@@ -50,16 +53,21 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
   /** subscriber of step numbers */
   public stepperCountSubcription: Subscription;
 
-  /**custom count widget shape css */
-  public countWidgetStyles: CountWidgetStyle;
+  /** custom count widget shape css */
+  public countWidgetStyles: CountWidgetStyles;
 
   /** list of country with state */
   private _countryAndState: any;
   /** list of country with city */
   private _contryAndCity: any;
 
+  /** form Group */
+  public myForm: FormGroup;
+
+
   constructor(private stepperCountService: StepperCountService,
-    private cdr: ChangeDetectorRef) {
+    private cdr: ChangeDetectorRef,
+    private fb: FormBuilder) {
     this.count = 1;
     this.stepperCountSubcription = new Subscription();
     this.country = [];
@@ -67,7 +75,7 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
     this.countWidgetStyles = {
       colors: {
         default: '#008DFF',
-        backround: '#e9ecef',
+        background: '#e9ecef',
         active: '#3bcb44',
         activeBg: '#e9ecef',
         completed: '#ffffff',
@@ -76,6 +84,7 @@ export class FormPresentationComponent implements OnInit, OnDestroy {
       shape: 'square',
       orientation: 'horizontal'
     }
+    this.myForm = this.fb.group({})
   }
 
   ngOnInit(): void {

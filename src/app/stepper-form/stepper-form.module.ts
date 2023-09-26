@@ -16,6 +16,8 @@ import { FormContainerComponent } from './form-container/form-container.componen
 import { FormPresentationComponent } from './form-container/form-presentation/form-presentation.component';
 import { StepperCountService } from './services/stepper-count.service';
 import { StpperService } from './stpper.service';
+import { StepComponent } from '../shared/custom-stepper/step/step.component';
+import { StepperComponent } from '../shared/custom-stepper/stepper/stepper.component';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { StpperService } from './stpper.service';
     CustomRangeSliderComponent,
     ReactiveFormsModule,
     FormPreviewComponent,
+    StepperComponent,
+    StepComponent
   ],
   exports: [
     FormContainerComponent

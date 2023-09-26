@@ -1,30 +1,49 @@
 <div class="px-0 container-xxl h-100">
-    <!-- start-form-wraper -->
-    <div class="form-wrapper rounded d-flex px-2 px-md-3 py-3 mt-4 m-auto"
-        [ngClass]="{ 'flex-column py-4' :countWidgetStyles.orientation !== 'vertical'}">
-        <div class="px-2 px-md--3 no-print">
-            <app-progress-count-presentation [countWidgetstyles]="countWidgetStyles"
-                [steps]="count"></app-progress-count-presentation>
-        </div>
-        <div class="active-form flex-grow-1 d-flex px-2 px-md-4 py-lg-4 w-100 border"
-            [ngClass]="{ 'mt-5' :countWidgetStyles.orientation !== 'vertical'}">
-            <!-- Basic-Details-form -->
-            <app-basic-details-presentation *ngIf="count === 1"></app-basic-details-presentation>
-            <!-- Address-Details-form -->
-            <app-address-details-presentation [countryAndState]="countryAndState" [countryAndCity]="contryAndCity"
-                *ngIf="count === 2"></app-address-details-presentation>
-            <!-- Skill-Rating-form -->
-            <app-skill-rating-presentation *ngIf="count === 3" [frameworks]="frameWorkList"
-                [programmingLanguages]="languageList"></app-skill-rating-presentation>
-            <!-- Project-Details-form -->
-            <app-project-details-presentation [projects]="projectList" [positions]="positionList"
-                *ngIf="count === 4"></app-project-details-presentation>
-            <!-- Policy-Details-form -->
-            <app-policy-details-presentation *ngIf="count === 5"></app-policy-details-presentation>
-            <!-- preview-form -->
-            <app-preview-form-presentation *ngIf="count === 6"
-                (sendFormData)="sendDataToParent($event)"></app-preview-form-presentation>
-        </div>
+    <div class="active-form flex-grow-1 d-flex px-2 px-md-4 py-lg-4 w-100 border"
+        [ngClass]="{ 'mt-5' :countWidgetStyles.orientation !== 'vertical'}">
+        <app-stepper [customStyle]="countWidgetStyles">
+            <!-- basic-details-form -->
+            <app-step countTitle="Basic" icon="icon-basic">
+                <header>
+                    <h2 class="fs-5 pt-4 pb-2 text-primary"><span>1.</span>Basic Details</h2>
+                </header>
+                <app-basic-details-presentation #formSelector></app-basic-details-presentation>
+            </app-step>
+
+            <!-- address-details-form -->
+            <app-step countTitle="Address" icon="icon-address">
+                <header>
+                    <h2 class="fs-5 pt-4 pb-2 text-primary"><span>2.</span>Address Details</h2>
+                </header>
+                <app-address-details-presentation [countryAndState]="countryAndState" [countryAndCity]="contryAndCity"
+                    #formSelector></app-address-details-presentation>
+            </app-step>
+
+            <!-- skill-details-form -->
+            <app-step countTitle="Skill" icon="icon-skill">
+                <header>
+                    <h2 class="fs-5 pt-4 pb-2 text-primary"><span>3.</span>Skill Details</h2>
+                </header>
+                <app-skill-rating-presentation [frameworks]="frameWorkList" [programmingLanguages]="languageList"
+                    #formSelector></app-skill-rating-presentation>
+            </app-step>
+
+            <!-- project-details-form -->
+            <app-step countTitle="Project" icon="icon-project">
+                <header>
+                    <h2 class="fs-5 pt-4 pb-2 text-primary"><span>4.</span>Project Details</h2>
+                </header>
+                <app-project-details-presentation [projects]="projectList" [positions]="positionList"
+                    #formSelector></app-project-details-presentation>
+            </app-step>
+
+            <!-- policy-details-form -->
+            <app-step countTitle="Policy" icon="icon-policy">
+                <header>
+                    <h2 class="fs-5 pt-4 pb-2 text-primary"><span>5.</span>Policy Details</h2>
+                </header>
+                <app-policy-details-presentation #formSelector></app-policy-details-presentation>
+            </app-step>
+        </app-stepper>
     </div>
-    <!-- end-form-wraper -->
 </div>

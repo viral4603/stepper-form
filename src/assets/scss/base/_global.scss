@@ -13,8 +13,10 @@
 }
 
 .form-wrapper {
-    min-height: 80vh;
     width: 80%;
+    .form-details {
+        min-height: 50vh;
+    }
 }
 
 //overlay
@@ -26,6 +28,12 @@
 .close-preview-icon {
     height: auto;
     width: 20px;
+}
+.active-form {
+    min-height:70vh ;
+}
+button:disabled {
+    cursor: not-allowed;
 }
 
 //responsive 

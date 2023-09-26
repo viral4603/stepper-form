@@ -6,6 +6,7 @@ import { SelectOption } from 'src/app/stepper-form/model/index.model';
 import { StepperCountService } from 'src/app/stepper-form/services/stepper-count.service';
 import { SkillRatingPresenterService } from '../skill-rating-presenter/skill-rating-presenter.service';
 import { SkillDetails } from 'src/app/stepper-form/constant/stpper.constant';
+import { StepperForm } from 'src/app/shared/custom-stepper/model';
 
 @Component({
   selector: 'app-skill-rating-presentation',
@@ -14,7 +15,7 @@ import { SkillDetails } from 'src/app/stepper-form/constant/stpper.constant';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SkillRatingPresenterService]
 })
-export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
+export class SkillRatingPresentationComponent implements OnInit, OnDestroy, StepperForm {
   /** Input and setter for framwork list */
   @Input() public set frameworks(v: SelectOption[]) {
     this._frameworks = v;
@@ -70,13 +71,7 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
     this._programmingLanguages = []
   }
 
-
   ngOnInit(): void {
-    this.stepperCountService.submitClick$.pipe(takeUntil(this.unSubscribe)).subscribe((res: any) => {
-      if (res.activeTab === 3) {
-        this.submitForm(res.navigateTo)
-      }
-    })
     /** patch form value from local storage */
     const localStorageValue = JSON.parse(localStorage.getItem(SkillDetails)!)
     if (localStorageValue) {
@@ -112,10 +107,9 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
    * @description save form data
    * @param tab tab number where user will navigate
    */
-  public submitForm(tab: number): void {
+  public submitForm(): void {
     if (this.skillForm.status !== "INVALID") {
       this.skillPresenterService.submitForm(this.skillForm.value)
-      this.stepperCountService.setActiveTab(tab)
     }
     else {
       this.isFormValid = false;
@@ -130,7 +124,11 @@ export class SkillRatingPresentationComponent implements OnInit, OnDestroy {
   public markFormGroupAsTouched(name: string): void {
     this.skillForm.controls[`${name}`].markAsTouched()
   }
-
+  /** get form group for parent access */
+  getFormData(): FormGroup<any> {
+    return this.skillForm
+  }
+  
   public ngOnDestroy(): void {
     this.unSubscribe.next()
     this.unSubscribe.unsubscribe()
